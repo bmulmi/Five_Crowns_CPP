@@ -23,9 +23,11 @@ CMakeFiles/Five_Crowns_CPP.dir/FiveCrowns.cpp.o
  /home/bibhash/git_repos/Five_Crowns_CPP/Player.hpp
 CMakeFiles/Five_Crowns_CPP.dir/Game.cpp.o
  /home/bibhash/git_repos/Five_Crowns_CPP/Cards.hpp
+ /home/bibhash/git_repos/Five_Crowns_CPP/Deck.hpp
  /home/bibhash/git_repos/Five_Crowns_CPP/Game.cpp
  /home/bibhash/git_repos/Five_Crowns_CPP/Game.hpp
  /home/bibhash/git_repos/Five_Crowns_CPP/Player.hpp
+ /home/bibhash/git_repos/Five_Crowns_CPP/Round.hpp
 CMakeFiles/Five_Crowns_CPP.dir/Human.cpp.o
  /home/bibhash/git_repos/Five_Crowns_CPP/Cards.hpp
  /home/bibhash/git_repos/Five_Crowns_CPP/Human.cpp
@@ -37,10 +39,15 @@ CMakeFiles/Five_Crowns_CPP.dir/Player.cpp.o
  /home/bibhash/git_repos/Five_Crowns_CPP/Player.hpp
 CMakeFiles/Five_Crowns_CPP.dir/Round.cpp.o
  /home/bibhash/git_repos/Five_Crowns_CPP/Cards.hpp
+ /home/bibhash/git_repos/Five_Crowns_CPP/Deck.hpp
  /home/bibhash/git_repos/Five_Crowns_CPP/Player.hpp
  /home/bibhash/git_repos/Five_Crowns_CPP/Round.cpp
  /home/bibhash/git_repos/Five_Crowns_CPP/Round.hpp
 CMakeFiles/Five_Crowns_CPP.dir/main.cpp.o
  /home/bibhash/git_repos/Five_Crowns_CPP/Cards.hpp
- /home/bibhash/git_repos/Five_Crowns_CPP/Deck.hpp
+ /home/bibhash/git_repos/Five_Crowns_CPP/Computer.hpp
+ /home/bibhash/git_repos/Five_Crowns_CPP/FiveCrowns.hpp
+ /home/bibhash/git_repos/Five_Crowns_CPP/Game.hpp
+ /home/bibhash/git_repos/Five_Crowns_CPP/Human.hpp
+ /home/bibhash/git_repos/Five_Crowns_CPP/Player.hpp
  /home/bibhash/git_repos/Five_Crowns_CPP/main.cpp

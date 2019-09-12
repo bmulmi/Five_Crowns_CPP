@@ -17,6 +17,8 @@ public:
     void play();
     void load();
     void start();
+    void distributeCards();
+    void printRoundStatus();
 
 private:
     Player** player;

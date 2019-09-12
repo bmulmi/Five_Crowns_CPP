@@ -7,6 +7,7 @@
 
 
 #include <vector>
+#include <iostream>
 #include "Cards.hpp"
 
 using namespace std;
@@ -19,8 +20,14 @@ public:
     void updateScore(int score) { this->score += score; }
     void setScore( int score ) { this->score = score; }
     void setHand (vector<Cards> hand) { this->hand = hand; }
-
-    virtual void printType()=0;
+    string getHand() {
+        string temp = "";
+        for (auto a_card : this->hand) {
+            temp += a_card.toString() + " ";
+        }
+        return temp;
+    }
+    virtual string getType()=0;
 
 protected:
     int score;

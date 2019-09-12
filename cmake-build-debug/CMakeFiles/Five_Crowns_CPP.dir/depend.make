@@ -22,9 +22,11 @@ CMakeFiles/Five_Crowns_CPP.dir/FiveCrowns.cpp.o: ../Human.hpp
 CMakeFiles/Five_Crowns_CPP.dir/FiveCrowns.cpp.o: ../Player.hpp
 
 CMakeFiles/Five_Crowns_CPP.dir/Game.cpp.o: ../Cards.hpp
+CMakeFiles/Five_Crowns_CPP.dir/Game.cpp.o: ../Deck.hpp
 CMakeFiles/Five_Crowns_CPP.dir/Game.cpp.o: ../Game.cpp
 CMakeFiles/Five_Crowns_CPP.dir/Game.cpp.o: ../Game.hpp
 CMakeFiles/Five_Crowns_CPP.dir/Game.cpp.o: ../Player.hpp
+CMakeFiles/Five_Crowns_CPP.dir/Game.cpp.o: ../Round.hpp
 
 CMakeFiles/Five_Crowns_CPP.dir/Human.cpp.o: ../Cards.hpp
 CMakeFiles/Five_Crowns_CPP.dir/Human.cpp.o: ../Human.cpp
@@ -36,11 +38,16 @@ CMakeFiles/Five_Crowns_CPP.dir/Player.cpp.o: ../Player.cpp
 CMakeFiles/Five_Crowns_CPP.dir/Player.cpp.o: ../Player.hpp
 
 CMakeFiles/Five_Crowns_CPP.dir/Round.cpp.o: ../Cards.hpp
+CMakeFiles/Five_Crowns_CPP.dir/Round.cpp.o: ../Deck.hpp
 CMakeFiles/Five_Crowns_CPP.dir/Round.cpp.o: ../Player.hpp
 CMakeFiles/Five_Crowns_CPP.dir/Round.cpp.o: ../Round.cpp
 CMakeFiles/Five_Crowns_CPP.dir/Round.cpp.o: ../Round.hpp
 
 CMakeFiles/Five_Crowns_CPP.dir/main.cpp.o: ../Cards.hpp
-CMakeFiles/Five_Crowns_CPP.dir/main.cpp.o: ../Deck.hpp
+CMakeFiles/Five_Crowns_CPP.dir/main.cpp.o: ../Computer.hpp
+CMakeFiles/Five_Crowns_CPP.dir/main.cpp.o: ../FiveCrowns.hpp
+CMakeFiles/Five_Crowns_CPP.dir/main.cpp.o: ../Game.hpp
+CMakeFiles/Five_Crowns_CPP.dir/main.cpp.o: ../Human.hpp
+CMakeFiles/Five_Crowns_CPP.dir/main.cpp.o: ../Player.hpp
 CMakeFiles/Five_Crowns_CPP.dir/main.cpp.o: ../main.cpp
 

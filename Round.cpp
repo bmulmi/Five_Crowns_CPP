@@ -16,7 +16,6 @@ Round::Round(int roundNumber, Player* player[]) {
 }
 
 Round::~Round() {
-    delete player;
 }
 
 // this starts a new fresh round
@@ -25,24 +24,54 @@ void Round::play() {
     deck->shuffleDeck();
 
     // set players hands
-    for (int i = 0; i < totalNumPlayers; i++) {
-        player[i]->setHand(deck->getCards(roundNumber + 2));
-    }
-
-    // set the draw pile
+    distributeCards();
 
     // set the discard pile
+    deck->discard(deck->drawCard());
 
     // set scores to zero
-    // start()
+    for (int i = 0; i < totalNumPlayers; i++) {
+        player[i]->setScore(0);
+    }
+
+    printRoundStatus();
+    start();
 }
 
 void Round::start() {
     // loop until round has not ended
         // change players
-        // get their moves
+        // get their move
+    return;
 }
 
 void Round::load() {
+    // sets the hands
+    // sets the discard pile
+    // sets the draw pile
 
+}
+
+// sets hands of the players
+void Round::distributeCards() {
+    for (int i = 0; i < totalNumPlayers; i++) {
+        vector<Cards> hand;
+        for (int j = 0; j < roundNumber + 2; j++) {
+            hand.push_back(deck->drawCard());
+        }
+        player[i]->setHand(hand);
+    }
+}
+
+void Round::printRoundStatus() {
+    cout << "\nRound Number: " << roundNumber << endl;
+    for (int i = 0; i < totalNumPlayers; i++) {
+        cout << player[i]->getType();
+        cout << "Hand: " << player[i]->getHand() << endl;
+        cout << "Score: " << player[i]->getScore() << endl;
+    }
+    cout << "\nDiscard Pile: " << deck->getDiscardCard().toString() << endl;
+    cout << "\nDraw Pile: ";
+    deck->showDrawPile();
+    cout << endl;
 }

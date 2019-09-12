@@ -20,12 +20,6 @@ iostream
 Player.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Player.hpp
 
-/home/bibhash/git_repos/Five_Crowns_CPP/Deck.cpp
-Deck.hpp
-/home/bibhash/git_repos/Five_Crowns_CPP/Deck.hpp
-bits/stdc++.h
--
-
 /home/bibhash/git_repos/Five_Crowns_CPP/Deck.hpp
 Cards.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Cards.hpp
@@ -61,6 +55,8 @@ Computer.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Game.cpp
 Game.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Game.hpp
+Round.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Round.hpp
 iostream
 -
 
@@ -85,6 +81,8 @@ Player.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Player.hpp
 vector
 -
+iostream
+-
 Cards.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Cards.hpp
 
@@ -95,8 +93,10 @@ Round.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Round.hpp
 Player.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Player.hpp
-
-/home/bibhash/git_repos/Five_Crowns_CPP/main.cpp
 Deck.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Deck.hpp
+
+/home/bibhash/git_repos/Five_Crowns_CPP/main.cpp
+FiveCrowns.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/FiveCrowns.hpp
 

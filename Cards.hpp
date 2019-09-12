@@ -2,7 +2,7 @@
 // Created by bibhash on 9/10/19.
 //
 
-#ifndef FIVE_CROWNS_CPP_CARDS_H
+#ifndef FIVE_CROWNS_CPP_CARDS_HPP
 #define FIVE_CROWNS_CPP_CARDS_HPP
 
 #include <string>

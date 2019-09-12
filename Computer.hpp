@@ -12,7 +12,7 @@ using namespace std;
 class Computer : public Player {
 public:
     Computer();
-    void printType () { cout << "I am computer" << endl; }
+    string getType() { return "Computer "; }
 
 };
 

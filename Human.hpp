@@ -13,7 +13,7 @@ using namespace std;
 class Human : public Player {
 public:
     Human();
-    void printType() { cout << "I am human" << endl; }
+    string getType() { return "Human "; }
 
 private:
 

@@ -7,7 +7,7 @@
 #include <queue>
 #include <iostream>
 
-#ifndef FIVE_CROWNS_CPP_DECK_H
+#ifndef FIVE_CROWNS_CPP_DECK_HPP
 #define FIVE_CROWNS_CPP_DECK_HPP
 
 using namespace std;
@@ -19,12 +19,14 @@ public:
     ~Deck();
     void printDeck();
     void shuffleDeck();
-    vector<Cards> getCards(int numCards);
+    void discard(Cards a_card);
+    void showDrawPile();
+    Cards getDiscardCard();
+    Cards drawCard();
 
 private:
-    deque<Cards> deck;
-    deque<Cards> discardPile;
     deque<Cards> drawPile;
+    deque<Cards> discardPile;
 
     deque<Cards> createJokers(int num);
     deque<Cards> createDeck();

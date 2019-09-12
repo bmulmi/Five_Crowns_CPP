@@ -8,9 +8,7 @@ using namespace std;
 
 //creates a single deck of cards
 Deck::Deck() {
-    this->deck = createDeck();
-
-
+    this->drawPile = createDeck();
 }
 
 Deck::Deck(int numDecks) {
@@ -19,12 +17,13 @@ Deck::Deck(int numDecks) {
 
     for (int i = 1; i < numDecks; i++) {
         deque<Cards> secondaryDeck = createDeck();
+        // push each card into the initial deck
         for (auto a_card : secondaryDeck) {
             initialDeck.push_back(a_card);
         }
     }
 
-    this->deck = initialDeck;
+    this->drawPile = initialDeck;
 }
 
 Deck::~Deck() {
@@ -62,9 +61,9 @@ deque<Cards> Deck::createJokers(int num) {
 }
 
 void Deck::printDeck() {
-    cout << "# Cards: " << this->deck.size() << endl;
+    cout << "# Cards: " << this->drawPile.size() << endl;
 
-    for(auto a_card : this->deck) {
+    for(auto a_card : this->drawPile) {
         cout << a_card.toString() << " ";
     }
     cout << endl;
@@ -72,16 +71,29 @@ void Deck::printDeck() {
 
 void Deck::shuffleDeck() {
     unsigned seed = 0;
-    shuffle(this->deck.begin(), this->deck.end(), default_random_engine(seed));
+    shuffle(this->drawPile.begin(), this->drawPile.end(), default_random_engine(seed));
 }
 
-vector<Cards> Deck::getCards(int numCards) {
-    vector<Cards> temp;
-
-    for (int i = 0; i < numCards; i++) {
-        temp.push_back(this->deck.front());
-        this->deck.pop_front();
-    }
-
+// returns top card of the draw pile and pops it from the pile
+Cards Deck::drawCard() {
+    Cards temp = drawPile.front();
+    drawPile.pop_front();
     return temp;
 }
+
+// pushes card into top of discard pile
+void Deck::discard(Cards a_card) {
+    this->discardPile.push_front(a_card);
+}
+
+// returns top card of the discard pile
+Cards Deck::getDiscardCard() {
+    return discardPile.front();
+}
+
+void Deck::showDrawPile() {
+    for (auto a_card : drawPile) {
+        cout << a_card.toString() << " ";
+    }
+}
+

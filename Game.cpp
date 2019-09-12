@@ -3,6 +3,7 @@
 //
 
 #include "Game.hpp"
+#include "Round.hpp"
 #include <iostream>
 using namespace std;
 
@@ -24,14 +25,18 @@ Game::~Game() {
 }
 
 void Game::start() {
-    while (roundNumber < 12) {
+    cout << "Game started!" << endl;
+    Round r(1, player);
+    r.play();
+//    while (roundNumber < 12) {
         // create the round
         // play the round
 
         // see if the round is save or quit
 
-    }
+//    }
     //declare winner()
+
 }
 
 void Game::load() {

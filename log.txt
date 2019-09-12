@@ -11,6 +11,8 @@
 - created shuffleDeck() function using shuffle function from <bits/stdc++.h> library.
 - added Hand to player member vars. It is a vector of Cards since it keeps increasing. Also, updating is much easier in vectors.
 - constructed round class, it assigns round number and players.
-
 - added start, load, and play function in round class.
+- added getCards(int num) in Deck class to distribute cards for player hands.
+- added printRoundStatus() prints the status of the round.
+
 
