@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/Cards.hpp.dir/Cards.cpp.o CMakeFiles/Cards.hpp.dir/Deck.cpp.o CMakeFiles/Cards.hpp.dir/Player.cpp.o CMakeFiles/Cards.hpp.dir/Human.cpp.o CMakeFiles/Cards.hpp.dir/Computer.cpp.o CMakeFiles/Cards.hpp.dir/Game.cpp.o CMakeFiles/Cards.hpp.dir/FiveCrowns.cpp.o  -o Cards.hpp 

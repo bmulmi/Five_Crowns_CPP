@@ -1,0 +1,16 @@
+9/11/2019
+- Created classes: Deck, Cards, Player, Human, Computer, Game, Round, FiveCrowns
+- Constructors for Cards. Added toString() function that returns string representation of the card object.
+- Constructors for Deck. Deck has private member variables: deck, discard pile, and draw pile.
+- all of these are deque.
+- createDeck() function and createJoker function added.
+- worked on client side code. Initialized players here. But need to move this to game class.
+- the toss function also needs to be in game class.
+
+9/12/2019
+- created shuffleDeck() function using shuffle function from <bits/stdc++.h> library.
+- added Hand to player member vars. It is a vector of Cards since it keeps increasing. Also, updating is much easier in vectors.
+- constructed round class, it assigns round number and players.
+
+- added start, load, and play function in round class.
+

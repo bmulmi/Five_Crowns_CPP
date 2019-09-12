@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Five_Crowns_CPP"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Five_Crowns_CPP">
+				<Option output="/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Five_Crowns_CPP" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 Five_Crowns_CPP"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Five_Crowns_CPP/fast">
+				<Option output="/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Five_Crowns_CPP" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 Five_Crowns_CPP/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/bibhash/git_repos/Five_Crowns_CPP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/Cards.cpp">
+			<Option target="Five_Crowns_CPP"/>
+		</Unit>
+		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/Cards.hpp">
+			<Option target="Five_Crowns_CPP"/>
+		</Unit>
+		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/Computer.cpp">
+			<Option target="Five_Crowns_CPP"/>
+		</Unit>
+		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/Computer.hpp">
+			<Option target="Five_Crowns_CPP"/>
+		</Unit>
+		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/Deck.cpp">
+			<Option target="Five_Crowns_CPP"/>
+		</Unit>
+		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/Deck.hpp">
+			<Option target="Five_Crowns_CPP"/>
+		</Unit>
+		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/FiveCrowns.cpp">
+			<Option target="Five_Crowns_CPP"/>
+		</Unit>
+		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/FiveCrowns.hpp">
+			<Option target="Five_Crowns_CPP"/>
+		</Unit>
+		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/Game.cpp">
+			<Option target="Five_Crowns_CPP"/>
+		</Unit>
+		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/Game.hpp">
+			<Option target="Five_Crowns_CPP"/>
+		</Unit>
+		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/Human.cpp">
+			<Option target="Five_Crowns_CPP"/>
+		</Unit>
+		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/Human.hpp">
+			<Option target="Five_Crowns_CPP"/>
+		</Unit>
+		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/Player.cpp">
+			<Option target="Five_Crowns_CPP"/>
+		</Unit>
+		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/Player.hpp">
+			<Option target="Five_Crowns_CPP"/>
+		</Unit>
+		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/Round.cpp">
+			<Option target="Five_Crowns_CPP"/>
+		</Unit>
+		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/Round.hpp">
+			<Option target="Five_Crowns_CPP"/>
+		</Unit>
+		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/main.cpp">
+			<Option target="Five_Crowns_CPP"/>
+		</Unit>
+		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
