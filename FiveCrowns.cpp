@@ -57,19 +57,19 @@ void FiveCrowns::loadGame() {
         cout << "What is the name of the saved file? ";
         cin >> filename;
         filename.append(".txt");
-
         file += filename;
         save.open(file);
     } while (!save.is_open());
 
     string line;
     getline(save, line);
-    int roundNumber = stoi(getValue(line));
+    int roundNumber = stoi(Utilities::getValue(line));
 
     vector<string> roundStats;
     while(getline(save, line)) {
         if(!line.empty() || line != "") {
-            roundStats.push_back(getValue(line));
+            string val = Utilities::getValue(line);
+            roundStats.push_back(Utilities::trim(val));
         }
     }
 

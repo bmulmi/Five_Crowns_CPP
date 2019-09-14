@@ -63,24 +63,29 @@ int Game::toss() {
 }
 
 void Game::load(vector<string> info) {
-    string nextPlayer = toLowerCase(info[info.size()-1]);
+    string nextPlayer = Utilities::toLowerCase(info[info.size()-1]);
+//    nextPlayer = Utilities::trim(nextPlayer);
+
+//    nextPlayer.erase(remove(nextPlayer.begin(), nextPlayer.end(), ' '), nextPlayer.end());
+
     info.pop_back();
-    string human = "human";
 
     cout << "Next player: " << nextPlayer << endl;
-    if (isEqual(human, nextPlayer)) {
+
+    if (nextPlayer == "human") {
         player[0] = new Human();
         player[1] = new Computer();
     }
-    else {
+    else if (nextPlayer == "computer"){
         player[0] = new Computer();
         player[1] = new Human();
     }
-
-    cout << "first player: " << player[0]->getType();
-    cout << "second player: " << player[1]->getType();
-
-    for (auto each : info) {
-        cout << each << endl;
+    else {
+        cerr << "Invalid Next Player in the serialization file! So, player goes first." << endl;
+        player[0] = new Human();
+        player[1] = new Computer();
     }
+
+    Round r(this->roundNumber, player);
+    r.load(info);
 }

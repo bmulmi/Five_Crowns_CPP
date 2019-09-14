@@ -65,11 +65,63 @@ void Round::start() {
     }
 }
 
-void Round::load() {
-    // sets the hands
-    // sets the discard pile
-    // sets the draw pile
+void Round::load(vector<string> info) {
+    vector <string> rawInfo = info;
 
+    int computerScore = stoi(rawInfo[1]);
+    int humanScore = stoi(rawInfo[4]);
+    vector<Cards> computerHand = loadHands(rawInfo[2]);
+    vector<Cards> humanHand = loadHands(rawInfo[5]);
+    deque<Cards> drawPile = loadDeck(rawInfo[6]);
+    deque<Cards> discardPile = loadDeck(rawInfo[7]);
+
+
+    string firstPlayer = player[0]->getType();
+    if (Utilities::toLowerCase(firstPlayer) == "computer") {
+        player[0]->setScore(computerScore);
+        player[0]->setHand(computerHand);
+        player[1]->setScore(humanScore);
+        player[1]->setHand(humanHand);
+    }
+    else {
+        player[1]->setScore(computerScore);
+        player[1]->setHand(computerHand);
+        player[0]->setScore(humanScore);
+        player[0]->setHand(humanHand);
+    }
+
+    deck->setDrawPile(drawPile);
+    deck->setDiscardPile(discardPile);
+
+    start();
+}
+
+vector<Cards> Round::loadHands(string cards) {
+    istringstream ss(cards);
+    string card;
+    vector<Cards> temp;
+
+    while(getline(ss, card)) {
+        string face = card.substr(0,1);
+        string suite = card.substr(1);
+        temp.emplace_back(Cards(face, suite));
+    }
+
+    return temp;
+}
+
+deque<Cards> Round::loadDeck(string cards) {
+    istringstream ss(cards);
+    string card;
+    deque<Cards> temp;
+
+    while(getline(ss, card)) {
+        string face = card.substr(0,1);
+        string suite = card.substr(1);
+        temp.emplace_back(Cards(face, suite));
+    }
+
+    return temp;
 }
 
 // sets hands of the players
@@ -89,14 +141,14 @@ void Round::printRoundStatus() {
     cout << "\n";
     for (int i = 0; i < totalNumPlayers; i++) {
         cout << setw(10) << player[i]->getType() << "\n";
-        cout << setw(10) << "Hand " << player[i]->getHand() << endl;
         cout << setw(10) << "Score " << player[i]->getScore() << endl;
+        cout << setw(10) << "Hand " << player[i]->getHand() << endl;
         cout << "\n";
     }
-    cout << setw(10) << "Discard Pile: " << deck->getDiscardCard().toString() << endl;
-    cout << setw(10) << "\nDraw Pile: ";
+    cout << setw(10) << "Draw Pile: ";
     deck->showDrawPile();
     cout << endl;
+    cout << setw(10) << "Discard Pile: " << deck->getDiscardCard().toString() << endl;
     cout << "--------------------------------------------------------------------------------------------------" << endl;
 
 }

@@ -10,10 +10,12 @@
 #include "Human.hpp"
 #include "Computer.hpp"
 #include "Round.hpp"
+#include "Utilities.hpp"
 
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <algorithm>
 
 class Game {
 public:
@@ -24,25 +26,34 @@ public:
     void start();
     int toss();
 
-    string toLowerCase(string str) {
-        string temp;
-
-        for (char c : str) {
-            temp.push_back(tolower(c));
-        }
-
-        return temp;
-    }
-
-    bool isEqual(string str, string str2){
-        if (str.size() != str2.size()) return false;
-
-        for (int i = 0; i < str.size(); i++){
-            if (str[i] != str2[i]) return false;
-        }
-
-        return true;
-    }
+//    string toLowerCase(string const& str) {
+//        string temp;
+//
+//        for (char c : str) {
+//            temp.push_back(tolower(c));
+//        }
+//
+//        return temp;
+//    }
+//
+//    bool isEqual(string const& str, string const& str2){
+//        cout << "isEqual called" << endl;
+//
+//        if (str.size() != str2.size()) {
+//            cout << str << str2;
+//            return false;
+//        }
+//
+//        for (int i = 0; i < str.size(); ++i){
+//            if (str[i] != str2[i]) {
+//                cout << str[i] << str2[i];
+//                return false;
+//
+//            }
+//        }
+//
+//        return true;
+//    }
 
 private:
     int roundNumber;

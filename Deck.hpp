@@ -20,6 +20,9 @@ public:
     void shuffleDeck();
     void discard(Cards a_card);
     void showDrawPile();
+    void setDrawPile(deque<Cards> cards);
+    void setDiscardPile(deque<Cards> cards);
+
     Cards getDiscardCard();
     Cards drawDiscardCard();
     Cards drawCard();

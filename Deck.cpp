@@ -112,3 +112,12 @@ void Deck::showDrawPile() {
     }
 }
 
+void Deck::setDiscardPile(deque<Cards> cards) {
+    this->discardPile.clear();
+    this->discardPile = cards;
+}
+
+void Deck::setDrawPile(deque<Cards> cards) {
+    this->drawPile.clear();
+    this->drawPile = cards;
+}

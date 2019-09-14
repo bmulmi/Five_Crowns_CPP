@@ -8,6 +8,7 @@
 
 #include "Player.hpp"
 #include "Deck.hpp"
+#include "Utilities.hpp"
 
 class Round {
 public:
@@ -15,10 +16,12 @@ public:
     Round(int roundNumber, Player* player[]);
     ~Round();
     void play();
-    void load();
+    void load(vector<string> info);
     void start();
 
 private:
+    vector<Cards> loadHands(string cards);
+    deque<Cards> loadDeck(string cards);
     void distributeCards();
     void printRoundStatus();
     void saveGame();

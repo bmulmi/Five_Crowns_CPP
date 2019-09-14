@@ -342,6 +342,33 @@ Round.cpp.s:
 	$(MAKE) -f CMakeFiles/Five_Crowns_CPP.dir/build.make CMakeFiles/Five_Crowns_CPP.dir/Round.cpp.s
 .PHONY : Round.cpp.s
 
+Utilities.o: Utilities.cpp.o
+
+.PHONY : Utilities.o
+
+# target to build an object file
+Utilities.cpp.o:
+	$(MAKE) -f CMakeFiles/Five_Crowns_CPP.dir/build.make CMakeFiles/Five_Crowns_CPP.dir/Utilities.cpp.o
+.PHONY : Utilities.cpp.o
+
+Utilities.i: Utilities.cpp.i
+
+.PHONY : Utilities.i
+
+# target to preprocess a source file
+Utilities.cpp.i:
+	$(MAKE) -f CMakeFiles/Five_Crowns_CPP.dir/build.make CMakeFiles/Five_Crowns_CPP.dir/Utilities.cpp.i
+.PHONY : Utilities.cpp.i
+
+Utilities.s: Utilities.cpp.s
+
+.PHONY : Utilities.s
+
+# target to generate assembly for a file
+Utilities.cpp.s:
+	$(MAKE) -f CMakeFiles/Five_Crowns_CPP.dir/build.make CMakeFiles/Five_Crowns_CPP.dir/Utilities.cpp.s
+.PHONY : Utilities.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -402,6 +429,9 @@ help:
 	@echo "... Round.o"
 	@echo "... Round.i"
 	@echo "... Round.s"
+	@echo "... Utilities.o"
+	@echo "... Utilities.i"
+	@echo "... Utilities.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

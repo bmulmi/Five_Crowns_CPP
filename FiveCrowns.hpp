@@ -13,6 +13,7 @@
 #include "Player.hpp"
 #include "Human.hpp"
 #include "Computer.hpp"
+#include "Utilities.hpp"
 
 using namespace std;
 
@@ -27,13 +28,6 @@ public:
 private:
     void init(int roundNumber);
     void loadGame();
-
-    string getValue(string line) {
-        auto pos = line.find(':');
-        string value = line.substr(pos+1);
-        return value;
-    }
-
     Game* game;
 };
 

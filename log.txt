@@ -20,5 +20,7 @@
 - made deck a singleton class so that it can be accessed from any other class with no copy issues.
 - added play() function to the player class. coded for human. Displays menu and calls necessary functions.
 - added goOut() and pickCard() functions to the player class.
+- found out the reason for not loading the game. The values have a space in the beginning. so used str.erase() for that.
+
 
 
