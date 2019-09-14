@@ -3,20 +3,13 @@
 //
 
 #include "Game.hpp"
-#include "Round.hpp"
-#include <iostream>
 using namespace std;
 
 Game::Game() {
 
 }
 
-Game::Game(int roundNumber, Player* player[]) {
-    this->player = player;
-//    cout << "First: " << endl;
-//    player[0]->printType();
-//    cout << "second: " << endl;
-//    player[1]->printType();
+Game::Game(int roundNumber) {
     this->roundNumber = roundNumber;
 }
 
@@ -25,20 +18,69 @@ Game::~Game() {
 }
 
 void Game::start() {
-    cout << "Game started!" << endl;
+    int nextPlayer = toss();
+    if (nextPlayer == 0) {
+        player[0] = new Human();
+        player[1] = new Computer();
+    }
+    else {
+        player[0] = new Computer();
+        player[1] = new Human();
+    }
+    cout << "Now, Lets get started!" << endl;
+
     Round r(1, player);
     r.play();
-//    while (roundNumber < 12) {
+
+    //while (roundNumber < 12) {
         // create the round
         // play the round
 
         // see if the round is save or quit
 
-//    }
+    //}
     //declare winner()
 
 }
 
-void Game::load() {
+int Game::toss() {
+    char side;
+    do {
+        cout << "Time for a toss. Heads or Tails (h/t)? ";
+        cin >> side;
+    } while (side != 'h' && side != 't');
 
+    srand(time(0));
+    int winner = rand() % 2;
+    if ((winner == 0 && side == 'h') || (winner == 1 && side == 't')) {
+        cout << "Congratulations! You won the toss." << endl;
+        return 0;
+    }
+    else {
+        cout << "Sorry, you lost the toss." << endl;
+        return 1;
+    }
+}
+
+void Game::load(vector<string> info) {
+    string nextPlayer = toLowerCase(info[info.size()-1]);
+    info.pop_back();
+    string human = "human";
+
+    cout << "Next player: " << nextPlayer << endl;
+    if (isEqual(human, nextPlayer)) {
+        player[0] = new Human();
+        player[1] = new Computer();
+    }
+    else {
+        player[0] = new Computer();
+        player[1] = new Human();
+    }
+
+    cout << "first player: " << player[0]->getType();
+    cout << "second player: " << player[1]->getType();
+
+    for (auto each : info) {
+        cout << each << endl;
+    }
 }

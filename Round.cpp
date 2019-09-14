@@ -2,6 +2,7 @@
 // Created by bibhash on 9/12/19.
 //
 
+#include <iomanip>
 #include "Round.hpp"
 
 Round::Round() {
@@ -11,11 +12,12 @@ Round::Round() {
 Round::Round(int roundNumber, Player* player[]) {
     this->roundNumber = roundNumber;
     this->player = player;
-    this->deck = new Deck(2);
+    this->deck = &Deck::getInstanceOfDeck(2);
     this->totalNumPlayers = 2;
 }
 
 Round::~Round() {
+    delete deck;
 }
 
 // this starts a new fresh round
@@ -34,15 +36,33 @@ void Round::play() {
         player[i]->setScore(0);
     }
 
-    printRoundStatus();
     start();
 }
 
 void Round::start() {
-    // loop until round has not ended
-        // change players
-        // get their move
-    return;
+    // this is only for two player game
+    // TODO: change this algorithm for more than three players
+    nextPlayer = player[1]->hasGoneOut() ? 1 : 0;
+
+    while (!roundEnded()) {
+        printRoundStatus();
+
+        player[nextPlayer]->play();
+
+        if (player[nextPlayer]->hasQuitGame()) {
+            cout << "Quitting the game..." << endl;
+            exit (1);
+        }
+
+        if (player[nextPlayer]->hasSaveGame()) {
+            saveGame();
+            // change the save game flag of the player
+            player[nextPlayer]->setSaveGame(false);
+        }
+        else {
+            nextPlayer = (nextPlayer + 1) % totalNumPlayers;
+        }
+    }
 }
 
 void Round::load() {
@@ -64,14 +84,32 @@ void Round::distributeCards() {
 }
 
 void Round::printRoundStatus() {
-    cout << "\nRound Number: " << roundNumber << endl;
+    cout << "--------------------------------------------------------------------------------------------------" << endl;
+    cout << left << setw(10) << "Round Number: " << roundNumber << endl;
+    cout << "\n";
     for (int i = 0; i < totalNumPlayers; i++) {
-        cout << player[i]->getType();
-        cout << "Hand: " << player[i]->getHand() << endl;
-        cout << "Score: " << player[i]->getScore() << endl;
+        cout << setw(10) << player[i]->getType() << "\n";
+        cout << setw(10) << "Hand " << player[i]->getHand() << endl;
+        cout << setw(10) << "Score " << player[i]->getScore() << endl;
+        cout << "\n";
     }
-    cout << "\nDiscard Pile: " << deck->getDiscardCard().toString() << endl;
-    cout << "\nDraw Pile: ";
+    cout << setw(10) << "Discard Pile: " << deck->getDiscardCard().toString() << endl;
+    cout << setw(10) << "\nDraw Pile: ";
     deck->showDrawPile();
     cout << endl;
+    cout << "--------------------------------------------------------------------------------------------------" << endl;
+
+}
+
+bool Round::roundEnded() {
+    for (int i = 0; i < totalNumPlayers; i++) {
+        if (player[i]->hasGoneOut()) return true;
+    }
+    return false;
+}
+
+void Round::saveGame() {
+    cout << "Saving Game..." << endl;
+
+
 }

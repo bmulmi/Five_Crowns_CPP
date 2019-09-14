@@ -17,12 +17,15 @@ public:
     void play();
     void load();
     void start();
-    void distributeCards();
-    void printRoundStatus();
 
 private:
+    void distributeCards();
+    void printRoundStatus();
+    void saveGame();
+    bool roundEnded();
     Player** player;
     Deck* deck;
+    int nextPlayer;
     int roundNumber;
     int totalNumPlayers;
 };

@@ -6,10 +6,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-//creates a single deck of cards
-Deck::Deck() {
-    this->drawPile = createDeck();
-}
+Deck* Deck::deck = NULL;
 
 Deck::Deck(int numDecks) {
     // create an initial deck
@@ -26,8 +23,11 @@ Deck::Deck(int numDecks) {
     this->drawPile = initialDeck;
 }
 
-Deck::~Deck() {
-
+Deck& Deck::getInstanceOfDeck(int num) {
+    if (deck == nullptr){
+        deck = new Deck(num);
+    }
+    return *deck;
 }
 
 // creates one deck of cards with Jokers
@@ -69,8 +69,16 @@ void Deck::printDeck() {
     cout << endl;
 }
 
+// mixes the discard pile into draw pile and shuffles the deck
 void Deck::shuffleDeck() {
     unsigned seed = 0;
+
+    for (auto each : discardPile) {
+        this->drawPile.push_back(each);
+    }
+
+    this->discardPile.clear();
+
     shuffle(this->drawPile.begin(), this->drawPile.end(), default_random_engine(seed));
 }
 
@@ -89,6 +97,13 @@ void Deck::discard(Cards a_card) {
 // returns top card of the discard pile
 Cards Deck::getDiscardCard() {
     return discardPile.front();
+}
+
+// returns top card of the discard pile and pops it from the pile
+Cards Deck::drawDiscardCard() {
+    Cards temp = discardPile.front();
+    discardPile.pop_front();
+    return temp;
 }
 
 void Deck::showDrawPile() {

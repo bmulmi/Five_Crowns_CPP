@@ -7,3 +7,15 @@
 Computer::Computer() {
 
 }
+
+void Computer::play() {
+    cout << "Computer Played..." << endl;
+}
+
+void Computer::pickCard() {
+
+}
+
+void Computer::goOut() {
+
+}

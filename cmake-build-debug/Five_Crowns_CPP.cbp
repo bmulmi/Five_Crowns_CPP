@@ -132,6 +132,9 @@
 		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/Round.hpp">
 			<Option target="Five_Crowns_CPP"/>
 		</Unit>
+		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/Utilities.hpp">
+			<Option target="Five_Crowns_CPP"/>
+		</Unit>
 		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/main.cpp">
 			<Option target="Five_Crowns_CPP"/>
 		</Unit>

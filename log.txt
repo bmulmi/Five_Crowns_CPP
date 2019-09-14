@@ -15,4 +15,10 @@
 - added getCards(int num) in Deck class to distribute cards for player hands.
 - added printRoundStatus() prints the status of the round.
 
+9/14/2019
+- in load() of game string comparision for next player not working. TODO
+- made deck a singleton class so that it can be accessed from any other class with no copy issues.
+- added play() function to the player class. coded for human. Displays menu and calls necessary functions.
+- added goOut() and pickCard() functions to the player class.
+
 

@@ -14,17 +14,21 @@ using namespace std;
 
 class Deck {
 public:
-    Deck();
-    Deck(int numDecks);
-    ~Deck();
+    ~Deck() = default;
+    static Deck& getInstanceOfDeck(int num);
     void printDeck();
     void shuffleDeck();
     void discard(Cards a_card);
     void showDrawPile();
     Cards getDiscardCard();
+    Cards drawDiscardCard();
     Cards drawCard();
 
 private:
+    static Deck *deck;
+
+    Deck(int numDecks);
+
     deque<Cards> drawPile;
     deque<Cards> discardPile;
 

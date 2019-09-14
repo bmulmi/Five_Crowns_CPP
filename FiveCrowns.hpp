@@ -7,8 +7,7 @@
 
 #include <string>
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
+#include <fstream>
 
 #include "Game.hpp"
 #include "Player.hpp"
@@ -26,14 +25,16 @@ public:
     void restart();
 
 private:
-    void init(int roundNumber, int nextPlayer);
-    void loadGame(string filename);
+    void init(int roundNumber);
+    void loadGame();
 
-    int toss();
+    string getValue(string line) {
+        auto pos = line.find(':');
+        string value = line.substr(pos+1);
+        return value;
+    }
 
-//    int numPlayers = 2;
     Game* game;
-    Player* player[2];
 };
 
 
