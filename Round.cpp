@@ -162,6 +162,4 @@ bool Round::roundEnded() {
 
 void Round::saveGame() {
     cout << "Saving Game..." << endl;
-
-
 }
