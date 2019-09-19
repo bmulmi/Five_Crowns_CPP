@@ -8,7 +8,7 @@
 
 #include <string>
 
-namespace Utilities {
+namespace Utils {
     std::string toLowerCase(std::string &word);
     std::string getValue(std::string &line);
     std::string trim(std::string &word);

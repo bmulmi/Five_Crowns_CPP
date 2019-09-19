@@ -6,7 +6,6 @@
 #define FIVE_CROWNS_CPP_HUMAN_HPP
 
 #include "Player.hpp"
-#include "Deck.hpp"
 #include <iostream>
 
 using namespace std;

@@ -63,13 +63,13 @@ void FiveCrowns::loadGame() {
 
     string line;
     getline(save, line);
-    int roundNumber = stoi(Utilities::getValue(line));
+    int roundNumber = stoi(Utils::getValue(line));
 
     vector<string> roundStats;
     while(getline(save, line)) {
         if(!line.empty() || line != "") {
-            string val = Utilities::getValue(line);
-            roundStats.push_back(Utilities::trim(val));
+            string val = Utils::getValue(line);
+            roundStats.push_back(Utils::trim(val));
         }
     }
 

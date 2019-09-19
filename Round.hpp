@@ -29,6 +29,7 @@ private:
     Player** player;
     Deck* deck;
     int nextPlayer;
+    int currPlayer;
     int roundNumber;
     int totalNumPlayers;
 };

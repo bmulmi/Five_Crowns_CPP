@@ -35,6 +35,9 @@ void Human::play() {
 
     if (choice == 2) {
         pickCard();
+        if (canGoOut()) {
+            goOut();
+        }
     }
 }
 
@@ -52,21 +55,25 @@ void Human::pickCard() {
         cardPicked = deck->drawCard();
     }
     else {
-        cardPicked = deck->getDiscardCard();
+        cardPicked = deck->drawDiscardCard();
     }
 
-    int handIndex;
+    this->hand.push_back(cardPicked);
+
+    int cardIndex;
+
     do {
         cout    << "Which card do you want to discard? \n" \
                 << getHandWithIndex() << "\n" \
                 << "Enter the index number of the card. " << endl;
-        cin >> handIndex;
-    } while (handIndex < 0 || handIndex > hand.size());
+        cin >> cardIndex;
+    } while (cardIndex < 0 || cardIndex > hand.size());
 
-    deck->discard(hand[handIndex]);
-    updateHand(cardPicked, handIndex);
+    deck->discard(hand[cardIndex]);
+    removeFromHand(cardIndex);
 }
 
 void Human::goOut() {
-
+    this->goneOut = true;
+    cout << "HUMAN WENT OUT!!!" << endl;
 }

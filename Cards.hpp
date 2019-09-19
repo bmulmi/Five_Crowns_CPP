@@ -14,9 +14,11 @@ public:
     Cards(string& face, string& suit);
     ~Cards();
 
-    string getSuit() { return suite; }
+    string getSuite() { return suite; }
     string getFace() { return face; }
+    int getFaceValue();
     string toString() { return face + suite; }
+    bool isJoker();
 
 private:
     string face;

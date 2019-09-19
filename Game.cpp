@@ -29,6 +29,11 @@ void Game::start() {
     }
     cout << "Now, Lets get started!" << endl;
 
+    // set the scores to zero before starting a fresh game
+    for (int i = 0; i < 2; i++) {
+        player[i]->setScore(0);
+    }
+
     Round r(1, player);
     r.play();
 
@@ -63,11 +68,7 @@ int Game::toss() {
 }
 
 void Game::load(vector<string> info) {
-    string nextPlayer = Utilities::toLowerCase(info[info.size()-1]);
-//    nextPlayer = Utilities::trim(nextPlayer);
-
-//    nextPlayer.erase(remove(nextPlayer.begin(), nextPlayer.end(), ' '), nextPlayer.end());
-
+    string nextPlayer = Utils::toLowerCase(info[info.size()-1]);
     info.pop_back();
 
     cout << "Next player: " << nextPlayer << endl;
@@ -86,6 +87,21 @@ void Game::load(vector<string> info) {
         player[1] = new Computer();
     }
 
+    // create the round of that round number
     Round r(this->roundNumber, player);
+    // load the round information
     r.load(info);
+    // start the loaded round
+    //r.start();
+    // now increase the round number
+//    this->roundNumber += 1;
+//
+//    // play all the rounds until the end
+//    while (roundNumber < 12) {
+//        // create new round
+//        Round r(this->roundNumber, player);
+//        r.play();
+//        roundNumber++;
+//    }
+
 }

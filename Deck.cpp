@@ -95,7 +95,8 @@ void Deck::discard(Cards a_card) {
 }
 
 // returns top card of the discard pile
-Cards Deck::getDiscardCard() {
+Cards Deck::showDiscardCard() {
+//    cout << "Discard Card returning: " << this->discardPile.front().toString();
     return discardPile.front();
 }
 
@@ -120,4 +121,30 @@ void Deck::setDiscardPile(deque<Cards> cards) {
 void Deck::setDrawPile(deque<Cards> cards) {
     this->drawPile.clear();
     this->drawPile = cards;
+}
+
+void Deck::setWildCard(int faceValue) {
+    int tempFace = faceValue;
+
+    if (tempFace > 10) {
+        switch (tempFace) {
+            case 11:
+                this->wildCardFace = "J";
+                break;
+
+            case 12:
+                this->wildCardFace = "Q";
+                break;
+
+            case 13:
+                this->wildCardFace = "K";
+                break;
+
+            default:
+                break;
+        }
+    }
+    else {
+        this->wildCardFace = to_string(tempFace);
+    }
 }

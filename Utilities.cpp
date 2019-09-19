@@ -4,7 +4,7 @@
 
 #include "Utilities.hpp"
 
-std::string Utilities::trim(std::string &word) {
+std::string Utils::trim(std::string &word) {
     std::string whitespace = " \t";
     auto strBegin = word.find_first_not_of(whitespace);
     if (strBegin == std::string::npos) {
@@ -15,7 +15,7 @@ std::string Utilities::trim(std::string &word) {
     return word.substr(strBegin, strRange);
 }
 
-std::string Utilities::toLowerCase(std::string &word) {
+std::string Utils::toLowerCase(std::string &word) {
     std::string temp;
 
     for (char c : word) {
@@ -25,7 +25,7 @@ std::string Utilities::toLowerCase(std::string &word) {
     return temp;
 }
 
-std::string Utilities::getValue(std::string &line) {
+std::string Utils::getValue(std::string &line) {
     auto pos = line.find(':');
     std::string value = line.substr(pos+1);
     return value;

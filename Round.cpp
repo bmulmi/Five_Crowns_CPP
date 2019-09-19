@@ -14,6 +14,8 @@ Round::Round(int roundNumber, Player* player[]) {
     this->player = player;
     this->deck = &Deck::getInstanceOfDeck(2);
     this->totalNumPlayers = 2;
+    // set the wild card
+    this->deck->setWildCard(roundNumber + 2);
 }
 
 Round::~Round() {
@@ -31,11 +33,6 @@ void Round::play() {
     // set the discard pile
     deck->discard(deck->drawCard());
 
-    // set scores to zero
-    for (int i = 0; i < totalNumPlayers; i++) {
-        player[i]->setScore(0);
-    }
-
     start();
 }
 
@@ -43,10 +40,11 @@ void Round::start() {
     // this is only for two player game
     // TODO: change this algorithm for more than three players
     nextPlayer = player[1]->hasGoneOut() ? 1 : 0;
+    currPlayer = nextPlayer;
 
     while (!roundEnded()) {
         printRoundStatus();
-
+        currPlayer = nextPlayer;
         player[nextPlayer]->play();
 
         if (player[nextPlayer]->hasQuitGame()) {
@@ -63,6 +61,8 @@ void Round::start() {
             nextPlayer = (nextPlayer + 1) % totalNumPlayers;
         }
     }
+
+    cout << "ROUND ENDED!" << endl;
 }
 
 void Round::load(vector<string> info) {
@@ -77,7 +77,7 @@ void Round::load(vector<string> info) {
 
 
     string firstPlayer = player[0]->getType();
-    if (Utilities::toLowerCase(firstPlayer) == "computer") {
+    if (Utils::toLowerCase(firstPlayer) == "computer") {
         player[0]->setScore(computerScore);
         player[0]->setHand(computerHand);
         player[1]->setScore(humanScore);
@@ -101,7 +101,7 @@ vector<Cards> Round::loadHands(string cards) {
     string card;
     vector<Cards> temp;
 
-    while(getline(ss, card)) {
+    while(getline(ss, card, ' ')) {
         string face = card.substr(0,1);
         string suite = card.substr(1);
         temp.emplace_back(Cards(face, suite));
@@ -115,7 +115,7 @@ deque<Cards> Round::loadDeck(string cards) {
     string card;
     deque<Cards> temp;
 
-    while(getline(ss, card)) {
+    while(getline(ss, card, ' ')) {
         string face = card.substr(0,1);
         string suite = card.substr(1);
         temp.emplace_back(Cards(face, suite));
@@ -142,23 +142,23 @@ void Round::printRoundStatus() {
     for (int i = 0; i < totalNumPlayers; i++) {
         cout << setw(10) << player[i]->getType() << "\n";
         cout << setw(10) << "Score " << player[i]->getScore() << endl;
-        cout << setw(10) << "Hand " << player[i]->getHand() << endl;
+        cout << setw(10) << "Hand " << player[i]->getHandAsString() << endl;
         cout << "\n";
     }
     cout << setw(10) << "Draw Pile: ";
     deck->showDrawPile();
     cout << endl;
-    cout << setw(10) << "Discard Pile: " << deck->getDiscardCard().toString() << endl;
+    cout << setw(10) << "Discard Pile: " << deck->showDiscardCard().toString() << endl;
     cout << "--------------------------------------------------------------------------------------------------" << endl;
 
 }
 
+//checks to see if the previous player can go out or not.
 bool Round::roundEnded() {
-    for (int i = 0; i < totalNumPlayers; i++) {
-        if (player[i]->hasGoneOut()) return true;
-    }
-    return false;
+    cout << player[currPlayer]->getType() << " " << player[currPlayer]->hasGoneOut();
+    return player[currPlayer]->hasGoneOut();
 }
+
 
 void Round::saveGame() {
     cout << "Saving Game..." << endl;

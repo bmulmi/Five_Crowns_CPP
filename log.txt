@@ -22,5 +22,17 @@
 - added goOut() and pickCard() functions to the player class.
 - found out the reason for not loading the game. The values have a space in the beginning. so used str.erase() for that.
 
+9/18/2019
+- found a bug in load() function. the hands and deck were not loading correctly.
+- added setWildCard() function that sets the wild card's face in the deck class.
+- TODO: Round changing. needs restructuring
+- added isRun() and isBook() functions to the Player class
+- added canGoOut() function that checks if the player can go out or not.
+- added extractJokerAndWildCards() function that takes the vector as reference, removes the wild cards and jokers from the vector and
+returns them.
+- added hasSameSuite() that checks if the hand cards are of the same suite.
+- added sortCards() function that sorts the Cards in ascending order
+- added swapCards() function that swaps two cards.
+- refactored previousPlayer to currPlayer to keep track of current player. MUST CHECK THIS!
 
 

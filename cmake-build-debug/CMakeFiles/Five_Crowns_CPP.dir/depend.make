@@ -42,6 +42,7 @@ CMakeFiles/Five_Crowns_CPP.dir/Human.cpp.o: ../Human.hpp
 CMakeFiles/Five_Crowns_CPP.dir/Human.cpp.o: ../Player.hpp
 
 CMakeFiles/Five_Crowns_CPP.dir/Player.cpp.o: ../Cards.hpp
+CMakeFiles/Five_Crowns_CPP.dir/Player.cpp.o: ../Deck.hpp
 CMakeFiles/Five_Crowns_CPP.dir/Player.cpp.o: ../Player.cpp
 CMakeFiles/Five_Crowns_CPP.dir/Player.cpp.o: ../Player.hpp
 

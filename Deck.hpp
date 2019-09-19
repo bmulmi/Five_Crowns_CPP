@@ -22,8 +22,10 @@ public:
     void showDrawPile();
     void setDrawPile(deque<Cards> cards);
     void setDiscardPile(deque<Cards> cards);
+    void setWildCard(int faceValue);
+    string getWildCardFace () { return this->wildCardFace; }
 
-    Cards getDiscardCard();
+    Cards showDiscardCard();
     Cards drawDiscardCard();
     Cards drawCard();
 
@@ -38,6 +40,7 @@ private:
     deque<Cards> createJokers(int num);
     deque<Cards> createDeck();
 
+    string wildCardFace;
     int const numberOfJokers = 3;
     string const suite [5] = {"S", "C", "D", "H", "T"};
     string const face [11] = {"3", "4", "5", "6", "7", "8",
