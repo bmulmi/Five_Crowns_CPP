@@ -14,6 +14,7 @@ Round::Round(int roundNumber, Player* player[]) {
     this->player = player;
     this->deck = &Deck::getInstanceOfDeck(2);
     this->totalNumPlayers = 2;
+    this->saveAndQuit = false;
     // set the wild card
     this->deck->setWildCard(roundNumber + 2);
 }
@@ -44,7 +45,6 @@ void Round::start() {
 
     while (!roundEnded()) {
         printRoundStatus();
-        currPlayer = nextPlayer;
         player[nextPlayer]->play();
 
         if (player[nextPlayer]->hasQuitGame()) {
@@ -53,11 +53,13 @@ void Round::start() {
         }
 
         if (player[nextPlayer]->hasSaveGame()) {
-            saveGame();
+            setSaveGame(true);
             // change the save game flag of the player
             player[nextPlayer]->setSaveGame(false);
+            return;
         }
         else {
+            currPlayer = nextPlayer;
             nextPlayer = (nextPlayer + 1) % totalNumPlayers;
         }
     }
@@ -92,10 +94,9 @@ void Round::load(vector<string> info) {
 
     deck->setDrawPile(drawPile);
     deck->setDiscardPile(discardPile);
-
-    start();
 }
 
+// loads Hands of players from serialized string
 vector<Cards> Round::loadHands(string cards) {
     istringstream ss(cards);
     string card;
@@ -110,6 +111,7 @@ vector<Cards> Round::loadHands(string cards) {
     return temp;
 }
 
+// loads Deck of cards from serialized string
 deque<Cards> Round::loadDeck(string cards) {
     istringstream ss(cards);
     string card;
@@ -159,7 +161,36 @@ bool Round::roundEnded() {
     return player[currPlayer]->hasGoneOut();
 }
 
+string Round::getSerializableInfo() {
+    string serializedText;
+    string humanScore, humanHand, computerScore, computerHand;
 
-void Round::saveGame() {
-    cout << "Saving Game..." << endl;
+    for (int i = 0; i < totalNumPlayers; i++) {
+        string type = player[i]->getType();
+        type = Utils::trim(type);
+
+        if (Utils::toLowerCase(type) == "human") {
+            humanHand = player[i]->getHandAsString();
+            int scr = player[i]->getScore();
+            humanScore = to_string(scr);
+        }
+        if (Utils::toLowerCase(type) == "computer") {
+            computerHand = player[i]->getHandAsString();
+            int scr = player[i]->getScore();
+            computerScore = to_string(scr);
+
+        }
+    }
+    serializedText += "Round: " + to_string(roundNumber) + "\n";
+    serializedText += "\nComputer:\n";
+    serializedText +=   "\tScore: " + computerScore + "\n" +
+                        "\tHand: " + computerHand + "\n";
+    serializedText += "\nHuman:\n";
+    serializedText +=   "\tScore: " + humanScore + "\n" +
+                        "\tHand: " + humanHand + "\n";
+    serializedText += "\nDraw Pile: " + deck->getDrawPile() + "\n";
+    serializedText += "\nDiscard Pile: " + deck->getDiscardPile() + "\n";
+    serializedText += "\nNext Player: " + player[currPlayer]->getType() + "\n";
+
+    return serializedText;
 }

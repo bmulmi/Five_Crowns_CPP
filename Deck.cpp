@@ -148,3 +148,23 @@ void Deck::setWildCard(int faceValue) {
         this->wildCardFace = to_string(tempFace);
     }
 }
+
+string Deck::getDiscardPile() {
+    string temp;
+
+    for (auto each : this->discardPile) {
+        temp += each.toString() + " ";
+    }
+
+    return temp;
+}
+
+string Deck::getDrawPile() {
+    string temp;
+
+    for (auto each : this->drawPile) {
+        temp += each.toString() + " ";
+    }
+
+    return temp;
+}

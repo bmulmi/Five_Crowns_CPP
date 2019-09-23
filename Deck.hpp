@@ -24,6 +24,8 @@ public:
     void setDiscardPile(deque<Cards> cards);
     void setWildCard(int faceValue);
     string getWildCardFace () { return this->wildCardFace; }
+    string getDiscardPile();
+    string getDrawPile();
 
     Cards showDiscardCard();
     Cards drawDiscardCard();

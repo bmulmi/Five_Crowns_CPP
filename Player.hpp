@@ -23,6 +23,7 @@ public:
     void setScore( int score ) { this->score = score; }
     void setHand (vector<Cards> hand) { this->hand = hand; }
     void removeFromHand(int discardIndex) { hand.erase(hand.begin() + discardIndex); }
+
     vector<Cards> getHand() { return this->hand; }
     string getHandAsString();
     string getHandWithIndex();

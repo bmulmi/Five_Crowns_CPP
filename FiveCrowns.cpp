@@ -20,7 +20,6 @@ void FiveCrowns::start() {
         cin >> load;
     } while(load != 'y' && load != 'n');
 
-    string filename;
     if (load == 'y') {
         loadGame();
     }
@@ -28,6 +27,8 @@ void FiveCrowns::start() {
         init(1);
         game->start();
     }
+
+    cout << "Thank you for playing Five Crowns! Hope you enjoyed it!" << endl;
 }
 
 
@@ -47,7 +48,7 @@ void FiveCrowns::init(int roundNumber) {
 }
 
 void FiveCrowns::loadGame() {
-    string file = "/home/bibhash/git_repos/Five_Crowns_CPP/";
+    string file = "/home/bibhash/git_repos/Five_Crowns_CPP/savedGames/";
 
     ifstream save;
     string filename;
@@ -62,9 +63,11 @@ void FiveCrowns::loadGame() {
     } while (!save.is_open());
 
     string line;
+    // get the round number
     getline(save, line);
     int roundNumber = stoi(Utils::getValue(line));
 
+    // store everything else in a vector of strings
     vector<string> roundStats;
     while(getline(save, line)) {
         if(!line.empty() || line != "") {
@@ -73,6 +76,9 @@ void FiveCrowns::loadGame() {
         }
     }
 
+    // initialize the game with the round number
     init(roundNumber);
+
+    // load the game
     game->load(roundStats);
 }

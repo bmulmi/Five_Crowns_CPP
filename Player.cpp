@@ -45,7 +45,7 @@ bool Player::canGoOut() {
         return true;
     }
     else {
-
+        return false;
     }
 }
 

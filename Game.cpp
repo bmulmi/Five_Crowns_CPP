@@ -34,17 +34,20 @@ void Game::start() {
         player[i]->setScore(0);
     }
 
-    Round r(1, player);
-    r.play();
 
-    //while (roundNumber < 12) {
-        // create the round
-        // play the round
+    while (roundNumber < 12) {
+        Round r(roundNumber, player);
+        r.play();
 
-        // see if the round is save or quit
+        if (r.isSaveAndQuit()) {
+            string roundInfo = r.getSerializableInfo();
+            saveGame(roundInfo);
+            return;
+        }
 
-    //}
-    //declare winner()
+        roundNumber++;
+    }
+//    declare winner()
 
 }
 
@@ -67,10 +70,12 @@ int Game::toss() {
     }
 }
 
+// sets next player and loads the round
 void Game::load(vector<string> info) {
     string nextPlayer = Utils::toLowerCase(info[info.size()-1]);
     info.pop_back();
 
+    // set the next player
     cout << "Next player: " << nextPlayer << endl;
 
     if (nextPlayer == "human") {
@@ -82,26 +87,47 @@ void Game::load(vector<string> info) {
         player[1] = new Human();
     }
     else {
-        cerr << "Invalid Next Player in the serialization file! So, player goes first." << endl;
+        cerr << "Invalid Next Player in the serialization file! So, human goes first." << endl;
         player[0] = new Human();
         player[1] = new Computer();
     }
 
-    // create the round of that round number
-    Round r(this->roundNumber, player);
-    // load the round information
-    r.load(info);
-    // start the loaded round
-    //r.start();
-    // now increase the round number
-//    this->roundNumber += 1;
-//
-//    // play all the rounds until the end
-//    while (roundNumber < 12) {
-//        // create new round
-//        Round r(this->roundNumber, player);
-//        r.play();
-//        roundNumber++;
-//    }
+    bool justLoaded = true;
 
+    while (roundNumber < 12) {
+        // create the round
+        Round r(this->roundNumber, player);
+
+        if (justLoaded){
+            r.load(info);
+            r.start();
+            justLoaded = false;
+        }
+        else {
+            r.play();
+        }
+
+        if (r.isSaveAndQuit()) {
+            string roundInfo = r.getSerializableInfo();
+            saveGame(roundInfo);
+            return;
+        }
+
+        roundNumber++;
+    }
+}
+
+// saves the string of round info into a ofstream object
+void Game::saveGame(string info) {
+    ofstream save;
+    string filename;
+
+    cout << "Please enter the name of the file you want to save: ";
+    cin.ignore();
+    cin >> filename;
+    filename += ".txt";
+
+    save.open("/home/bibhash/git_repos/Five_Crowns_CPP/savedGames/"+filename);
+    save << info;
+    save.close();
 }

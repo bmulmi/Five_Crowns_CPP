@@ -35,4 +35,17 @@ returns them.
 - added swapCards() function that swaps two cards.
 - refactored previousPlayer to currPlayer to keep track of current player. MUST CHECK THIS!
 
+9/19/2019
+- put the currPlayer assignment within the else statement right before nextPlayer is changed.
+- TODO: check if a wild card is a part of a run or a book.
+        This makes a difference while counting the cards.
+
+9/21/2019
+- added save game function in round and game
+- saveGame does not show score. TODO
+
+9/22/2019
+- save game works correctly now.
+
+
 

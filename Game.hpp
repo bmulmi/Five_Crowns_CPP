@@ -16,6 +16,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <algorithm>
+#include <fstream>
 
 class Game {
 public:
@@ -24,36 +25,8 @@ public:
     ~Game();
     void load(vector<string> info);
     void start();
+    void saveGame(string info);
     int toss();
-
-//    string toLowerCase(string const& str) {
-//        string temp;
-//
-//        for (char c : str) {
-//            temp.push_back(tolower(c));
-//        }
-//
-//        return temp;
-//    }
-//
-//    bool isEqual(string const& str, string const& str2){
-//        cout << "isEqual called" << endl;
-//
-//        if (str.size() != str2.size()) {
-//            cout << str << str2;
-//            return false;
-//        }
-//
-//        for (int i = 0; i < str.size(); ++i){
-//            if (str[i] != str2[i]) {
-//                cout << str[i] << str2[i];
-//                return false;
-//
-//            }
-//        }
-//
-//        return true;
-//    }
 
 private:
     int roundNumber;
