@@ -75,5 +75,5 @@ void Human::pickCard() {
 
 void Human::goOut() {
     this->goneOut = true;
-    cout << "HUMAN WENT OUT!!!" << endl;
+    cout << "Human has gone out." << endl;
 }

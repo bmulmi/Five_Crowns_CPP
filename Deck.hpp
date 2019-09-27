@@ -14,8 +14,13 @@ using namespace std;
 
 class Deck {
 public:
+    Deck& operator = (Deck const&) = delete;
+    Deck& operator = (Deck const&&) = delete;
+    Deck(Deck const&) = delete;
+    Deck(Deck const&&) = delete;
     ~Deck() = default;
     static Deck& getInstanceOfDeck(int num);
+
     void printDeck();
     void shuffleDeck();
     void discard(Cards a_card);
@@ -32,9 +37,8 @@ public:
     Cards drawCard();
 
 private:
-    static Deck *deck;
-
     Deck(int numDecks);
+    static Deck *deck;
 
     deque<Cards> drawPile;
     deque<Cards> discardPile;

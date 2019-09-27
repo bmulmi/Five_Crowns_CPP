@@ -14,7 +14,7 @@ class Round {
 public:
     Round();
     Round(int roundNumber, Player* player[]);
-    ~Round();
+    ~Round() = default;
     void play();
     void load(vector<string> info);
     void start();

@@ -14,10 +14,6 @@ Cards::Cards(string& face, string &suite) {
     this->suite = suite;
 }
 
-Cards::~Cards() {
-
-}
-
 bool Cards::isJoker() {
     if (this->face == "J" && (this->suite == "1" || this->suite == "2" || this->suite == "3")) {
         return true;

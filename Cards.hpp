@@ -12,7 +12,7 @@ class Cards {
 public:
     Cards();
     Cards(string& face, string& suit);
-    ~Cards();
+    ~Cards() = default;
 
     string getSuite() { return suite; }
     string getFace() { return face; }

@@ -19,10 +19,6 @@ Round::Round(int roundNumber, Player* player[]) {
     this->deck->setWildCard(roundNumber + 2);
 }
 
-Round::~Round() {
-    delete deck;
-}
-
 // this starts a new fresh round
 void Round::play() {
     // shuffle cards
@@ -157,8 +153,9 @@ void Round::printRoundStatus() {
 
 //checks to see if the previous player can go out or not.
 bool Round::roundEnded() {
-    cout << player[currPlayer]->getType() << " " << player[currPlayer]->hasGoneOut();
-    return player[currPlayer]->hasGoneOut();
+//    cout << player[currPlayer]->getType() << " " << player[currPlayer]->hasGoneOut();
+    return true;
+    //return player[currPlayer]->hasGoneOut();
 }
 
 string Round::getSerializableInfo() {

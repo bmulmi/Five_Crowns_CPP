@@ -21,6 +21,7 @@ Deck::Deck(int numDecks) {
     }
 
     this->drawPile = initialDeck;
+    this->discardPile = {};
 }
 
 Deck& Deck::getInstanceOfDeck(int num) {
@@ -73,7 +74,8 @@ void Deck::printDeck() {
 void Deck::shuffleDeck() {
     unsigned seed = 0;
 
-    for (auto each : discardPile) {
+    // combine the discard pile to draw pile
+    for (auto each : this->discardPile) {
         this->drawPile.push_back(each);
     }
 
