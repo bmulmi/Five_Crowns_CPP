@@ -61,4 +61,5 @@ returns them.
 - thats why the code was breaking down on the 9th round because there was not enough card to distribute!!!
 - created new function called arrangeDeck(numDecks) that combines the number of decks into one pile.
 - shuffle card now uses the arrangeDeck function to combine the two decks into a discard pile and shuffles them.
+- added bool isMissingCards in canBeRun function so that all the missingCards are counted and then returned.
 

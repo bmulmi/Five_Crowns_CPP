@@ -46,10 +46,13 @@ bool Player::canGoOut() {
         vector<vector<Cards>> permutedHands;
         // get all the permutations of this hand
         permute(currHand, 0, currHand.size()-1, permutedHands);
+
+        // get all the combination indices of this size of hand
         vector<vector<int>> combinations = getCombinationIndices(currHand.size());
 
         cout << permutedHands.size() << " : size of permuted hands" << endl;
 
+        // to store the perfect combination if found
         vector<Cards> tempHand;
         vector<int> combo;
 
@@ -71,6 +74,7 @@ bool Player::canGoOut() {
     }
 }
 
+// checks the combination of cards in the passed hand
 bool Player::checkCombo(vector<Cards> permutedHands, vector<int> combos) {
 
     for (int i = 0; i < combos.size()-1; i++) {
@@ -135,10 +139,27 @@ vector<vector<int>> Player::getCombinationIndices(int size) {
 
         case 12:
             temp.push_back({0,12});
-            temp.push_back({});
+            temp.push_back({0,3,12});
+            temp.push_back({0,4,12});
+            temp.push_back({0,5,12});
+            temp.push_back({0,6,12});
+            temp.push_back({0,3,6,12});
+            temp.push_back({0,3,7,12});
+            temp.push_back({0,4,8,12});
+            temp.push_back({0,3,6,9,12});
             break;
 
         case 13:
+            temp.push_back({0,13});
+            temp.push_back({0,3,13});
+            temp.push_back({0,4,13});
+            temp.push_back({0,5,13});
+            temp.push_back({0,6,13});
+            temp.push_back({0,3,6,13});
+            temp.push_back({0,3,7,13});
+            temp.push_back({0,3,8,13});
+            temp.push_back({0,4,8,13});
+            temp.push_back({0,3,6,9,13});
             break;
 
         default:
@@ -245,6 +266,7 @@ bool Player::hasSameSuite(vector<Cards> a_hand) {
 }
 
 bool Player::canBeRun(vector<Cards> a_cards, int &missingCardsCount) {
+    bool isMissingCards = false;
     for (int i = 0; i < a_cards.size() - 1; i++) {
         // Step 3.1: check if each card's face is equal to the face value of the next card minus one
         if (a_cards[i].getFaceValue() == a_cards[i + 1].getFaceValue() - 1) {
@@ -258,8 +280,12 @@ bool Player::canBeRun(vector<Cards> a_cards, int &missingCardsCount) {
         if (a_cards[i].getFaceValue() < a_cards[i + 1].getFaceValue()) {
             // add the count of missing cards in between runs
             missingCardsCount += a_cards[i + 1].getFaceValue() - a_cards[i].getFaceValue() - 1;
-            return true;
+            isMissingCards = true;
         }
+    }
+
+    if (isMissingCards) {
+        return true;
     }
 }
 
