@@ -46,24 +46,17 @@ bool Player::canGoOut(vector<Cards> a_hand) {
 
     else {
         vector<vector<Cards>> permutedHands;
+
         // get all the permutations of this hand
         permute(currHand, 0, currHand.size()-1, permutedHands);
 
         // get all the combination indices of this size of hand
         vector<vector<int>> combinations = getCombinationIndices(currHand.size());
 
-        // cout << permutedHands.size() << " : size of permuted hands" << endl;
-
-        // to store the perfect combination if found
-        vector<Cards> tempHand;
-        vector<int> combo;
-
         for (auto eachHand : permutedHands) {
             bool comboFound = false;
             for (auto eachCombo : combinations) {
-                if (checkCombo(eachHand, eachCombo)) {
-                    tempHand = eachHand;
-                    combo = eachCombo;
+                if (checkCombo(eachHand, eachCombo) == 0) {
                     comboFound = true;
                     break;
                 }
@@ -76,20 +69,7 @@ bool Player::canGoOut(vector<Cards> a_hand) {
     }
 }
 
-int Player::calculateScoreOfHand(vector<Cards> a_hand) {
-    int score = 0;
 
-    //Deck* deck = &Deck::getInstanceOfDeck(2);
-    //string wildCard = deck->getWildCardFace();
-    // TODO: calculate the wild card as 20?
-
-    for (auto each : a_hand) {
-        int currCardVal = each.getFaceValue();
-        score += currCardVal;
-    }
-
-    return score;
-}
 
 string Player::whichPileToChoose() {
     deck = &Deck::getInstanceOfDeck(2);
@@ -127,10 +107,10 @@ string Player::whichPileToChoose() {
 }
 
 string Player::whichCardToDiscard() {
-
+    // the card with the highest score
 }
 
-string Player::assemblePossibleHand() {
+vector<vector<Cards>> Player::assemblePossibleHand() {
     vector<Cards> currHand = hand;
 
     vector<vector<Cards>> permutedHands;
@@ -144,25 +124,30 @@ string Player::assemblePossibleHand() {
     // to store the perfect combination if found
     vector<Cards> tempHand;
     vector<int> combo;
-
+    int leastScore = INTMAX_MAX;
     for (auto eachHand : permutedHands) {
-        bool comboFound = false;
         for (auto eachCombo : combinations) {
-            if (checkCombo(eachHand, eachCombo)) {
+            // get the score from this combination
+            int currScore = checkCombo(eachHand, eachCombo);
+
+            // store the hand and combo of the least score calculated from combo
+            if (currScore < leastScore) {
                 tempHand = eachHand;
                 combo = eachCombo;
-                comboFound = true;
-                break;
             }
-            else {
-
-            }
-        }
-        if (comboFound) {
-            // return the perfect combination hand
-
         }
     }
+
+    vector<vector<Cards>> assembledHands;
+    for (int i = 0; i < combo.size() - 1; i++) {
+        int start = combo[i];
+        int end = combo[i+1];
+
+        vector<Cards> comboHand (permutedHands.begin()+start, permutedHands.begin()+end);
+        assembledHands.push_back(comboHand);
+    }
+
+    return assembledHands;
     // return the temp hand and combination with the least score
 }
 

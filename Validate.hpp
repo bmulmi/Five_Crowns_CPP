@@ -19,12 +19,13 @@ namespace Validate {
         NOT_A_BOOK,
     };
 
+    int calculateScoreOfHand (vector<Cards> a_hand);
     TYPE isRun(vector<Cards> a_hand);
     TYPE isBook (vector<Cards> a_hand);
     bool hasSameSuite(vector<Cards> a_hand);
     bool compareIntervalCards(Cards left, Cards right);
     bool canBeRun(vector<Cards> a_cards, int &missingCardsCount);
-    bool checkCombo(vector<Cards> permutedHands, vector<int> combos);
+    int checkCombo(vector<Cards> permutedHands, vector<int> combos);
     void sortCards(vector<Cards> &a_hand);
     void swapCards(Cards *left, Cards *right);
     void permute(vector<Cards> a_hand, int left, int right, vector<vector<Cards>>& permuted);

@@ -103,8 +103,14 @@ void Human::getHint() {
         }
 
         case 3: {
-            string arrangedHand = assemblePossibleHand();
-            cout << "You can arrange your hand as: " << arrangedHand << endl;
+            vector<vector<Cards>> arrangedHand = assemblePossibleHand();
+            cout << "You can arrange your hand as: \n";
+            for (auto eachHand : arrangedHand) {
+                for (auto eachCard : eachHand) {
+                    cout << eachCard.toString() << " ";
+                }
+                cout << " | ";
+            }
             break;
         }
 

@@ -71,10 +71,10 @@ Validate::TYPE Validate::isRun(vector<Cards> a_hand) {
         bool potentialRun = canBeRun(initialHand, missingCardsCount);
 
         // Step 4: check the type of run
-        // STEP 4.1: you reach this point if you need to consider joker and wildcards
         if (potentialRun && missingCardsCount == 0) {
             return PERFECT_RUN;
         }
+        // STEP 4.1: you reach this point if you need to consider joker and wildcards
         else if (potentialRun && missingCardsCount <= (jokerCards.size() + wildCards.size())) {
             return RUN_WITH_JOKERS_WILDS;
         }
@@ -110,7 +110,7 @@ Validate::TYPE Validate::isBook(vector<Cards> a_hand) {
         }
     }
 
-    if (hasWilds) {
+    if (hasWilds || !jokerCards.empty()) {
         return BOOK_WITH_JOKERS_WILDS;
     }
 
@@ -118,8 +118,9 @@ Validate::TYPE Validate::isBook(vector<Cards> a_hand) {
 }
 
 
-// checks the combination of cards in the passed hand
-bool Validate::checkCombo(vector<Cards> permutedHands, vector<int> combos) {
+// checks the combination of cards in the passed hand and returns the score
+int Validate::checkCombo(vector<Cards> permutedHands, vector<int> combos) {
+    int score = 0;
 
     for (int i = 0; i < combos.size()-1; i++) {
         int start = combos[i];
@@ -131,10 +132,37 @@ bool Validate::checkCombo(vector<Cards> permutedHands, vector<int> combos) {
         // check for run or book for that combination of the hand
         if (isRun(comboHand) == NOT_A_RUN || isBook(comboHand) == NOT_A_BOOK){
             // try another combination of permuted hand
-            return false;
+            score += calculateScoreOfHand(comboHand);
         }
     }
-    return true;
+
+    return score;
+}
+
+// this is called only when the hand is neither a run or a book
+int Validate::calculateScoreOfHand(vector<Cards> a_hand) {
+    int score = 0;
+
+    Deck* deck = &Deck::getInstanceOfDeck(2);
+    string wildCard = deck->getWildCardFace();
+
+    for (auto each : a_hand) {
+        int currCardVal;
+
+        if (each.getFace() == wildCard) {
+            currCardVal = 20;
+        }
+        else if (each.isJoker()) {
+            currCardVal = 50;
+        }
+        else {
+            currCardVal = each.getFaceValue();
+        }
+
+        score += currCardVal;
+    }
+
+    return score;
 }
 
 vector<vector<int>> Validate::getCombinationIndices(int size) {

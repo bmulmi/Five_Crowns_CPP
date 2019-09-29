@@ -34,9 +34,8 @@ public:
 
     string whichPileToChoose();
     string whichCardToDiscard();
-    string assemblePossibleHand();
+    vector<vector<Cards>> assemblePossibleHand();
 
-    int calculateScoreOfHand (vector<Cards> a_hand);
 
     virtual string getType() = 0;
     virtual void goOut() = 0;
