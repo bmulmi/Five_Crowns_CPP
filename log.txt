@@ -62,4 +62,7 @@ returns them.
 - created new function called arrangeDeck(numDecks) that combines the number of decks into one pile.
 - shuffle card now uses the arrangeDeck function to combine the two decks into a discard pile and shuffles them.
 - added bool isMissingCards in canBeRun function so that all the missingCards are counted and then returned.
+- isBook() now does not extract wild cards, instead it skips them in the loop.
+- added enum TYPE in Validate to make the isRun and isBook more precise.
+- changed the return types wherever isRun or isBook is used.
 

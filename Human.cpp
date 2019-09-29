@@ -30,12 +30,12 @@ void Human::play() {
 
     if (choice == 3) {
         cout << "Asking for help..." << endl;
-        play();
+        getHint();
     }
 
     if (choice == 2) {
         pickCard();
-        if (canGoOut()) {
+        if (canGoOut(hand)) {
             goOut();
         }
     }
@@ -76,4 +76,48 @@ void Human::pickCard() {
 void Human::goOut() {
     this->goneOut = true;
     cout << "Human has gone out." << endl;
+}
+
+void Human::getHint() {
+    int choice;
+    cout << "1. Whether to draw from draw pile or discard pile.\n";
+    cout << "2. Which card to discard on the discard pile.\n";
+    cout << "3. How to assemble books and runs with the current hand.\n";
+    cout << "4. Whether to go out or not.\n" << endl;
+    cout << "Please enter the Hint # you would like: ";
+    do {
+        cin >> choice;
+    } while (choice < 0 || choice > 4);
+
+    switch (choice) {
+        case 1: {
+            string pile = whichPileToChoose();
+            cout << "You should pick from the " << pile << " pile." << endl;
+            break;
+        }
+
+        case 2: {
+            string whichCard = whichCardToDiscard();
+            cout << "You should discard " << whichCard << endl;
+            break;
+        }
+
+        case 3: {
+            string arrangedHand = assemblePossibleHand();
+            cout << "You can arrange your hand as: " << arrangedHand << endl;
+            break;
+        }
+
+        case 4:
+            if (canGoOut(hand)) {
+                cout << "You may go out." << endl;
+            }
+            else {
+                cout << "You cannot go out." << endl;
+            }
+            break;
+
+        default:
+            break;
+    }
 }

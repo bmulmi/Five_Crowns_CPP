@@ -5,6 +5,118 @@
 #include "Validate.hpp"
 #include "Deck.hpp"
 
+// checks if the cards have the same suite
+bool Validate::hasSameSuite(vector<Cards> a_hand) {
+    if (a_hand.empty()) return true;
+
+    string a_suite = a_hand[0].getSuite();
+    for (auto each : a_hand) {
+        if (each.getSuite() != a_suite) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+// checks if the cards have the potential to be a run
+bool Validate::canBeRun(vector<Cards> a_cards, int &missingCardsCount) {
+    bool isMissingCards = false;
+    for (int i = 0; i < a_cards.size() - 1; i++) {
+        // Step 3.1: check if each card's face is equal to the face value of the next card minus one
+        if (a_cards[i].getFaceValue() == a_cards[i + 1].getFaceValue() - 1) {
+            continue;
+        }
+        // Step 3.2: check if there are two same face cards
+        if (a_cards[i].getFaceValue() == a_cards[i + 1].getFaceValue()) {
+            return false;
+        }
+        // Step 3.3: you reach this point if one or more cards are missing in between the run
+        if (a_cards[i].getFaceValue() < a_cards[i + 1].getFaceValue()) {
+            // add the count of missing cards in between runs
+            missingCardsCount += a_cards[i + 1].getFaceValue() - a_cards[i].getFaceValue() - 1;
+            isMissingCards = true;
+        }
+    }
+
+    if (isMissingCards) {
+        return true;
+    }
+}
+
+
+// checks if the cards can be arranged as a run
+Validate::TYPE Validate::isRun(vector<Cards> a_hand) {
+    if (a_hand.empty()) {
+        return PERFECT_RUN;
+    }
+
+    vector<Cards> initialHand = a_hand;
+    vector<Cards> jokerCards = extractJokerCards(initialHand);
+    vector<Cards> wildCards = extractWildCards(initialHand);
+
+    // Step 1: all suites of the hand must be the same for runs
+    if (hasSameSuite(initialHand)) {
+        // store the suite of this hand
+        string suite = initialHand[0].getSuite();
+
+        // Step 2: sort the cards according to the face value
+        // sort(initialHand.begin(), initialHand.end(), &Player::compareIntervalCards);
+        sortCards(initialHand);
+
+        int missingCardsCount = 0;
+
+        // Step 3: compare each card and see if it can be a potential run
+        // pass the missing Cards Count by reference to keep track of it
+        bool potentialRun = canBeRun(initialHand, missingCardsCount);
+
+        // Step 4: check the type of run
+        // STEP 4.1: you reach this point if you need to consider joker and wildcards
+        if (potentialRun && missingCardsCount == 0) {
+            return PERFECT_RUN;
+        }
+        else if (potentialRun && missingCardsCount <= (jokerCards.size() + wildCards.size())) {
+            return RUN_WITH_JOKERS_WILDS;
+        }
+        else {
+            return NOT_A_RUN;
+        }
+    }
+
+    return NOT_A_RUN;
+}
+
+// checks if the cards can be arranged as book
+Validate::TYPE Validate::isBook(vector<Cards> a_hand) {
+    if (a_hand.empty()){
+        return PERFECT_BOOK;
+    }
+
+    Deck* deck = &Deck::getInstanceOfDeck(2);
+    string wildCard = deck->getWildCardFace();
+
+    vector<Cards> initialHand = a_hand;
+    vector<Cards> jokerCards = extractJokerCards(initialHand);
+
+    bool hasWilds = false;
+
+    for (int i = 0; i < initialHand.size() - 1; i++) {
+        if (initialHand[i].getFace() == wildCard || initialHand[i+1].getFace() == wildCard) {
+            hasWilds = true;
+            continue;
+        }
+        if (initialHand[i].getFaceValue() != initialHand[i+1].getFaceValue()) {
+            return NOT_A_BOOK;
+        }
+    }
+
+    if (hasWilds) {
+        return BOOK_WITH_JOKERS_WILDS;
+    }
+
+    return PERFECT_BOOK;
+}
+
 
 // checks the combination of cards in the passed hand
 bool Validate::checkCombo(vector<Cards> permutedHands, vector<int> combos) {
@@ -17,8 +129,8 @@ bool Validate::checkCombo(vector<Cards> permutedHands, vector<int> combos) {
         vector<Cards> comboHand (permutedHands.begin()+start, permutedHands.begin()+end);
 
         // check for run or book for that combination of the hand
-        if (!isRun(comboHand) || !isBook(comboHand)){
-            // try another combination of hand
+        if (isRun(comboHand) == NOT_A_RUN || isBook(comboHand) == NOT_A_BOOK){
+            // try another combination of permuted hand
             return false;
         }
     }
@@ -100,6 +212,7 @@ vector<vector<int>> Validate::getCombinationIndices(int size) {
     return temp;
 }
 
+
 void Validate::permute(vector<Cards> a_hand, int left, int right, vector<vector<Cards>>& permuted) {
     if (left == right) {
         permuted.push_back(a_hand);
@@ -114,94 +227,6 @@ void Validate::permute(vector<Cards> a_hand, int left, int right, vector<vector<
 }
 
 
-// checks if the cards have the same suite
-bool Validate::hasSameSuite(vector<Cards> a_hand) {
-    if (a_hand.empty()) return true;
-
-    string a_suite = a_hand[0].getSuite();
-    for (auto each : a_hand) {
-        if (each.getSuite() != a_suite) {
-            return false;
-        }
-    }
-    return true;
-}
-
-bool Validate::canBeRun(vector<Cards> a_cards, int &missingCardsCount) {
-    bool isMissingCards = false;
-    for (int i = 0; i < a_cards.size() - 1; i++) {
-        // Step 3.1: check if each card's face is equal to the face value of the next card minus one
-        if (a_cards[i].getFaceValue() == a_cards[i + 1].getFaceValue() - 1) {
-            continue;
-        }
-        // Step 3.2: check if there are two same face cards
-        if (a_cards[i].getFaceValue() == a_cards[i + 1].getFaceValue()) {
-            return false;
-        }
-        // Step 3.3: you reach this point if one or more cards are missing in between the run
-        if (a_cards[i].getFaceValue() < a_cards[i + 1].getFaceValue()) {
-            // add the count of missing cards in between runs
-            missingCardsCount += a_cards[i + 1].getFaceValue() - a_cards[i].getFaceValue() - 1;
-            isMissingCards = true;
-        }
-    }
-
-    if (isMissingCards) {
-        return true;
-    }
-}
-
-// checks if the cards can be arranged as a run
-bool Validate::isRun(vector<Cards> a_hand) {
-    if (a_hand.empty()) {
-        return true;
-    }
-
-    vector<Cards> initialHand = a_hand;
-    vector<Cards> jokerCards = extractJokerCards(initialHand);
-    vector<Cards> wildCards = extractWildCards(initialHand);
-
-    // Step 1: all suites of the hand must be the same for runs
-    if (hasSameSuite(initialHand)) {
-        // store the suite of this hand
-        string suite = initialHand[0].getSuite();
-
-        // store the wildcards with same suite of the hand
-        // vector<Cards> sameSuiteWilds = extractWildCardsSameSuite(initialHand, suite);
-
-        // store the wildcards with different suite of the hand
-        // vector<Cards> diffSuiteWilds = extractWildCardsDiffSuite(initialHand, suite);
-
-        // Step 2: sort the cards according to the face value
-        // sort(initialHand.begin(), initialHand.end(), &Player::compareIntervalCards);
-        sortCards(initialHand);
-
-        int missingCardsCount = 0;
-
-        // Step 3: compare each card and see if it can be a potential run
-        // pass the missing Cards Count by reference to keep track of it
-        bool potentialRun = canBeRun(initialHand, missingCardsCount);
-
-        // Step 4: you reach this point if you need to consider joker and wildcards
-        if (potentialRun && (jokerCards.size() + wildCards.size()) <= missingCardsCount) {
-            // when missing Cards are less than the total jokers and wild cards
-            // return true
-            return true;
-            // get same suite wild card
-//                Cards temp = sameSuiteWilds.back();
-//                sameSuiteWilds.pop_back();
-//                // push it in the initial hand
-//                initialHand.push_back(temp);
-//                // sort the hand
-//                sortCards(initialHand);
-//                // check for potential run
-//                int tempMissCards = 0;
-//                bool tempRun = canBeRun(initialHand, tempMissCards);
-        }
-    }
-    // all else cases return false
-    return false;
-}
 
 bool Validate::compareIntervalCards(Cards left, Cards right) {
     return left.getFaceValue() < right.getFaceValue();
@@ -223,24 +248,6 @@ void Validate::swapCards(Cards *left, Cards *right) {
     Cards temp = *left;
     *left = *right;
     *right = temp;
-}
-
-// checks if the cards can be arranged as book
-bool Validate::isBook(vector<Cards> a_hand) {
-    if (a_hand.empty()){
-        return true;
-    }
-
-    vector<Cards> initialHand = a_hand;
-    vector<Cards> jokerCards = extractJokerCards(initialHand);
-    vector<Cards> wildCards = extractWildCards(initialHand);
-    for (int i = 0; i < initialHand.size(); i++) {
-        if (initialHand[0].getFaceValue() != initialHand[i].getFaceValue()) {
-            return false;
-        }
-    }
-
-    return true;
 }
 
 

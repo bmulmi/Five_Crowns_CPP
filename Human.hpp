@@ -19,7 +19,7 @@ public:
     void pickCard();
 
 private:
-
+    void getHint();
 };
 
 

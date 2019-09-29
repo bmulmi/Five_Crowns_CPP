@@ -30,6 +30,14 @@ public:
     string getHandAsString();
     string getHandWithIndex();
 
+    void Hint();
+
+    string whichPileToChoose();
+    string whichCardToDiscard();
+    string assemblePossibleHand();
+
+    int calculateScoreOfHand (vector<Cards> a_hand);
+
     virtual string getType() = 0;
     virtual void goOut() = 0;
     virtual void play() = 0;
@@ -38,7 +46,7 @@ public:
     bool hasQuitGame() { return quitGame; }
     bool hasSaveGame() { return saveGame; }
     bool hasGoneOut() { return goneOut; }
-    bool canGoOut();
+    bool canGoOut(vector<Cards> a_hand);
 
     void setQuitGame(bool val) { quitGame = val; }
     void setSaveGame(bool val) { saveGame = val; }
