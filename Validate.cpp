@@ -46,9 +46,9 @@ bool Validate::canBeRun(vector<Cards> a_cards, int &missingCardsCount) {
 
 
 // checks if the cards can be arranged as a run
-Validate::TYPE Validate::isRun(vector<Cards> a_hand) {
+bool Validate::isRun(vector<Cards> a_hand) {
     if (a_hand.empty()) {
-        return PERFECT_RUN;
+        return true;
     }
 
     vector<Cards> initialHand = a_hand;
@@ -71,25 +71,19 @@ Validate::TYPE Validate::isRun(vector<Cards> a_hand) {
         bool potentialRun = canBeRun(initialHand, missingCardsCount);
 
         // Step 4: check the type of run
-        if (potentialRun && missingCardsCount == 0) {
-            return PERFECT_RUN;
-        }
         // STEP 4.1: you reach this point if you need to consider joker and wildcards
-        else if (potentialRun && missingCardsCount <= (jokerCards.size() + wildCards.size())) {
-            return RUN_WITH_JOKERS_WILDS;
-        }
-        else {
-            return NOT_A_RUN;
+        if (potentialRun && missingCardsCount <= (jokerCards.size() + wildCards.size())) {
+            return true;
         }
     }
 
-    return NOT_A_RUN;
+    return false;
 }
 
 // checks if the cards can be arranged as book
-Validate::TYPE Validate::isBook(vector<Cards> a_hand) {
+bool Validate::isBook(vector<Cards> a_hand) {
     if (a_hand.empty()){
-        return PERFECT_BOOK;
+        return true;
     }
 
     Deck* deck = &Deck::getInstanceOfDeck(2);
@@ -97,24 +91,14 @@ Validate::TYPE Validate::isBook(vector<Cards> a_hand) {
 
     vector<Cards> initialHand = a_hand;
     vector<Cards> jokerCards = extractJokerCards(initialHand);
-
-    bool hasWilds = false;
+    vector<Cards> wildCards = extractWildCards(initialHand);
 
     for (int i = 0; i < initialHand.size() - 1; i++) {
-        if (initialHand[i].getFace() == wildCard || initialHand[i+1].getFace() == wildCard) {
-            hasWilds = true;
-            continue;
-        }
         if (initialHand[i].getFaceValue() != initialHand[i+1].getFaceValue()) {
-            return NOT_A_BOOK;
+            return false;
         }
     }
-
-    if (hasWilds || !jokerCards.empty()) {
-        return BOOK_WITH_JOKERS_WILDS;
-    }
-
-    return PERFECT_BOOK;
+    return true;
 }
 
 
@@ -130,8 +114,12 @@ int Validate::checkCombo(vector<Cards> permutedHands, vector<int> combos) {
         vector<Cards> comboHand (permutedHands.begin()+start, permutedHands.begin()+end);
 
         // check for run or book for that combination of the hand
-        if (isRun(comboHand) == NOT_A_RUN || isBook(comboHand) == NOT_A_BOOK){
-            // try another combination of permuted hand
+        if (!isRun(comboHand) && !isBook(comboHand)){
+            // calculate the score of that combination and store it
+            score += calculateScoreOfHand(comboHand);
+        }
+        if (combos.size() < 2) {
+            vector<Cards> comboHand (permutedHands.begin()+end, permutedHands.end());
             score += calculateScoreOfHand(comboHand);
         }
     }
@@ -168,6 +156,18 @@ int Validate::calculateScoreOfHand(vector<Cards> a_hand) {
 vector<vector<int>> Validate::getCombinationIndices(int size) {
     vector<vector<int>> temp;
     switch (size){
+        case 3:
+            temp.push_back({0,3});
+            break;
+
+        case 4:
+            temp.push_back({0,3});
+            break;
+
+        case 5:
+            temp.push_back({0,3});
+            break;
+
         case 6:
             temp.push_back({0,6});
             temp.push_back({0,3,6});
@@ -240,7 +240,6 @@ vector<vector<int>> Validate::getCombinationIndices(int size) {
     return temp;
 }
 
-
 void Validate::permute(vector<Cards> a_hand, int left, int right, vector<vector<Cards>>& permuted) {
     if (left == right) {
         permuted.push_back(a_hand);
@@ -252,12 +251,6 @@ void Validate::permute(vector<Cards> a_hand, int left, int right, vector<vector<
             swapCards(&a_hand[left], &a_hand[i]);
         }
     }
-}
-
-
-
-bool Validate::compareIntervalCards(Cards left, Cards right) {
-    return left.getFaceValue() < right.getFaceValue();
 }
 
 // sorts the vector of cards
@@ -277,7 +270,6 @@ void Validate::swapCards(Cards *left, Cards *right) {
     *left = *right;
     *right = temp;
 }
-
 
 // extracts the joker from the hand argument passed and returns them
 vector<Cards> Validate::extractJokerCards(vector<Cards> &hand) {

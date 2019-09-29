@@ -8,20 +8,12 @@
 
 #include "Cards.hpp"
 #include <vector>
+#include <climits>
 
 namespace Validate {
-    enum TYPE {
-        PERFECT_RUN,
-        RUN_WITH_JOKERS_WILDS,
-        NOT_A_RUN,
-        PERFECT_BOOK,
-        BOOK_WITH_JOKERS_WILDS,
-        NOT_A_BOOK,
-    };
-
     int calculateScoreOfHand (vector<Cards> a_hand);
-    TYPE isRun(vector<Cards> a_hand);
-    TYPE isBook (vector<Cards> a_hand);
+    bool isRun(vector<Cards> a_hand);
+    bool isBook (vector<Cards> a_hand);
     bool hasSameSuite(vector<Cards> a_hand);
     bool compareIntervalCards(Cards left, Cards right);
     bool canBeRun(vector<Cards> a_cards, int &missingCardsCount);

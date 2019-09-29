@@ -40,10 +40,14 @@ bool Player::canGoOut(vector<Cards> a_hand) {
     vector<Cards> currHand = a_hand;
     int handSize = currHand.size();
 
-    if ((currHand.size() < 6) && (isRun(currHand) != NOT_A_RUN || isBook(currHand) != NOT_A_BOOK)) {
-        return true;
+    if (currHand.size() < 6) {
+        if (isRun(currHand) || isBook(currHand)) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
-
     else {
         vector<vector<Cards>> permutedHands;
 
@@ -107,7 +111,28 @@ string Player::whichPileToChoose() {
 }
 
 string Player::whichCardToDiscard() {
-    // the card with the highest score
+    vector<Cards> currHand = hand;
+    Cards toDiscard;
+    int score = 9999;
+
+    for (int i = 0; i < currHand.size(); i++){
+        vector<Cards> temp = currHand;
+        // remove a card from the hand
+        temp.erase(temp.begin() + i);
+
+        // now count the score
+        vector<vector<Cards>> permutedHands;
+        permute(temp, 0, temp.size()-1, permutedHands);
+        vector<vector<int>> combinations = getCombinationIndices(currHand.size());
+
+        // to store the perfect combination if found
+        vector<Cards> tempHand;
+        vector<int> combo;
+        
+        getLowestScoreHand(tempHand, combo, permutedHands, combinations);
+
+
+    }
 }
 
 vector<vector<Cards>> Player::assemblePossibleHand() {
@@ -124,7 +149,32 @@ vector<vector<Cards>> Player::assemblePossibleHand() {
     // to store the perfect combination if found
     vector<Cards> tempHand;
     vector<int> combo;
-    int leastScore = INTMAX_MAX;
+
+    getLowestScoreHand (tempHand, combo, permutedHands, combinations);
+
+
+    vector<vector<Cards>> assembledHands;
+    for (int i = 0; i < combo.size() - 1; i++) {
+        int start = combo[i];
+        int end = combo[i+1];
+
+        vector<Cards> comboHand (tempHand.begin()+start, tempHand.begin()+end);
+        assembledHands.push_back(comboHand);
+
+        // for less than 6 cards in a hand, push the rest of the card
+        if (combo.size() < 2) {
+            vector<Cards> comboHand (tempHand.begin()+end, tempHand.end());
+            assembledHands.push_back(comboHand);
+        }
+    }
+
+    return assembledHands;
+}
+
+void Player::getLowestScoreHand(vector<Cards> tempHand, vector<int> combo, vector<vector<Cards>> permutedHands,
+                                vector<vector<int>> combinations) {
+
+    int leastScore = 99999;
     for (auto eachHand : permutedHands) {
         for (auto eachCombo : combinations) {
             // get the score from this combination
@@ -137,20 +187,7 @@ vector<vector<Cards>> Player::assemblePossibleHand() {
             }
         }
     }
-
-    vector<vector<Cards>> assembledHands;
-    for (int i = 0; i < combo.size() - 1; i++) {
-        int start = combo[i];
-        int end = combo[i+1];
-
-        vector<Cards> comboHand (permutedHands.begin()+start, permutedHands.begin()+end);
-        assembledHands.push_back(comboHand);
-    }
-
-    return assembledHands;
-    // return the temp hand and combination with the least score
 }
-
 void Player::Hint() {
 
 }

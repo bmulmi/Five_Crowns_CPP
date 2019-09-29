@@ -65,4 +65,7 @@ returns them.
 - isBook() now does not extract wild cards, instead it skips them in the loop.
 - added enum TYPE in Validate to make the isRun and isBook more precise.
 - changed the return types wherever isRun or isBook is used.
+- removed the TYPE enum because isRun or isBook can be only true or false, the jokers and wild cards dont count the score
+- added edge case of less than 6 cards in a hand for assemblePossibleHands();
+- added edge case of less than 6 cards in a hand for checkCombo() that returns the score of the hand.
 
