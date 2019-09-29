@@ -65,7 +65,9 @@ protected:
     bool goneOut;
     bool saveGame;
     bool quitGame;
+    Deck* deck;
     vector<Cards> hand;
+
 
 private:
 

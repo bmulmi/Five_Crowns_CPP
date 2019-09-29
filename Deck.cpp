@@ -7,21 +7,13 @@
 using namespace std;
 
 Deck* Deck::deck = NULL;
+deque<Cards> Deck::drawPile;
+deque<Cards> Deck::discardPile;
 
 Deck::Deck(int numDecks) {
     // create an initial deck
-    deque<Cards> initialDeck = createDeck();
-
-    for (int i = 1; i < numDecks; i++) {
-        deque<Cards> secondaryDeck = createDeck();
-        // push each card into the initial deck
-        for (auto a_card : secondaryDeck) {
-            initialDeck.push_back(a_card);
-        }
-    }
-
-    this->drawPile = initialDeck;
-    this->discardPile = {};
+    deque<Cards> initialDeck = arrangeDeck(numDecks);
+    drawPile = initialDeck;
 }
 
 Deck& Deck::getInstanceOfDeck(int num) {
@@ -46,6 +38,21 @@ deque<Cards> Deck::createDeck() {
     }
 
     return temp;
+}
+
+// arranges the number of decks into one deck
+deque<Cards> Deck::arrangeDeck(int numDecks) {
+    deque<Cards> initialDeck;
+
+    for (int i = 0; i < numDecks; i++) {
+        deque<Cards> secondaryDeck = createDeck();
+        // push each card into the initial deck
+        for (auto a_card : secondaryDeck) {
+            initialDeck.push_back(a_card);
+        }
+    }
+
+    return initialDeck;
 }
 
 // creates a deque of Jokers
@@ -74,14 +81,15 @@ void Deck::printDeck() {
 void Deck::shuffleDeck() {
     unsigned seed = 0;
 
-    // combine the discard pile to draw pile
-    for (auto each : this->discardPile) {
-        this->drawPile.push_back(each);
-    }
+    // clear both the piles
+    drawPile.clear();
+    discardPile.clear();
 
-    this->discardPile.clear();
+    // arrange the draw pile
+    drawPile = arrangeDeck(2);
 
-    shuffle(this->drawPile.begin(), this->drawPile.end(), default_random_engine(seed));
+    // shuffle the draw pile
+    shuffle(drawPile.begin(), drawPile.end(), default_random_engine(seed));
 }
 
 // returns top card of the draw pile and pops it from the pile

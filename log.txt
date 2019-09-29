@@ -55,6 +55,10 @@ returns them.
 - added a function that returns combination indices of the vector of cards for checking
 - ERROR: cannot access memory at location! discard pile first card's face
 
-
-
+9/29/2019
+- made deck a protected member of the player class to solve the copy issue of deck instance
+- found out that shuffle deck function did not collect hand cards and was just joining discard and draw pile!!
+- thats why the code was breaking down on the 9th round because there was not enough card to distribute!!!
+- created new function called arrangeDeck(numDecks) that combines the number of decks into one pile.
+- shuffle card now uses the arrangeDeck function to combine the two decks into a discard pile and shuffles them.
 

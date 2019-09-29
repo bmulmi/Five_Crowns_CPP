@@ -182,8 +182,8 @@ vector<Cards> Player::extractWildCardsSameSuite(vector<Cards> &a_hand, string a_
 
     int handSize = a_hand.size();
 
-    Deck* tempDeck = &Deck::getInstanceOfDeck(2);
-    string wildCard = tempDeck->getWildCardFace();
+    deck = &Deck::getInstanceOfDeck(2);
+    string wildCard = deck->getWildCardFace();
 
     for (int i = 0; i < handSize; i++) {
         if (a_hand[i].getFace() == wildCard && a_hand[i].getSuite() == a_suite) {
@@ -199,8 +199,8 @@ vector<Cards> Player::extractWildCardsDiffSuite(vector<Cards> &a_hand, string a_
 
     int handSize = a_hand.size();
 
-    Deck* tempDeck = &Deck::getInstanceOfDeck(2);
-    string wildCard = tempDeck->getWildCardFace();
+    deck = &Deck::getInstanceOfDeck(2);
+    string wildCard = deck->getWildCardFace();
 
     for (int i = 0; i < handSize; i++) {
         if (a_hand[i].getFace() == wildCard && a_hand[i].getSuite() != a_suite) {
@@ -217,8 +217,8 @@ vector<Cards> Player::extractWildCards(vector<Cards> &a_hand) {
 
     int handSize = a_hand.size();
 
-    Deck* tempDeck = &Deck::getInstanceOfDeck(2);
-    string wildCard = tempDeck->getWildCardFace();
+    deck = &Deck::getInstanceOfDeck(2);
+    string wildCard = deck->getWildCardFace();
 
     for (int i = 0; i < handSize; i++) {
         if (a_hand[i].getFace() == wildCard) {

@@ -49,7 +49,7 @@ void Human::pickCard() {
         cin >> choice;
     } while (choice != 1 && choice != 2);
 
-    Deck* deck = &Deck::getInstanceOfDeck(2);
+    deck = &Deck::getInstanceOfDeck(2);
     Cards cardPicked;
     if (choice == 1) {
         cardPicked = deck->drawCard();

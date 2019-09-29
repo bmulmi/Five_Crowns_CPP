@@ -12,15 +12,17 @@ Round::Round() {
 Round::Round(int roundNumber, Player* player[]) {
     this->roundNumber = roundNumber;
     this->player = player;
-    this->deck = &Deck::getInstanceOfDeck(2);
     this->totalNumPlayers = 2;
     this->saveAndQuit = false;
-    // set the wild card
-    this->deck->setWildCard(roundNumber + 2);
 }
 
 // this starts a new fresh round
 void Round::play() {
+    deck = &(Deck::getInstanceOfDeck(2));
+
+    // set the wild card
+    deck->setWildCard(roundNumber + 2);
+
     // shuffle cards
     deck->shuffleDeck();
 
@@ -38,6 +40,9 @@ void Round::start() {
     // TODO: change this algorithm for more than three players
     nextPlayer = player[1]->hasGoneOut() ? 1 : 0;
     currPlayer = nextPlayer;
+//
+//    deck = &(Deck::getInstanceOfDeck(2));
+//    deck->setWildCard(roundNumber + 2);
 
     while (!roundEnded()) {
         printRoundStatus();
@@ -60,10 +65,13 @@ void Round::start() {
         }
     }
 
-    cout << "ROUND ENDED!" << endl;
+    cout << "ROUND " << roundNumber <<" ENDED!" << endl;
 }
 
 void Round::load(vector<string> info) {
+    deck = &(Deck::getInstanceOfDeck(2));
+    deck->setWildCard(roundNumber + 2);
+
     vector <string> rawInfo = info;
 
     int computerScore = stoi(rawInfo[1]);
@@ -154,8 +162,7 @@ void Round::printRoundStatus() {
 //checks to see if the previous player can go out or not.
 bool Round::roundEnded() {
 //    cout << player[currPlayer]->getType() << " " << player[currPlayer]->hasGoneOut();
-    return true;
-    //return player[currPlayer]->hasGoneOut();
+    return player[currPlayer]->hasGoneOut();
 }
 
 string Round::getSerializableInfo() {

@@ -37,7 +37,7 @@ void Computer::play() {
 }
 
 void Computer::pickCard() {
-    Deck* deck = &Deck::getInstanceOfDeck(2);
+    deck = &Deck::getInstanceOfDeck(2);
 
     // make a copy of the hand for now
     vector<Cards> tempHand = this->hand;
