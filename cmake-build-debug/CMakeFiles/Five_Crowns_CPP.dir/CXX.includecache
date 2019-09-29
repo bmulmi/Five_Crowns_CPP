@@ -22,12 +22,6 @@ Player.hpp
 Deck.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Deck.hpp
 
-/home/bibhash/git_repos/Five_Crowns_CPP/Deck.cpp
-Deck.hpp
-/home/bibhash/git_repos/Five_Crowns_CPP/Deck.hpp
-bits/stdc++.h
--
-
 /home/bibhash/git_repos/Five_Crowns_CPP/Deck.hpp
 Cards.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Cards.hpp
@@ -111,6 +105,8 @@ Cards.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Cards.hpp
 Deck.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Deck.hpp
+Validate.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Validate.hpp
 
 /home/bibhash/git_repos/Five_Crowns_CPP/Round.cpp
 iomanip
@@ -128,6 +124,18 @@ Utilities.hpp
 
 /home/bibhash/git_repos/Five_Crowns_CPP/Utilities.hpp
 string
+-
+
+/home/bibhash/git_repos/Five_Crowns_CPP/Validate.cpp
+Validate.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Validate.hpp
+Deck.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Deck.hpp
+
+/home/bibhash/git_repos/Five_Crowns_CPP/Validate.hpp
+Cards.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Cards.hpp
+vector
 -
 
 /home/bibhash/git_repos/Five_Crowns_CPP/main.cpp

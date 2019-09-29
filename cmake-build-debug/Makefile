@@ -369,6 +369,33 @@ Utilities.cpp.s:
 	$(MAKE) -f CMakeFiles/Five_Crowns_CPP.dir/build.make CMakeFiles/Five_Crowns_CPP.dir/Utilities.cpp.s
 .PHONY : Utilities.cpp.s
 
+Validate.o: Validate.cpp.o
+
+.PHONY : Validate.o
+
+# target to build an object file
+Validate.cpp.o:
+	$(MAKE) -f CMakeFiles/Five_Crowns_CPP.dir/build.make CMakeFiles/Five_Crowns_CPP.dir/Validate.cpp.o
+.PHONY : Validate.cpp.o
+
+Validate.i: Validate.cpp.i
+
+.PHONY : Validate.i
+
+# target to preprocess a source file
+Validate.cpp.i:
+	$(MAKE) -f CMakeFiles/Five_Crowns_CPP.dir/build.make CMakeFiles/Five_Crowns_CPP.dir/Validate.cpp.i
+.PHONY : Validate.cpp.i
+
+Validate.s: Validate.cpp.s
+
+.PHONY : Validate.s
+
+# target to generate assembly for a file
+Validate.cpp.s:
+	$(MAKE) -f CMakeFiles/Five_Crowns_CPP.dir/build.make CMakeFiles/Five_Crowns_CPP.dir/Validate.cpp.s
+.PHONY : Validate.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -432,6 +459,9 @@ help:
 	@echo "... Utilities.o"
 	@echo "... Utilities.i"
 	@echo "... Utilities.s"
+	@echo "... Validate.o"
+	@echo "... Validate.i"
+	@echo "... Validate.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
