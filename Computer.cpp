@@ -11,7 +11,7 @@ Computer::Computer() {
 void Computer::play() {
     int choice;
     do {
-        cout << "Player: Computer" << endl;
+        cout << "Current Player: Computer" << endl;
         cout    << "1. Save the game.\n" \
                 << "2. Make a move.\n" \
                 << "3. Quit the game." << endl;
@@ -31,7 +31,6 @@ void Computer::play() {
     if (choice == 2) {
         pickCard();
         if (canGoOut(hand)) {
-            cout << "@@@@Computer can go out.@@@@" << endl;
             goOut();
         }
     }
@@ -42,7 +41,7 @@ void Computer::pickCard() {
 
     // choose a pile
     string chosenPile = whichPileToChoose();
-    cout << "@@@@Computer chose " << chosenPile << " to pick the card.@@@@\n";
+    cout << "@@@@ Computer chose " << chosenPile << " pile to pick the card because discard pile card does not help in making a run or a book. @@@@\n";
 
     // pick from the pile
     Cards cardPicked;
@@ -56,7 +55,7 @@ void Computer::pickCard() {
 
     // choose card to discard
     int discardIndex = whichCardToDiscard();
-    cout << "@@@@Computer discarded " << hand[discardIndex].toString() << " card.@@@@\n" << endl;
+    cout << "@@@@ Computer discarded " << hand[discardIndex].toString() << " card because it made the score lower. @@@@\n" << endl;
 
     // discard the card
     deck->discard(hand[discardIndex]);
@@ -65,4 +64,5 @@ void Computer::pickCard() {
 
 void Computer::goOut() {
     this->goneOut = true;
+    cout << "@@@@ Computer has gone out. @@@@" << endl;
 }

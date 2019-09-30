@@ -11,7 +11,7 @@ Human::Human() {
 void Human::play() {
     int choice;
     do {
-        cout << "Player: Human" << endl;
+        cout << "Current Player: Human" << endl;
         cout    << "1. Save the game.\n" \
                 << "2. Make a move.\n" \
                 << "3. Ask for help.\n" \
@@ -19,7 +19,6 @@ void Human::play() {
         cin >> choice;
 
         if (choice == 3) {
-            cout << "Asking for help..." << endl;
             getHint();
         }
 
@@ -46,11 +45,11 @@ void Human::play() {
 
         if (input == 'y') {
             if (canGoOut(hand)) {
-                cout << "You may go out.\n" << endl;
+                cout << "++++ You may go out. ++++\n" << endl;
                 goOut();
             }
             else {
-                cout << "You cannot go out. There are still unaccounted cards in your hand!\n" << endl;
+                cout << "++++ You cannot go out. There are still unaccounted cards in your hand! ++++\n" << endl;
             }
         }
     }
@@ -65,7 +64,7 @@ void Human::pickCard() {
 
         if (choice == 3) {
             string pile = whichPileToChoose();
-            cout << "**HINT: You should pick from the " << pile << " pile**" << endl;
+            cout << "++++ HINT: You should pick from the " << pile << " pile. ++++" << endl;
         }
 
     } while (choice != 1 && choice != 2);
@@ -92,10 +91,10 @@ void Human::pickCard() {
         if (cardIndex == -1) {
             int whichCard = whichCardToDiscard();
             if (whichCard == -999) {
-                cout << "**You need at least four cards in your hand to discard a card**" << endl;
+                cout << "++++ You need at least four cards in your hand to discard a card ++++" << endl;
             }
             else {
-                cout << "**HINT: You should discard " << hand[whichCard].toString() << " because it will help you get a lower score.**" << endl;
+                cout << "++++ HINT: You should discard " << hand[whichCard].toString() << " because it will help you get a lower score. ++++" << endl;
             }
         }
     } while (cardIndex < 0 || cardIndex > hand.size());
@@ -106,7 +105,7 @@ void Human::pickCard() {
 
 void Human::goOut() {
     this->goneOut = true;
-    cout << "Human has gone out." << endl;
+    cout << "**** Human has gone out. ****" << endl;
 }
 
 void Human::getHint() {
@@ -122,25 +121,25 @@ void Human::getHint() {
     switch (choice) {
         case 1: {
             string pile = whichPileToChoose();
-            cout << "You should pick from the " << pile << " pile." << endl;
+            cout << "++++ You should pick from the " << pile << " pile. ++++" << endl;
             break;
         }
 
         case 5: {
             int whichCard = whichCardToDiscard();
             if (whichCard == -999) {
-                cout << "You need at least four cards in your hand to discard a card" << endl;
+                cout << "++++ You need at least four cards in your hand to discard a card ++++" << endl;
                 break;
             }
             else {
-                cout << "You should discard " << hand[whichCard].toString() << " because it will help you get a lower score" << endl;
+                cout << "++++ You should discard " << hand[whichCard].toString() << " because it will help you get a lower score. ++++" << endl;
                 break;
             }
         }
 
         case 2: {
             vector<vector<Cards>> arrangedHand = assemblePossibleHand();
-            cout << "You can arrange your hand as: \n";
+            cout << "++++ You can arrange your hand as: ++++\n";
             for (auto const& eachHand : arrangedHand) {
                 for (auto eachCard : eachHand) {
                     cout << eachCard.toString() << " ";
@@ -153,10 +152,10 @@ void Human::getHint() {
 
         case 3:
             if (canGoOut(hand)) {
-                cout << "You may go out." << endl;
+                cout << "++++ You may go out. ++++" << endl;
             }
             else {
-                cout << "You cannot go out." << endl;
+                cout << "++++ You cannot go out. ++++" << endl;
             }
             break;
 

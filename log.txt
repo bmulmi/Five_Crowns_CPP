@@ -16,7 +16,7 @@
 - added printRoundStatus() prints the status of the round.
 
 9/14/2019
-- in load() of game string comparision for next player not working. TODO
+- in load() of game string comparision for next player not working.
 - made deck a singleton class so that it can be accessed from any other class with no copy issues.
 - added play() function to the player class. coded for human. Displays menu and calls necessary functions.
 - added goOut() and pickCard() functions to the player class.
@@ -24,8 +24,7 @@
 
 9/18/2019
 - found a bug in load() function. the hands and deck were not loading correctly.
-- added setWildCard() function that sets the wild card's face in the deck class.
-- TODO: Round changing. needs restructuring
+- added setWildCarestructuringrd() function that sets the wild card's face in the deck class.
 - added isRun() and isBook() functions to the Player class
 - added canGoOut() function that checks if the player can go out or not.
 - added extractJokerCards() function that takes the vector as reference, removes the wild cards and jokers from the vector and
@@ -37,12 +36,10 @@ returns them.
 
 9/19/2019
 - put the currPlayer assignment within the else statement right before nextPlayer is changed.
-- TODO: check if a wild card is a part of a run or a book.
-        This makes a difference while counting the cards.
 
 9/21/2019
 - added save game function in round and game
-- saveGame does not show score. TODO
+- saveGame does not show score.
 
 9/22/2019
 - save game works correctly now.
@@ -58,7 +55,7 @@ returns them.
 9/29/2019
 - made deck a protected member of the player class to solve the copy issue of deck instance
 - found out that shuffle deck function did not collect hand cards and was just joining discard and draw pile!!
-- thats why the code was breaking down on the 9th round because there was not enough card to distribute!!!
+- that is why the code was breaking down on the 9th round because there was not enough card to distribute!!!
 - created new function called arrangeDeck(numDecks) that combines the number of decks into one pile.
 - shuffle card now uses the arrangeDeck function to combine the two decks into a discard pile and shuffles them.
 - added bool isMissingCards in canBeRun function so that all the missingCards are counted and then returned.
@@ -70,4 +67,5 @@ returns them.
 - added edge case of less than 6 cards in a hand for checkCombo() that returns the score of the hand.
 - calculate score now calculates wildCards and Jokers as 0 point
 - added endRound that prints out end of round hands and scores earned
+- TODO: check the whichPileToChoose edge case (JS 7H 3H) with discardCard 8H. must choose 8H discard JS.
 
