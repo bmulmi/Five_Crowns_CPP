@@ -34,6 +34,20 @@ string Player::getHandWithIndex() {
     return temp;
 }
 
+// returns the score from the current hand where joker is 50 points and wilds are 20 points
+int Player::getHandScore() {
+    vector<Cards> currHand = hand;
+    vector<vector<Cards>> possibleCombos = assemblePossibleHand();
+    int currScore = 0;
+    for (auto const& each : possibleCombos) {
+        if (isRun(each) || isBook(each))
+            continue;
+        else
+            currScore += calculateRealScore(each);
+    }
+    return currScore;
+}
+
 // checks to see if the player can go out or not
 bool Player::canGoOut(vector<Cards> a_hand) {
     // make a copy of the hand
@@ -41,12 +55,7 @@ bool Player::canGoOut(vector<Cards> a_hand) {
     int handSize = currHand.size();
 
     if (currHand.size() < 6) {
-        if (isRun(currHand) || isBook(currHand)) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return (isRun(currHand) || isBook(currHand));
     }
     else {
         vector<vector<Cards>> permutedHands;
@@ -77,13 +86,13 @@ bool Player::canGoOut(vector<Cards> a_hand) {
 
 string Player::whichPileToChoose() {
     deck = &Deck::getInstanceOfDeck(2);
-    string chosenPile = "";
+    string chosenPile;
     // take the discard pile card
     Cards pickedCard = deck->showDiscardCard();
 
     // pick if joker
     if (pickedCard.isJoker()) {
-        return "Discard";
+        return "discard";
     }
 
     Deck* deck = &Deck::getInstanceOfDeck(2);
@@ -91,7 +100,7 @@ string Player::whichPileToChoose() {
 
     // pick if wildCard
     if (pickedCard.getFace() == wildCard) {
-        return "Discard";
+        return "discard";
     }
 
     // make a copy of hand
@@ -103,17 +112,21 @@ string Player::whichPileToChoose() {
         vector<Cards> temp = copyHand;
         temp.erase(temp.begin() + i);
         if (canGoOut(temp)) {
-            return "Discard";
+            return "discard";
         }
     }
 
-    return "Draw";
+    return "draw";
 }
 
-string Player::whichCardToDiscard() {
+int Player::whichCardToDiscard() {
     vector<Cards> currHand = hand;
-    Cards toDiscard;
-    int score = 9999;
+    int cardIndex = 0;
+    int currScore = 9999;
+
+    // if the hand size is 3
+    if (currHand.size() == 3)
+        return -999;
 
     for (int i = 0; i < currHand.size(); i++){
         vector<Cards> temp = currHand;
@@ -128,11 +141,14 @@ string Player::whichCardToDiscard() {
         // to store the perfect combination if found
         vector<Cards> tempHand;
         vector<int> combo;
-        
-        getLowestScoreHand(tempHand, combo, permutedHands, combinations);
 
-
+        int tempScr = getLowestScoreHand(tempHand, combo, permutedHands, combinations);
+        if (tempScr < currScore) {
+            currScore = tempScr;
+            cardIndex = i;
+        }
     }
+    return cardIndex;
 }
 
 vector<vector<Cards>> Player::assemblePossibleHand() {
@@ -152,7 +168,6 @@ vector<vector<Cards>> Player::assemblePossibleHand() {
 
     getLowestScoreHand (tempHand, combo, permutedHands, combinations);
 
-
     vector<vector<Cards>> assembledHands;
     for (int i = 0; i < combo.size() - 1; i++) {
         int start = combo[i];
@@ -163,17 +178,18 @@ vector<vector<Cards>> Player::assemblePossibleHand() {
 
         // for less than 6 cards in a hand, push the rest of the card
         if (combo.size() < 2) {
-            vector<Cards> comboHand (tempHand.begin()+end, tempHand.end());
-            assembledHands.push_back(comboHand);
+            vector<Cards> cHand (tempHand.begin()+end, tempHand.end());
+            assembledHands.push_back(cHand);
         }
     }
 
     return assembledHands;
 }
 
-void Player::getLowestScoreHand(vector<Cards> tempHand, vector<int> combo, vector<vector<Cards>> permutedHands,
+// returns the score after checking every possible combination in the permuted hands
+// also changes tempHand and combo passed in a arguments
+int Player::getLowestScoreHand(vector<Cards> &tempHand, vector<int> &combo, vector<vector<Cards>> permutedHands,
                                 vector<vector<int>> combinations) {
-
     int leastScore = 99999;
     for (auto eachHand : permutedHands) {
         for (auto eachCombo : combinations) {
@@ -182,12 +198,15 @@ void Player::getLowestScoreHand(vector<Cards> tempHand, vector<int> combo, vecto
 
             // store the hand and combo of the least score calculated from combo
             if (currScore < leastScore) {
+                leastScore = currScore;
                 tempHand = eachHand;
                 combo = eachCombo;
             }
         }
     }
+    return leastScore;
 }
+
 void Player::Hint() {
 
 }

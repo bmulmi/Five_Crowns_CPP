@@ -68,4 +68,6 @@ returns them.
 - removed the TYPE enum because isRun or isBook can be only true or false, the jokers and wild cards dont count the score
 - added edge case of less than 6 cards in a hand for assemblePossibleHands();
 - added edge case of less than 6 cards in a hand for checkCombo() that returns the score of the hand.
+- calculate score now calculates wildCards and Jokers as 0 point
+- added endRound that prints out end of round hands and scores earned
 

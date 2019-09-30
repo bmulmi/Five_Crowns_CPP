@@ -27,6 +27,7 @@ private:
 
     void distributeCards();
     void printRoundStatus();
+    void endRound();
     bool roundEnded();
     void setSaveGame(bool val) { saveAndQuit = val;}
 

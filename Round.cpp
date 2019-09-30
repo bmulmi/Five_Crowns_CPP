@@ -36,13 +36,10 @@ void Round::play() {
 }
 
 void Round::start() {
-    // this is only for two player game
-    // TODO: change this algorithm for more than three players
     nextPlayer = player[1]->hasGoneOut() ? 1 : 0;
     currPlayer = nextPlayer;
-//
-//    deck = &(Deck::getInstanceOfDeck(2));
-//    deck->setWildCard(roundNumber + 2);
+
+    player[currPlayer]->setGoneOut(false);
 
     while (!roundEnded()) {
         printRoundStatus();
@@ -66,6 +63,7 @@ void Round::start() {
     }
 
     cout << "ROUND " << roundNumber <<" ENDED!" << endl;
+    endRound();
 }
 
 void Round::load(vector<string> info) {
@@ -161,7 +159,6 @@ void Round::printRoundStatus() {
 
 //checks to see if the previous player can go out or not.
 bool Round::roundEnded() {
-//    cout << player[currPlayer]->getType() << " " << player[currPlayer]->hasGoneOut();
     return player[currPlayer]->hasGoneOut();
 }
 
@@ -197,4 +194,17 @@ string Round::getSerializableInfo() {
     serializedText += "\nNext Player: " + player[currPlayer]->getType() + "\n";
 
     return serializedText;
+}
+
+void Round::endRound() {
+    cout << player[currPlayer]->getType() << ":\n";
+    cout << "Hand: " << player[currPlayer]->getHandAsString();
+    cout << "Score Earned: 0\n";
+    player[currPlayer]->updateScore(0);
+
+    cout << player[nextPlayer]->getType() << ":\n";
+    cout << "Hand: " << player[nextPlayer]->getHandAsString();
+    int earned = player[nextPlayer]->getHandScore();
+    cout << "Score Earned: " << earned;
+    player[nextPlayer]->updateScore(earned);
 }

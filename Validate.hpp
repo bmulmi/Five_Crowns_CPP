@@ -12,6 +12,7 @@
 
 namespace Validate {
     int calculateScoreOfHand (vector<Cards> a_hand);
+    int calculateRealScore (vector<Cards> a_hand);
     bool isRun(vector<Cards> a_hand);
     bool isBook (vector<Cards> a_hand);
     bool hasSameSuite(vector<Cards> a_hand);

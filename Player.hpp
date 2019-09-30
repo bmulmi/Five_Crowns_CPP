@@ -21,11 +21,12 @@ public:
     Player();
     ~Player() = default;
     int getScore() { return score; }
+    int getHandScore();
     void updateScore(int score) { this->score += score; }
     void setScore( int score ) { this->score = score; }
     void setHand (vector<Cards> hand) { this->hand = hand; }
     void removeFromHand(int discardIndex) { hand.erase(hand.begin() + discardIndex); }
-    void getLowestScoreHand (vector<Cards> tempHand, vector<int> combo, vector<vector<Cards>> permutedHands,
+    int getLowestScoreHand (vector<Cards> &tempHand, vector<int> &combo, vector<vector<Cards>> permutedHands,
             vector<vector<int>> combinations);
     vector<Cards> getHand() { return this->hand; }
     string getHandAsString();
@@ -34,7 +35,7 @@ public:
     void Hint();
 
     string whichPileToChoose();
-    string whichCardToDiscard();
+    int whichCardToDiscard();
     vector<vector<Cards>> assemblePossibleHand();
 
 

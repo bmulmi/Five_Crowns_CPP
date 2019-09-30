@@ -119,8 +119,8 @@ int Validate::checkCombo(vector<Cards> permutedHands, vector<int> combos) {
             score += calculateScoreOfHand(comboHand);
         }
         if (combos.size() < 2) {
-            vector<Cards> comboHand (permutedHands.begin()+end, permutedHands.end());
-            score += calculateScoreOfHand(comboHand);
+            vector<Cards> cHand (permutedHands.begin()+end, permutedHands.end());
+            score += calculateScoreOfHand(cHand);
         }
     }
 
@@ -129,6 +129,31 @@ int Validate::checkCombo(vector<Cards> permutedHands, vector<int> combos) {
 
 // this is called only when the hand is neither a run or a book
 int Validate::calculateScoreOfHand(vector<Cards> a_hand) {
+    int score = 0;
+
+    Deck* deck = &Deck::getInstanceOfDeck(2);
+    string wildCard = deck->getWildCardFace();
+
+    for (auto each : a_hand) {
+        int currCardVal;
+
+        if (each.getFace() == wildCard) {
+            currCardVal = 0;
+        }
+        else if (each.isJoker()) {
+            currCardVal = 0;
+        }
+        else {
+            currCardVal = each.getFaceValue();
+        }
+
+        score += currCardVal;
+    }
+
+    return score;
+}
+
+int Validate::calculateRealScore(vector<Cards> a_hand) {
     int score = 0;
 
     Deck* deck = &Deck::getInstanceOfDeck(2);

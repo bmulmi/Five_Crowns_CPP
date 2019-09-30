@@ -11,6 +11,7 @@ Computer::Computer() {
 void Computer::play() {
     int choice;
     do {
+        cout << "Player: Computer" << endl;
         cout    << "1. Save the game.\n" \
                 << "2. Make a move.\n" \
                 << "3. Quit the game." << endl;
@@ -28,42 +29,40 @@ void Computer::play() {
     }
 
     if (choice == 2) {
-        cout << "Computer played...";
-//        pickCard();
-//        if (canGoOut()) {
-//            goOut();
-//        }
+        pickCard();
+        if (canGoOut(hand)) {
+            cout << "@@@@Computer can go out.@@@@" << endl;
+            goOut();
+        }
     }
 }
 
 void Computer::pickCard() {
     deck = &Deck::getInstanceOfDeck(2);
 
-    // make a copy of the hand for now
-    vector<Cards> tempHand = this->hand;
+    // choose a pile
+    string chosenPile = whichPileToChoose();
+    cout << "@@@@Computer chose " << chosenPile << " to pick the card.@@@@\n";
 
-    // copy the discard pile card into a temp hand
-    Cards cardPicked = deck->showDiscardCard();
-    tempHand.push_back(cardPicked);
-
-    int erasedCardIndex;
-    for (int i = 0; i < tempHand.size(); i++) {
-        // remove a card from the hand and check if a run or book can be arranged
-        vector<Cards> temp = tempHand;
-        temp.erase(temp.begin() + i);
-
-        // TODO: get permutations of this temp
-        //  check combination of each permutation
-        //  if a combination works then discard the erased card and pick the discard pile card
-        //  else if none of the combination works then calculate score of each combination
-        //  and pick the one with the score less than the current hand
-        //  else pick the draw pile card
+    // pick from the pile
+    Cards cardPicked;
+    if (chosenPile == "discard") {
+        cardPicked = deck->drawDiscardCard();
     }
+    else {
+        cardPicked = deck->drawCard();
+    }
+    this->hand.push_back(cardPicked);
 
+    // choose card to discard
+    int discardIndex = whichCardToDiscard();
+    cout << "@@@@Computer discarded " << hand[discardIndex].toString() << " card.@@@@\n" << endl;
 
-
+    // discard the card
+    deck->discard(hand[discardIndex]);
+    removeFromHand(discardIndex);
 }
 
 void Computer::goOut() {
-
+    this->goneOut = true;
 }
