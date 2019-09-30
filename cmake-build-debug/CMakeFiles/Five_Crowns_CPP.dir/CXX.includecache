@@ -20,24 +20,6 @@ queue
 iostream
 -
 
-/home/bibhash/git_repos/Five_Crowns_CPP/Player.cpp
-Player.hpp
-/home/bibhash/git_repos/Five_Crowns_CPP/Player.hpp
-
-/home/bibhash/git_repos/Five_Crowns_CPP/Player.hpp
-vector
--
-iostream
--
-algorithm
--
-Cards.hpp
-/home/bibhash/git_repos/Five_Crowns_CPP/Cards.hpp
-Deck.hpp
-/home/bibhash/git_repos/Five_Crowns_CPP/Deck.hpp
-Validate.hpp
-/home/bibhash/git_repos/Five_Crowns_CPP/Validate.hpp
-
 /home/bibhash/git_repos/Five_Crowns_CPP/Validate.cpp
 Validate.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Validate.hpp

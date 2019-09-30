@@ -21,7 +21,6 @@ bool Validate::hasSameSuite(vector<Cards> a_hand) {
 
 // checks if the cards have the potential to be a run
 bool Validate::canBeRun(vector<Cards> a_cards, int &missingCardsCount) {
-    bool isMissingCards = false;
     for (int i = 0; i < a_cards.size() - 1; i++) {
         // Step 3.1: check if each card's face is equal to the face value of the next card minus one
         if (a_cards[i].getFaceValue() == a_cards[i + 1].getFaceValue() - 1) {
@@ -35,13 +34,10 @@ bool Validate::canBeRun(vector<Cards> a_cards, int &missingCardsCount) {
         if (a_cards[i].getFaceValue() < a_cards[i + 1].getFaceValue()) {
             // add the count of missing cards in between runs
             missingCardsCount += a_cards[i + 1].getFaceValue() - a_cards[i].getFaceValue() - 1;
-            isMissingCards = true;
         }
     }
 
-    if (isMissingCards) {
-        return true;
-    }
+    return true;
 }
 
 
@@ -118,7 +114,7 @@ int Validate::checkCombo(vector<Cards> permutedHands, vector<int> combos) {
             // calculate the score of that combination and store it
             score += calculateScoreOfHand(comboHand);
         }
-        if (combos.size() < 2) {
+        if (combos.size() <= 2) {
             vector<Cards> cHand (permutedHands.begin()+end, permutedHands.end());
             score += calculateScoreOfHand(cHand);
         }

@@ -69,3 +69,7 @@ returns them.
 - added endRound that prints out end of round hands and scores earned
 - TODO: check the whichPileToChoose edge case (JS 7H 3H) with discardCard 8H. must choose 8H discard JS.
 
+9/30/2019
+- fixed save game next player issue. Now the player if he had not made a move plays next.
+- comos.size() must be <= 2 in check combo to add the remaining hand card value
+

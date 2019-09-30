@@ -191,7 +191,7 @@ string Round::getSerializableInfo() {
                         "\tHand: " + humanHand + "\n";
     serializedText += "\nDraw Pile: " + deck->getDrawPile() + "\n";
     serializedText += "\nDiscard Pile: " + deck->getDiscardPile() + "\n";
-    serializedText += "\nNext Player: " + player[currPlayer]->getType() + "\n";
+    serializedText += "\nNext Player: " + player[nextPlayer]->getType() + "\n";
 
     return serializedText;
 }
