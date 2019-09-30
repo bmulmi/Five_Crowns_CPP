@@ -185,7 +185,7 @@ int Validate::calculateRealScore(vector<Cards> a_hand) {
     return score;
 }
 
-vector<vector<int>> Validate::getCombinationIndices(int size) {
+vector<vector<int>> Validate::getCombinationIndicesToGoOut(int size) {
     vector<vector<int>> temp;
     switch (size){
         case 3:

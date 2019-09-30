@@ -28,8 +28,7 @@ namespace Validate {
     vector<Cards> extractWildCardsSameSuite(vector<Cards> &a_hand, string a_suite);
     vector<Cards> extractWildCardsDiffSuite(vector<Cards> &a_hand, string a_suite);
 
-    vector<vector<int>> getCombinationIndices(int size);
-
+    vector<vector<int>> getCombinationIndicesToGoOut(int size);
 
 };
 

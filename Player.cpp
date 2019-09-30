@@ -64,7 +64,7 @@ bool Player::canGoOut(vector<Cards> a_hand) {
         permute(currHand, 0, currHand.size()-1, permutedHands);
 
         // get all the combination indices of this size of hand
-        vector<vector<int>> combinations = getCombinationIndices(currHand.size());
+        vector<vector<int>> combinations = getCombinationIndicesToGoOut(currHand.size());
 
         for (auto eachHand : permutedHands) {
             bool comboFound = false;
@@ -136,7 +136,7 @@ int Player::whichCardToDiscard() {
         // now count the score
         vector<vector<Cards>> permutedHands;
         permute(temp, 0, temp.size()-1, permutedHands);
-        vector<vector<int>> combinations = getCombinationIndices(temp.size());
+        vector<vector<int>> combinations = getCombinationIndicesToGoOut(temp.size());
 
         // to store the perfect combination if found
         vector<Cards> tempHand;
@@ -160,7 +160,7 @@ vector<vector<Cards>> Player::assemblePossibleHand() {
     permute(currHand, 0, currHand.size()-1, permutedHands);
 
     // get all the combination indices of this size of hand
-    vector<vector<int>> combinations = getCombinationIndices(currHand.size());
+    vector<vector<int>> combinations = getCombinationIndicesToGoOut(currHand.size());
 
     // to store the perfect combination if found
     vector<Cards> tempHand;
@@ -191,11 +191,29 @@ vector<vector<Cards>> Player::assemblePossibleHand() {
 int Player::getLowestScoreHand(vector<Cards> &tempHand, vector<int> &combo, vector<vector<Cards>> permutedHands,
                                 vector<vector<int>> combinations) {
     int leastScore = 99999;
-    for (auto eachHand : permutedHands) {
-        for (auto eachCombo : combinations) {
-            // get the score from this combination
-            int currScore = checkCombo(eachHand, eachCombo);
+    for (auto const& eachHand : permutedHands) {
+        int currScore;
 
+        // generate more combinations for this hand
+        for (int i = eachHand.size() - 1; i >= 3; i--) {
+            combinations.push_back ({0, i});
+        }
+        for (int i = 0; i < eachHand.size() - 1; i += 3) {
+            combinations.push_back({i, i+3});
+        }
+
+        // this handles the last one or two cards in the hand
+        if (eachHand.size() % 3 != 0) {
+            int modd = eachHand.size() % 3;
+            int start = eachHand.size() - modd;
+            int end = eachHand.size();
+            combinations.push_back({start, end});
+        }
+
+        // Now, check all the combination indices to go out
+        for (auto const& eachCombo : combinations) {
+            // get the score from this combination
+            currScore = checkCombo(eachHand, eachCombo);
             // store the hand and combo of the least score calculated from combo
             if (currScore < leastScore) {
                 leastScore = currScore;

@@ -74,4 +74,5 @@ returns them.
 - comos.size() must be <= 2 in check combo to add the remaining hand card value
 - added edge case in isRun and isBook to handle single card hands.
 - bug in whichCardToDiscard - was getCombinationIndices of currHand.size() where it should have been temp.size()
+- added more combinations in getLowestScoreHand because the canGoOut indices do not give combinations for one or two card combos
 
