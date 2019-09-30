@@ -51,6 +51,11 @@ bool Validate::isRun(vector<Cards> a_hand) {
     vector<Cards> jokerCards = extractJokerCards(initialHand);
     vector<Cards> wildCards = extractWildCards(initialHand);
 
+    // even after extracting jokes and wild cards
+    // when the hand has only one or two cards, then return false
+    if ((jokerCards.size() + wildCards.size() == 0) && (initialHand.size() == 1 || initialHand.size() == 2)) {
+        return false;
+    }
     // Step 1: all suites of the hand must be the same for runs
     if (hasSameSuite(initialHand)) {
         // store the suite of this hand
@@ -88,6 +93,12 @@ bool Validate::isBook(vector<Cards> a_hand) {
     vector<Cards> initialHand = a_hand;
     vector<Cards> jokerCards = extractJokerCards(initialHand);
     vector<Cards> wildCards = extractWildCards(initialHand);
+
+    // even after extracting jokers and wild cards
+    // when the hand has only one or two cards, then return false
+    if ((jokerCards.size() + wildCards.size() == 0) && (initialHand.size() == 1 || initialHand.size() == 2)) {
+        return false;
+    }
 
     for (int i = 0; i < initialHand.size() - 1; i++) {
         if (initialHand[i].getFaceValue() != initialHand[i+1].getFaceValue()) {

@@ -105,8 +105,8 @@ vector<Cards> Round::loadHands(string cards) {
     vector<Cards> temp;
 
     while(getline(ss, card, ' ')) {
-        string face = card.substr(0,1);
-        string suite = card.substr(1);
+        string face = card.substr(0,card.length()-1);
+        string suite = card.substr(card.length()-1);
         temp.emplace_back(Cards(face, suite));
     }
 
@@ -197,6 +197,7 @@ string Round::getSerializableInfo() {
 }
 
 void Round::endRound() {
+    cout << "***********************************************\n";
     cout << player[currPlayer]->getType() << ":\n";
     cout << "Hand: " << player[currPlayer]->getHandAsString();
     cout << "Score Earned: 0\n";
@@ -205,6 +206,9 @@ void Round::endRound() {
     cout << player[nextPlayer]->getType() << ":\n";
     cout << "Hand: " << player[nextPlayer]->getHandAsString();
     int earned = player[nextPlayer]->getHandScore();
-    cout << "Score Earned: " << earned;
+    cout << "Score Earned: " << earned << endl;
     player[nextPlayer]->updateScore(earned);
+    cout << "***********************************************\n";
+
+    cout << "\n" << endl;
 }

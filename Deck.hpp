@@ -6,6 +6,7 @@
 #include <vector>
 #include <queue>
 #include <iostream>
+#include <time.h>
 
 #ifndef FIVE_CROWNS_CPP_DECK_HPP
 #define FIVE_CROWNS_CPP_DECK_HPP

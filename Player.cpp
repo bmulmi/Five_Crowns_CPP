@@ -136,7 +136,7 @@ int Player::whichCardToDiscard() {
         // now count the score
         vector<vector<Cards>> permutedHands;
         permute(temp, 0, temp.size()-1, permutedHands);
-        vector<vector<int>> combinations = getCombinationIndices(currHand.size());
+        vector<vector<int>> combinations = getCombinationIndices(temp.size());
 
         // to store the perfect combination if found
         vector<Cards> tempHand;
@@ -177,7 +177,7 @@ vector<vector<Cards>> Player::assemblePossibleHand() {
         assembledHands.push_back(comboHand);
 
         // for less than 6 cards in a hand, push the rest of the card
-        if (combo.size() < 2) {
+        if (combo.size() <= 2) {
             vector<Cards> cHand (tempHand.begin()+end, tempHand.end());
             assembledHands.push_back(cHand);
         }

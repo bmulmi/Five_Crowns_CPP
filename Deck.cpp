@@ -79,7 +79,7 @@ void Deck::printDeck() {
 
 // mixes the discard pile into draw pile and shuffles the deck
 void Deck::shuffleDeck() {
-    unsigned seed = 0;
+    unsigned seed = time(NULL);
 
     // clear both the piles
     drawPile.clear();

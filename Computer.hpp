@@ -14,7 +14,8 @@ using namespace std;
 class Computer : public Player {
 public:
     Computer();
-    string getType() { return "Computer"; }
+    string getType() { return type; }
+    void setType(string type) { this->type = type; }
     void play();
     void goOut();
     void pickCard();

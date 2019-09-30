@@ -72,4 +72,6 @@ returns them.
 9/30/2019
 - fixed save game next player issue. Now the player if he had not made a move plays next.
 - comos.size() must be <= 2 in check combo to add the remaining hand card value
+- added edge case in isRun and isBook to handle single card hands.
+- bug in whichCardToDiscard - was getCombinationIndices of currHand.size() where it should have been temp.size()
 

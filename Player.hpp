@@ -12,6 +12,7 @@
 #include "Cards.hpp"
 #include "Deck.hpp"
 #include "Validate.hpp"
+#include <string.h>
 
 using namespace std;
 using namespace Validate;
@@ -40,6 +41,7 @@ public:
 
 
     virtual string getType() = 0;
+    virtual void setType(string type) = 0;
     virtual void goOut() = 0;
     virtual void play() = 0;
     virtual void pickCard() = 0;
@@ -56,6 +58,7 @@ public:
 
 protected:
     int score;
+    string type;
     bool goneOut;
     bool saveGame;
     bool quitGame;

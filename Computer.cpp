@@ -37,18 +37,21 @@ void Computer::play() {
 }
 
 void Computer::pickCard() {
+    cout << getType() << endl;
     deck = &Deck::getInstanceOfDeck(2);
 
     // choose a pile
     string chosenPile = whichPileToChoose();
-    cout << "@@@@ Computer chose " << chosenPile << " pile to pick the card because discard pile card does not help in making a run or a book. @@@@\n";
 
     // pick from the pile
     Cards cardPicked;
     if (chosenPile == "discard") {
+        cout << "@@@@ Computer chose " << chosenPile << " pile because it helped in making a run or a book. @@@@\n";
         cardPicked = deck->drawDiscardCard();
     }
     else {
+        cout << "@@@@ Computer chose " << chosenPile
+        << " pile to pick the card because discard pile card does not help in making a run or a book. @@@@\n";
         cardPicked = deck->drawCard();
     }
     this->hand.push_back(cardPicked);
@@ -64,5 +67,5 @@ void Computer::pickCard() {
 
 void Computer::goOut() {
     this->goneOut = true;
-    cout << "@@@@ Computer has gone out. @@@@" << endl;
+    cout << "@@@@ " << this->getType() << " has gone out. @@@@" << endl;
 }
