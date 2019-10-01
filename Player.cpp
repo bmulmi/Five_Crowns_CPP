@@ -136,11 +136,32 @@ int Player::whichCardToDiscard() {
         // now count the score
         vector<vector<Cards>> permutedHands;
         permute(temp, 0, temp.size()-1, permutedHands);
-        vector<vector<int>> combinations = getCombinationIndicesToGoOut(temp.size());
+
+        vector<vector<int>> combinations1 = getCombinationIndicesToGoOut(temp.size());
+        vector<vector<int>> combinations2 = getCombinationIndicesTOCheck(temp.size());
+        vector<vector<int>> combinations;
+        combinations.reserve(combinations1.size() + combinations2.size());
+        combinations.insert(combinations.end(), combinations1.begin(), combinations1.end());
+        combinations.insert(combinations.end(), combinations2.begin(), combinations2.end());
 
         // to store the perfect combination if found
         vector<Cards> tempHand;
         vector<int> combo;
+
+        // generate more combinations for this hand
+//        for (int i = temp.size() - 1; i > 3; i--) {
+//            combinations.push_back ({0, i});
+//        }
+//        for (int i = 3; i < temp.size() - 1; i += 3) {
+//            combinations.push_back({i-3, i});
+//        }
+//        // this handles the last one or two cards in the hand
+//        if (temp.size() % 3 != 0) {
+//            int modd = temp.size() % 3;
+//            int start = temp.size() - modd;
+//            int end = temp.size();
+//            combinations.push_back({start, end});
+//        }
 
         int tempScr = getLowestScoreHand(tempHand, combo, permutedHands, combinations);
         if (tempScr < currScore) {
@@ -160,7 +181,27 @@ vector<vector<Cards>> Player::assemblePossibleHand() {
     permute(currHand, 0, currHand.size()-1, permutedHands);
 
     // get all the combination indices of this size of hand
-    vector<vector<int>> combinations = getCombinationIndicesToGoOut(currHand.size());
+    vector<vector<int>> combinations1 = getCombinationIndicesToGoOut(currHand.size());
+    vector<vector<int>> combinations2 = getCombinationIndicesTOCheck(currHand.size());
+    vector<vector<int>> combinations;
+    combinations.reserve(combinations1.size() + combinations2.size());
+    combinations.insert(combinations.end(), combinations1.begin(), combinations1.end());
+    combinations.insert(combinations.end(), combinations2.begin(), combinations2.end());
+
+    // generate more combinations for this hand
+//    for (int i = currHand.size() - 1; i > 3; i--) {
+//        combinations.push_back ({0, i});
+//    }
+//    for (int i = 3; i < currHand.size() - 1; i += 3) {
+//        combinations.push_back({i-3, i});
+//    }
+//    // this handles the last one or two cards in the hand
+//    if (currHand.size() % 3 != 0) {
+//        int modd = currHand.size() % 3;
+//        int start = currHand.size() - modd;
+//        int end = currHand.size();
+//        combinations.push_back({start, end});
+//    }
 
     // to store the perfect combination if found
     vector<Cards> tempHand;
@@ -193,23 +234,6 @@ int Player::getLowestScoreHand(vector<Cards> &tempHand, vector<int> &combo, vect
     int leastScore = 99999;
     for (auto const& eachHand : permutedHands) {
         int currScore;
-
-        // generate more combinations for this hand
-        for (int i = eachHand.size() - 1; i >= 3; i--) {
-            combinations.push_back ({0, i});
-        }
-        for (int i = 0; i < eachHand.size() - 1; i += 3) {
-            combinations.push_back({i, i+3});
-        }
-
-        // this handles the last one or two cards in the hand
-        if (eachHand.size() % 3 != 0) {
-            int modd = eachHand.size() % 3;
-            int start = eachHand.size() - modd;
-            int end = eachHand.size();
-            combinations.push_back({start, end});
-        }
-
         // Now, check all the combination indices to go out
         for (auto const& eachCombo : combinations) {
             // get the score from this combination

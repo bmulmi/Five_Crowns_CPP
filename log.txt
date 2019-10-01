@@ -75,4 +75,5 @@ returns them.
 - added edge case in isRun and isBook to handle single card hands.
 - bug in whichCardToDiscard - was getCombinationIndices of currHand.size() where it should have been temp.size()
 - added more combinations in getLowestScoreHand because the canGoOut indices do not give combinations for one or two card combos
+- need to look into getlowestscorehand function once again
 

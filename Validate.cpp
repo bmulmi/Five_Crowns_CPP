@@ -53,9 +53,15 @@ bool Validate::isRun(vector<Cards> a_hand) {
 
     // even after extracting jokes and wild cards
     // when the hand has only one or two cards, then return false
-    if ((jokerCards.size() + wildCards.size() == 0) && (initialHand.size() == 1 || initialHand.size() == 2)) {
+    if ((jokerCards.size() + wildCards.size() == 0) && (initialHand.size() < 3)) {
         return false;
     }
+
+    // if all the cards in hand is joker or wild cards
+    if ((jokerCards.size() + wildCards.size() > 0) && initialHand.empty()){
+        return true;
+    }
+
     // Step 1: all suites of the hand must be the same for runs
     if (hasSameSuite(initialHand)) {
         // store the suite of this hand
@@ -100,6 +106,11 @@ bool Validate::isBook(vector<Cards> a_hand) {
         return false;
     }
 
+    // if all the cards in hand is joker or wild cards
+    if ((jokerCards.size() + wildCards.size() > 0) && (initialHand.size() == 0)){
+        return true;
+    }
+
     for (int i = 0; i < initialHand.size() - 1; i++) {
         if (initialHand[i].getFaceValue() != initialHand[i+1].getFaceValue()) {
             return false;
@@ -125,7 +136,7 @@ int Validate::checkCombo(vector<Cards> permutedHands, vector<int> combos) {
             // calculate the score of that combination and store it
             score += calculateScoreOfHand(comboHand);
         }
-        if (combos.size() <= 2) {
+        if ((i == combos.size() - 2) && (permutedHands.size() - end <= 2)) {
             vector<Cards> cHand (permutedHands.begin()+end, permutedHands.end());
             score += calculateScoreOfHand(cHand);
         }
@@ -193,11 +204,11 @@ vector<vector<int>> Validate::getCombinationIndicesToGoOut(int size) {
             break;
 
         case 4:
-            temp.push_back({0,3});
+            temp.push_back({0,4});
             break;
 
         case 5:
-            temp.push_back({0,3});
+            temp.push_back({0,5});
             break;
 
         case 6:
@@ -272,6 +283,107 @@ vector<vector<int>> Validate::getCombinationIndicesToGoOut(int size) {
     return temp;
 }
 
+vector<vector<int>> Validate::getCombinationIndicesTOCheck(int size) {
+    vector<vector<int>> temp;
+    switch (size){
+        case 3:
+            break;
+
+        case 4:
+            temp.push_back({0,3});
+            break;
+
+        case 5:
+            temp.push_back({0,3});
+            temp.push_back({0,4});
+            break;
+
+        case 6:
+            temp.push_back({0,4});
+            temp.push_back({0,5});
+            break;
+
+        case 7:
+            temp.push_back({0,5});
+            temp.push_back({0,6});
+            break;
+
+        case 8:
+            temp.push_back({0,6});
+            temp.push_back({0,7});
+            temp.push_back({0,3,6});
+            temp.push_back({0,3,7});
+            break;
+
+        case 9:
+            temp.push_back({0,7});
+            temp.push_back({0,8});
+            temp.push_back({0,3,7});
+            temp.push_back({0,3,8});
+            temp.push_back({0,4,8});
+            break;
+
+        case 10:
+            temp.push_back({0,9});
+            temp.push_back({0,8});
+            temp.push_back({0,3,8});
+            temp.push_back({0,3,9});
+            temp.push_back({0,3,6,9});
+            temp.push_back({0,4,8});
+            temp.push_back({0,4,9});
+            break;
+
+        case 11:
+            temp.push_back({0,9});
+            temp.push_back({0,10});
+            temp.push_back({0,3,9});
+            temp.push_back({0,3,10});
+            temp.push_back({0,4,9});
+            temp.push_back({0,4,10});
+            temp.push_back({0,5,10});
+            temp.push_back({0,3,6,9});
+            temp.push_back({0,3,7,10});
+            break;
+
+        case 12:
+            temp.push_back({0,11});
+            temp.push_back({0,10});
+            temp.push_back({0,3,10});
+            temp.push_back({0,3,11});
+            temp.push_back({0,3,6,10});
+            temp.push_back({0,3,6,11});
+            temp.push_back({0,3,7,11});
+            temp.push_back({0,4,10});
+            temp.push_back({0,4,11});
+            temp.push_back({0,5,10});
+            temp.push_back({0,5,11});
+            break;
+
+        case 13:
+            temp.push_back({0,12});
+            temp.push_back({0,11});
+            temp.push_back({0,3,11});
+            temp.push_back({0,3,12});
+            temp.push_back({0,4,11});
+            temp.push_back({0,4,12});
+            temp.push_back({0,5,11});
+            temp.push_back({0,5,12});
+            temp.push_back({0,6,12});
+            temp.push_back({0,3,6,9,12});
+            temp.push_back({0,3,7,11});
+            temp.push_back({0,3,7,12});
+            temp.push_back({0,3,6,12});
+            temp.push_back({0,3,6,11});
+            temp.push_back({0,4,8,11});
+            temp.push_back({0,4,8,12});
+            break;
+
+        default:
+            break;
+    }
+    return temp;
+}
+
 void Validate::permute(vector<Cards> a_hand, int left, int right, vector<vector<Cards>>& permuted) {
     if (left == right) {
         permuted.push_back(a_hand);
@@ -319,41 +431,6 @@ vector<Cards> Validate::extractJokerCards(vector<Cards> &hand) {
     return temp;
 }
 
-// removes the wild card from the hand passed in and returns the wild cards
-vector<Cards> Validate::extractWildCardsSameSuite(vector<Cards> &a_hand, string a_suite) {
-    vector<Cards> temp;
-
-    int handSize = a_hand.size();
-
-    Deck* deck = &Deck::getInstanceOfDeck(2);
-    string wildCard = deck->getWildCardFace();
-
-    for (int i = 0; i < handSize; i++) {
-        if (a_hand[i].getFace() == wildCard && a_hand[i].getSuite() == a_suite) {
-            temp.push_back(a_hand[i]);
-            a_hand.erase(a_hand.begin() + i);
-        }
-    }
-    return temp;
-}
-
-vector<Cards> Validate::extractWildCardsDiffSuite(vector<Cards> &a_hand, string a_suite) {
-    vector<Cards> temp;
-
-    int handSize = a_hand.size();
-
-    Deck* deck = &Deck::getInstanceOfDeck(2);
-    string wildCard = deck->getWildCardFace();
-
-    for (int i = 0; i < handSize; i++) {
-        if (a_hand[i].getFace() == wildCard && a_hand[i].getSuite() != a_suite) {
-            temp.push_back(a_hand[i]);
-            a_hand.erase(a_hand.begin() + i);
-        }
-    }
-    return temp;
-}
-
 // extracts all the wild cards from the hand
 vector<Cards> Validate::extractWildCards(vector<Cards> &a_hand) {
     vector<Cards> temp;
@@ -373,4 +450,3 @@ vector<Cards> Validate::extractWildCards(vector<Cards> &a_hand) {
     }
     return temp;
 }
-

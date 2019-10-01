@@ -29,7 +29,7 @@ namespace Validate {
     vector<Cards> extractWildCardsDiffSuite(vector<Cards> &a_hand, string a_suite);
 
     vector<vector<int>> getCombinationIndicesToGoOut(int size);
-
+    vector<vector<int>> getCombinationIndicesTOCheck(int size);
 };
 
 

@@ -87,20 +87,20 @@ void Game::load(vector<string> info) {
     cout << "Next player: " << nextPlayer << endl;
 
     if (nextPlayer == "human") {
-        player[0] = new Human();
-        player[0]->setType("Human");
+//        player[0] = new Human();
+//        player[0]->setType("Human");
         player[1] = new Computer();
         player[1]->setType("Computer");
-//        player[0] = new Computer();
-//        player[0]->setType("Computer 2");
+        player[0] = new Computer();
+        player[0]->setType("Computer 2");
     }
     else if (nextPlayer == "computer"){
         player[0] = new Computer();
         player[0]->setType("Computer");
-        player[1] = new Human();
-        player[1]->setType("Human");
-//        player[1] = new Computer();
-//        player[1]->setType("Computer 2");
+//        player[1] = new Human();
+//        player[1]->setType("Human");
+        player[1] = new Computer();
+        player[1]->setType("Computer 2");
     }
     else {
         cerr << "Invalid Next Player in the serialization file! So, human goes first." << endl;

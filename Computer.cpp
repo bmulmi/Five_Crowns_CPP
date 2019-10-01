@@ -10,13 +10,14 @@ Computer::Computer() {
 
 void Computer::play() {
     int choice;
-    do {
-        cout << "Current Player: Computer" << endl;
-        cout    << "1. Save the game.\n" \
-                << "2. Make a move.\n" \
-                << "3. Quit the game." << endl;
-        cin >> choice;
-    } while (choice  > 4 || choice < 0);
+//    do {
+//        cout << "Current Player: Computer" << endl;
+//        cout    << "1. Save the game.\n" \
+//                << "2. Make a move.\n" \
+//                << "3. Quit the game." << endl;
+//        cin >> choice;
+//    } while (choice  > 4 || choice < 0);
+    choice = 2;
 
     if (choice == 1) {
         setSaveGame(true);
@@ -51,7 +52,7 @@ void Computer::pickCard() {
     }
     else {
         cout << "@@@@ Computer chose " << chosenPile
-        << " pile to pick the card because discard pile card does not help in making a run or a book. @@@@\n";
+        << " pile to pick the card because discard pile card does not help in making a complete run or a complete book. @@@@\n";
         cardPicked = deck->drawCard();
     }
     this->hand.push_back(cardPicked);

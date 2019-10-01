@@ -120,8 +120,8 @@ deque<Cards> Round::loadDeck(string cards) {
     deque<Cards> temp;
 
     while(getline(ss, card, ' ')) {
-        string face = card.substr(0,1);
-        string suite = card.substr(1);
+        string face = card.substr(0,card.length()-1);
+        string suite = card.substr(card.length()-1);
         temp.emplace_back(Cards(face, suite));
     }
 
@@ -211,4 +211,5 @@ void Round::endRound() {
     cout << "***********************************************\n";
 
     cout << "\n" << endl;
+//    setSaveGame(true);
 }
