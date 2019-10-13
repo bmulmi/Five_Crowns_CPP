@@ -15,12 +15,11 @@ Cards::Cards(string& face, string &suite) {
 }
 
 bool Cards::isJoker() {
-    if (this->face == "J" && (this->suite == "1" || this->suite == "2" || this->suite == "3")) {
-        return true;
-    }
-    else {
-        return false;
-    }
+    return (this->face == "J" && (this->suite == "1" || this->suite == "2" || this->suite == "3"));
+}
+
+bool operator==(const Cards &left, const Cards &right) {
+    return (left.face == right.face && left.suite == right.suite);
 }
 
 int Cards::getFaceValue() {

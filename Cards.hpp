@@ -13,6 +13,7 @@ public:
     Cards();
     Cards(string& face, string& suit);
     ~Cards() = default;
+    friend bool operator==(const Cards &left, const Cards &right);
 
     string getSuite() { return suite; }
     string getFace() { return face; }

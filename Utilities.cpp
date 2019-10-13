@@ -30,3 +30,10 @@ std::string Utils::getValue(std::string &line) {
     std::string value = line.substr(pos+1);
     return value;
 }
+
+Cards Utils::toCards(string a_card) {
+    string t_face = a_card.substr(0, a_card.length()-1);
+    string t_suite = a_card.substr(a_card.length()-1);
+    Cards temp(t_face, t_suite);
+    return temp;
+}

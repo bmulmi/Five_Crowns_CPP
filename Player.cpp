@@ -34,6 +34,15 @@ string Player::getHandWithIndex() {
     return temp;
 }
 
+int Player::getCardIndex(vector<Cards> a_hand, Cards a_card) {
+    for (int i = 0; i < a_hand.size(); i++) {
+        if (a_hand[i] == a_card) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 // returns the score from the current hand where joker is 50 points and wilds are 20 points
 int Player::getHandScore() {
     vector<Cards> currHand = hand;
@@ -248,6 +257,9 @@ int Player::getLowestScoreHand(vector<Cards> &tempHand, vector<int> &combo, vect
     }
     return leastScore;
 }
+
+
+
 
 void Player::Hint() {
 

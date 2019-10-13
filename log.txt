@@ -77,3 +77,8 @@ returns them.
 - added more combinations in getLowestScoreHand because the canGoOut indices do not give combinations for one or two card combos
 - need to look into getlowestscorehand function once again
 
+10/13/2019
+- changed the discarding function for human while dropping a card
+    added toCard() in Utils
+    added getCardIndex() in Player
+

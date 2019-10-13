@@ -80,15 +80,19 @@ void Human::pickCard() {
 
     this->hand.push_back(cardPicked);
 
+    string cardToDiscard;
+    Cards discardingCard;
     int cardIndex;
 
     do {
+        cin.ignore();
         cout    << "Which card do you want to discard? \n" \
                 << getHandWithIndex() << "\n" \
                 << "Enter the index number of the card or Enter -1 to get hint. " << endl;
-        cin >> cardIndex;
+        cin >> cardToDiscard;
+        discardingCard = Utils::toCards(cardToDiscard);
 
-        if (cardIndex == -1) {
+        if (cardToDiscard == "-1") {
             int whichCard = whichCardToDiscard();
             if (whichCard == -999) {
                 cout << "++++ You need at least four cards in your hand to discard a card ++++" << endl;
@@ -97,6 +101,9 @@ void Human::pickCard() {
                 cout << "++++ HINT: You should discard " << hand[whichCard].toString() << " because it will help you get a lower score. ++++" << endl;
             }
         }
+
+        cardIndex = getCardIndex(hand, discardingCard);
+
     } while (cardIndex < 0 || cardIndex > hand.size());
 
     deck->discard(hand[cardIndex]);

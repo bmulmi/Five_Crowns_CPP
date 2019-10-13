@@ -12,6 +12,7 @@
 #include "Cards.hpp"
 #include "Deck.hpp"
 #include "Validate.hpp"
+#include "Utilities.hpp"
 #include <string.h>
 
 using namespace std;
@@ -27,6 +28,9 @@ public:
     void setScore( int score ) { this->score = score; }
     void setHand (vector<Cards> hand) { this->hand = hand; }
     void removeFromHand(int discardIndex) { hand.erase(hand.begin() + discardIndex); }
+
+    int getCardIndex(vector<Cards> a_hand, Cards a_card);
+
     int getLowestScoreHand (vector<Cards> &tempHand, vector<int> &combo, vector<vector<Cards>> permutedHands,
             vector<vector<int>> combinations);
 
