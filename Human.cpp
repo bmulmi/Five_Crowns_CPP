@@ -37,13 +37,29 @@ void Human::play() {
     if (choice == 2) {
         pickCard();
 
-        char input;
-        do {
-            cout << "Do you want to go out? (y/n) ";
-            cin >> input;
-        } while(input != 'y' && input != 'n');
+        int input;
 
-        if (input == 'y') {
+        do {
+            cout << "Do you want to: \n";
+            cout << "1. Assemble possible hands.\n";
+            cout << "2. Go Out.\n";
+            cout << "3. Continue playing.\n";
+            cin >> input;
+        } while(input < 1 || input > 3);
+
+        if (input == 1) {
+            vector<vector<Cards>> arrangedHand = assemblePossibleHand();
+            cout << "++++ You can arrange your hand as: ++++\n";
+            for (auto const& eachHand : arrangedHand) {
+                for (auto eachCard : eachHand) {
+                    cout << eachCard.toString() << " ";
+                }
+                cout << " | ";
+            }
+            cout << "\n" << endl;
+        }
+
+        if (input == 2) {
             if (canGoOut(hand)) {
                 cout << "++++ You may go out. ++++\n" << endl;
                 goOut();
@@ -80,7 +96,7 @@ void Human::pickCard() {
 
     this->hand.push_back(cardPicked);
 
-    string cardToDiscard;
+    string input;
     Cards discardingCard;
     int cardIndex;
 
@@ -88,11 +104,12 @@ void Human::pickCard() {
         cin.ignore();
         cout    << "Which card do you want to discard? \n" \
                 << getHandWithIndex() << "\n" \
-                << "Enter the index number of the card or Enter -1 to get hint. " << endl;
-        cin >> cardToDiscard;
-        discardingCard = Utils::toCards(cardToDiscard);
+                << "Enter the card to discard OR Enter -1 to get hint. " << endl;
+        cin >> input;
 
-        if (cardToDiscard == "-1") {
+        discardingCard = Utils::toCards(input);
+
+        if (input == "-1") {
             int whichCard = whichCardToDiscard();
             if (whichCard == -999) {
                 cout << "++++ You need at least four cards in your hand to discard a card ++++" << endl;

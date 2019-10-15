@@ -43,22 +43,16 @@ bool Validate::canBeRun(vector<Cards> a_cards, int &missingCardsCount) {
 
 // checks if the cards can be arranged as a run
 bool Validate::isRun(vector<Cards> a_hand) {
-    if (a_hand.empty()) {
-        return true;
+    if (a_hand.size() < 3) {
+        return false;
     }
 
     vector<Cards> initialHand = a_hand;
     vector<Cards> jokerCards = extractJokerCards(initialHand);
     vector<Cards> wildCards = extractWildCards(initialHand);
 
-    // even after extracting jokes and wild cards
-    // when the hand has only one or two cards, then return false
-    if ((jokerCards.size() + wildCards.size() == 0) && (initialHand.size() < 3)) {
-        return false;
-    }
-
     // if all the cards in hand is joker or wild cards
-    if ((jokerCards.size() + wildCards.size() > 0) && initialHand.empty()){
+    if (initialHand.empty()){
         return true;
     }
 
@@ -68,7 +62,6 @@ bool Validate::isRun(vector<Cards> a_hand) {
         string suite = initialHand[0].getSuite();
 
         // Step 2: sort the cards according to the face value
-        // sort(initialHand.begin(), initialHand.end(), &Player::compareIntervalCards);
         sortCards(initialHand);
 
         int missingCardsCount = 0;
@@ -89,8 +82,8 @@ bool Validate::isRun(vector<Cards> a_hand) {
 
 // checks if the cards can be arranged as book
 bool Validate::isBook(vector<Cards> a_hand) {
-    if (a_hand.empty()){
-        return true;
+    if (a_hand.size() < 3) {
+        return false;
     }
 
     Deck* deck = &Deck::getInstanceOfDeck(2);
@@ -100,14 +93,8 @@ bool Validate::isBook(vector<Cards> a_hand) {
     vector<Cards> jokerCards = extractJokerCards(initialHand);
     vector<Cards> wildCards = extractWildCards(initialHand);
 
-    // even after extracting jokers and wild cards
-    // when the hand has only one or two cards, then return false
-    if ((jokerCards.size() + wildCards.size() == 0) && (initialHand.size() == 1 || initialHand.size() == 2)) {
-        return false;
-    }
-
-    // if all the cards in hand is joker or wild cards
-    if ((jokerCards.size() + wildCards.size() > 0) && (initialHand.size() == 0)){
+    // if all the cards in hand is jokers and wild cards
+    if ((initialHand.empty())){
         return true;
     }
 
@@ -116,6 +103,7 @@ bool Validate::isBook(vector<Cards> a_hand) {
             return false;
         }
     }
+
     return true;
 }
 

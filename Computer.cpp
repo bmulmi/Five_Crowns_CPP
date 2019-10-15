@@ -10,13 +10,13 @@ Computer::Computer() {
 
 void Computer::play() {
     int choice;
-//    do {
-//        cout << "Current Player: Computer" << endl;
-//        cout    << "1. Save the game.\n" \
-//                << "2. Make a move.\n" \
-//                << "3. Quit the game." << endl;
-//        cin >> choice;
-//    } while (choice  > 4 || choice < 0);
+    do {
+        cout << "Current Player: Computer" << endl;
+        cout    << "1. Save the game.\n" \
+                << "2. Make a move.\n" \
+                << "3. Quit the game." << endl;
+        cin >> choice;
+    } while (choice  > 4 || choice < 0);
     choice = 2;
 
     if (choice == 1) {

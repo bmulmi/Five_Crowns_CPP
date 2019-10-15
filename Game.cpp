@@ -22,10 +22,10 @@ void Game::start() {
     if (nextPlayer == 0) {
         player[0] = new Human();
         player[0]->setType("Human");
-        player[0] = new Computer();
-        player[0]->setType("Computer");
-//        player[1] = new Computer();
-//        player[1]->setType("Computer 2");
+//        player[0] = new Computer();
+//        player[0]->setType("Computer 2");
+        player[1] = new Computer();
+        player[1]->setType("Computer");
     }
     else {
         player[0] = new Computer();

@@ -34,6 +34,18 @@ public:
     int getLowestScoreHand (vector<Cards> &tempHand, vector<int> &combo, vector<vector<Cards>> permutedHands,
             vector<vector<int>> combinations);
 
+    int getLowestScore (vector <Cards> &a_hand, vector<vector<Cards>> &assembled_hands);
+    vector<vector<Cards>> getBooksAndRuns(vector<Cards> a_hand);
+    vector<vector<Cards>> getSameSuiteHands(vector<Cards> a_hand);
+    void getBooksOrRuns(vector<Cards> a_hand, vector<vector<Cards>> &a_collection, int check_type);
+
+    void combineAndCheck (vector<Cards> a_hand, vector<Cards> a_cards, vector<vector<Cards>> &collection, int check_type);
+    void combineTwoAndCheck (vector<Cards> a_hand, vector<Cards> a_cards1, vector<Cards> a_cards2, vector<vector<Cards>> &collection, int check_type);
+    void removeCards (vector<Cards> &a_hand, vector<Cards> cards);
+
+
+
+
     vector<Cards> getHand() { return this->hand; }
     string getHandAsString();
     string getHandWithIndex();

@@ -81,4 +81,12 @@ returns them.
 - changed the discarding function for human while dropping a card
     added toCard() in Utils
     added getCardIndex() in Player
+- added getBooksAndRuns() function to the player class that returns a vector of all the possible books and runs from the hand
+- deleted code from isRun and isBook
+- added combineAndCheck, combineTwoAndCheck functions
+- added getSameSuiteHands that returns a vector of vector of hands with same suites
+- added getBooksOrRuns() as a helper function for getBooksAndRuns()
+- error in removeCards() - returns first card with empty face value
+- the recursive function works
+
 

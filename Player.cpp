@@ -59,36 +59,39 @@ int Player::getHandScore() {
 
 // checks to see if the player can go out or not
 bool Player::canGoOut(vector<Cards> a_hand) {
-    // make a copy of the hand
-    vector<Cards> currHand = a_hand;
-    int handSize = currHand.size();
+    vector<vector<Cards>> assembledHands;
+    int temp = getLowestScore(a_hand, assembledHands);
+    return temp == 0;
+//
+//    if (currHand.size() < 6) {
+//        return (isRun(currHand) || isBook(currHand));
+//    }
+//    else {
+//        return getLowestScore(a_hand, assembledHands) == 0;
 
-    if (currHand.size() < 6) {
-        return (isRun(currHand) || isBook(currHand));
-    }
-    else {
-        vector<vector<Cards>> permutedHands;
-
-        // get all the permutations of this hand
-        permute(currHand, 0, currHand.size()-1, permutedHands);
-
-        // get all the combination indices of this size of hand
-        vector<vector<int>> combinations = getCombinationIndicesToGoOut(currHand.size());
-
-        for (auto eachHand : permutedHands) {
-            bool comboFound = false;
-            for (auto eachCombo : combinations) {
-                if (checkCombo(eachHand, eachCombo) == 0) {
-                    comboFound = true;
-                    break;
-                }
-            }
-            if (comboFound) {
-                return true;
-            }
-        }
-        return false;
-    }
+//
+//        vector<vector<Cards>> permutedHands;
+//
+//        // get all the permutations of this hand
+//        permute(currHand, 0, currHand.size()-1, permutedHands);
+//
+//        // get all the combination indices of this size of hand
+//        vector<vector<int>> combinations = getCombinationIndicesToGoOut(currHand.size());
+//
+//        for (auto eachHand : permutedHands) {
+//            bool comboFound = false;
+//            for (auto eachCombo : combinations) {
+//                if (checkCombo(eachHand, eachCombo) == 0) {
+//                    comboFound = true;
+//                    break;
+//                }
+//            }
+//            if (comboFound) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 }
 
 
@@ -157,21 +160,6 @@ int Player::whichCardToDiscard() {
         vector<Cards> tempHand;
         vector<int> combo;
 
-        // generate more combinations for this hand
-//        for (int i = temp.size() - 1; i > 3; i--) {
-//            combinations.push_back ({0, i});
-//        }
-//        for (int i = 3; i < temp.size() - 1; i += 3) {
-//            combinations.push_back({i-3, i});
-//        }
-//        // this handles the last one or two cards in the hand
-//        if (temp.size() % 3 != 0) {
-//            int modd = temp.size() % 3;
-//            int start = temp.size() - modd;
-//            int end = temp.size();
-//            combinations.push_back({start, end});
-//        }
-
         int tempScr = getLowestScoreHand(tempHand, combo, permutedHands, combinations);
         if (tempScr < currScore) {
             currScore = tempScr;
@@ -197,22 +185,6 @@ vector<vector<Cards>> Player::assemblePossibleHand() {
     combinations.insert(combinations.end(), combinations1.begin(), combinations1.end());
     combinations.insert(combinations.end(), combinations2.begin(), combinations2.end());
 
-    // generate more combinations for this hand
-//    for (int i = currHand.size() - 1; i > 3; i--) {
-//        combinations.push_back ({0, i});
-//    }
-//    for (int i = 3; i < currHand.size() - 1; i += 3) {
-//        combinations.push_back({i-3, i});
-//    }
-//    // this handles the last one or two cards in the hand
-//    if (currHand.size() % 3 != 0) {
-//        int modd = currHand.size() % 3;
-//        int start = currHand.size() - modd;
-//        int end = currHand.size();
-//        combinations.push_back({start, end});
-//    }
-
-    // to store the perfect combination if found
     vector<Cards> tempHand;
     vector<int> combo;
 
@@ -258,8 +230,229 @@ int Player::getLowestScoreHand(vector<Cards> &tempHand, vector<int> &combo, vect
     return leastScore;
 }
 
+void Player::removeCards(vector<Cards> &a_hand, vector<Cards> cards) {
+    for (auto each : cards) {
+        for (int i = 0; i < a_hand.size(); i++) {
+            if (each == a_hand[i]) {
+                a_hand.erase(a_hand.begin() + i);
+                break;
+            }
+        }
+    }
+}
 
+int Player::getLowestScore(vector<Cards> &a_hand, vector<vector<Cards>> &assembled_hands) {
+    int minScore = 99999;
 
+    vector<Cards> bestCombo;
+    vector<vector <Cards>> booksAndRuns = getBooksAndRuns(a_hand);
+
+    cout << "#Books and runs found: " << booksAndRuns.size() << endl;
+//
+//    for (auto each : booksAndRuns) {
+//        for (auto ev : each) {
+//            cout << ev.toString() << " ";
+//        }
+//        cout << "\n";
+//    }
+//
+    // base case
+    if (booksAndRuns.empty()) {
+        return calculateRealScore(a_hand);
+    }
+    // generate child hands of each by removing the parent cards
+    else {
+        for (auto each : booksAndRuns) {
+            // copy the current hand
+            vector <Cards> temp_hand = a_hand;
+
+            // remove the books or runs from the hand
+            removeCards(temp_hand, each);
+
+            // calculate the score -> recursion
+            int score = getLowestScore(temp_hand, assembled_hands);
+
+            // set the minScore of this parent
+            // also set the best combo of this parent
+            if (score < minScore) {
+                minScore = score;
+                bestCombo = each;
+            }
+        }
+        // push the best combination of this depth into the assembled hands vector
+        assembled_hands.push_back(bestCombo);
+    }
+    return minScore;
+}
+
+vector<vector<Cards>> Player::getBooksAndRuns(vector<Cards> a_hand) {
+    vector<vector<Cards>> temp;
+
+    // check for books
+    vector<Cards> temp_hand = a_hand;
+    getBooksOrRuns(a_hand, temp, 0);
+
+    // check for runs
+    vector<vector<Cards>> temp_sameSuiteHands = getSameSuiteHands(temp_hand);
+    for (auto each : temp_sameSuiteHands) {
+        getBooksOrRuns(each, temp, 1);
+    }
+
+    return temp;
+}
+
+void Player::getBooksOrRuns(vector<Cards> a_hand, vector<vector<Cards>> &a_collection, int check_type) {
+    vector<Cards> temp_hand = a_hand;
+    vector<Cards> temp_jokers = extractJokerCards(temp_hand);
+    vector<Cards> temp_wilds = extractWildCards(temp_hand);
+
+    int totalJnW = temp_jokers.size() + temp_wilds.size();
+    bool jokerAndWildExist = totalJnW != 0;
+
+    if (temp_hand.empty() && totalJnW != 0) {
+        // this means the hand has only jokers and wild cards
+        a_collection.push_back(a_hand);
+        return;
+    }
+
+    // check without jokers and wilds
+    for (int i = 0; i < temp_hand.size(); i++) {
+        for (int j = 1; j < temp_hand.size() + 1 - i; j++) {
+            vector<Cards> curr (temp_hand.begin()+i, temp_hand.begin()+i+j);
+            if (check_type == 0) {
+                if (isBook(curr)) {
+                    a_collection.push_back(curr);
+                }
+            }
+            else {
+                if (isRun(curr)) {
+                    a_collection.push_back(curr);
+                }
+            }
+        }
+    }
+
+    // when there are no jokers or wildcards in the hand
+    // no need to go further than this command
+    if (!jokerAndWildExist) {
+        return;
+    }
+
+    // ---------------------------------------------
+    // STEP 2: check with Jokers in each combination
+    if (!temp_jokers.empty()) {
+        combineAndCheck(temp_hand, temp_jokers, a_collection, check_type);
+    }
+    // STEP 3: check with Wild Cards in each combination
+    if (!temp_wilds.empty()) {
+        combineAndCheck(temp_hand, temp_wilds, a_collection, check_type);
+    }
+
+    // STEP 4: check with Jokers AND WildCards in each combination
+    // reset the variables
+    temp_hand = a_hand;
+    temp_jokers = extractJokerCards(temp_hand);
+    temp_wilds = extractWildCards(temp_hand);
+    if (!temp_jokers.empty() && !temp_wilds.empty()) {
+        combineTwoAndCheck(temp_hand, temp_wilds, temp_jokers, a_collection, check_type);
+    }
+
+}
+
+void Player::combineAndCheck(vector <Cards> a_hand, vector <Cards> a_cards, vector <vector<Cards>> &collection, int check_type) {
+    for (int i = 0; i < a_hand.size(); i++) {
+        for (int j = 0; j < a_hand.size() + 1 - i; j++) {
+            // generate the combination
+            vector<Cards> curr (a_hand.begin()+i, a_hand.begin()+i+j);
+
+            vector<Cards> cardsToCombine = a_cards;
+            // check this group of cards with jokers
+            while (!cardsToCombine.empty()) {
+                Cards currJoker = cardsToCombine.back();
+                cardsToCombine.pop_back();
+                curr.push_back(currJoker);
+                if (check_type == 0) {
+                    if (isBook(curr)) {
+                        collection.push_back(curr);
+                    }
+                }
+                else {
+                    if (isRun(curr)) {
+                        collection.push_back(curr);
+                    }
+                }
+            }
+        }
+    }
+}
+
+void Player::combineTwoAndCheck(vector<Cards> a_hand, vector<Cards> a_cards1, vector<Cards> a_cards2,
+                                vector<vector<Cards>> &collection, int check_type) {
+    for (int i = 0; i < a_hand.size(); i++) {
+        for (int j = 0; j < a_hand.size() + 1 - i; j++) {
+            // generate the combination
+            vector<Cards> curr (a_hand.begin()+i, a_hand.begin()+i+j);
+            vector<Cards> temp_cards1 = a_cards1;
+
+            // check this group of cards with wilds
+            while (!temp_cards1.empty()) {
+                Cards currWilds = temp_cards1.back();
+                temp_cards1.pop_back();
+                curr.push_back(currWilds);
+
+                // make a copy of the cards
+                vector<Cards> copy_curr = curr;
+
+                vector<Cards> temp_cards2 = a_cards2;
+                // push each joker to the copied hand and check
+                while (!temp_cards2.empty()) {
+                    Cards currJoker = temp_cards2.back();
+                    temp_cards2.pop_back();
+                    copy_curr.push_back(currJoker);
+                    if (check_type == 0) {
+                        if (isBook(copy_curr)) {
+                            collection.push_back(copy_curr);
+                        }
+                    }
+                    else {
+                        if (isRun(copy_curr)) {
+                            collection.push_back(copy_curr);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+vector<vector<Cards>> Player::getSameSuiteHands(vector<Cards> a_hand) {
+    string const suite [5] = {"S", "C", "D", "H", "T"};
+    vector<Cards> jokers = extractJokerCards(a_hand);
+    vector<Cards> wilds = extractWildCards(a_hand);
+    vector<vector<Cards>> temp;
+
+    for (auto e_suite : suite) {
+        vector<Cards> curr;
+        for (auto e_card : a_hand) {
+            if (e_card.getSuite() == e_suite) {
+                curr.push_back(e_card);
+            }
+        }
+        if (curr.size() > 1){
+            // add jokers and wildcards to that group
+            for (auto each : jokers) {
+                curr.push_back(each);
+            }
+            for (auto each : wilds) {
+                curr.push_back(each);
+            }
+            // finally add it to the returning vector
+            temp.push_back(curr);
+        }
+    }
+
+    return temp;
+}
 
 void Player::Hint() {
 
