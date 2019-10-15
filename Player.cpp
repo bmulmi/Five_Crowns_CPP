@@ -62,36 +62,6 @@ bool Player::canGoOut(vector<Cards> a_hand) {
     vector<vector<Cards>> assembledHands;
     int temp = getLowestScore(a_hand, assembledHands);
     return temp == 0;
-//
-//    if (currHand.size() < 6) {
-//        return (isRun(currHand) || isBook(currHand));
-//    }
-//    else {
-//        return getLowestScore(a_hand, assembledHands) == 0;
-
-//
-//        vector<vector<Cards>> permutedHands;
-//
-//        // get all the permutations of this hand
-//        permute(currHand, 0, currHand.size()-1, permutedHands);
-//
-//        // get all the combination indices of this size of hand
-//        vector<vector<int>> combinations = getCombinationIndicesToGoOut(currHand.size());
-//
-//        for (auto eachHand : permutedHands) {
-//            bool comboFound = false;
-//            for (auto eachCombo : combinations) {
-//                if (checkCombo(eachHand, eachCombo) == 0) {
-//                    comboFound = true;
-//                    break;
-//                }
-//            }
-//            if (comboFound) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
 }
 
 
@@ -145,22 +115,10 @@ int Player::whichCardToDiscard() {
         // remove a card from the hand
         temp.erase(temp.begin() + i);
 
-        // now count the score
-        vector<vector<Cards>> permutedHands;
-        permute(temp, 0, temp.size()-1, permutedHands);
+        // now count the score;
+        vector<vector<Cards>> assembledHand;
 
-        vector<vector<int>> combinations1 = getCombinationIndicesToGoOut(temp.size());
-        vector<vector<int>> combinations2 = getCombinationIndicesTOCheck(temp.size());
-        vector<vector<int>> combinations;
-        combinations.reserve(combinations1.size() + combinations2.size());
-        combinations.insert(combinations.end(), combinations1.begin(), combinations1.end());
-        combinations.insert(combinations.end(), combinations2.begin(), combinations2.end());
-
-        // to store the perfect combination if found
-        vector<Cards> tempHand;
-        vector<int> combo;
-
-        int tempScr = getLowestScoreHand(tempHand, combo, permutedHands, combinations);
+        int tempScr = getLowestScore(temp, assembledHand);
         if (tempScr < currScore) {
             currScore = tempScr;
             cardIndex = i;
@@ -171,67 +129,13 @@ int Player::whichCardToDiscard() {
 
 vector<vector<Cards>> Player::assemblePossibleHand() {
     vector<Cards> currHand = hand;
-
-    vector<vector<Cards>> permutedHands;
-
-    // get all the permutations of this hand
-    permute(currHand, 0, currHand.size()-1, permutedHands);
-
-    // get all the combination indices of this size of hand
-    vector<vector<int>> combinations1 = getCombinationIndicesToGoOut(currHand.size());
-    vector<vector<int>> combinations2 = getCombinationIndicesTOCheck(currHand.size());
-    vector<vector<int>> combinations;
-    combinations.reserve(combinations1.size() + combinations2.size());
-    combinations.insert(combinations.end(), combinations1.begin(), combinations1.end());
-    combinations.insert(combinations.end(), combinations2.begin(), combinations2.end());
-
-    vector<Cards> tempHand;
-    vector<int> combo;
-
-    getLowestScoreHand (tempHand, combo, permutedHands, combinations);
-
     vector<vector<Cards>> assembledHands;
-    for (int i = 0; i < combo.size() - 1; i++) {
-        int start = combo[i];
-        int end = combo[i+1];
-
-        vector<Cards> comboHand (tempHand.begin()+start, tempHand.begin()+end);
-        assembledHands.push_back(comboHand);
-
-        // for less than 6 cards in a hand, push the rest of the card
-        if (combo.size() <= 2) {
-            vector<Cards> cHand (tempHand.begin()+end, tempHand.end());
-            assembledHands.push_back(cHand);
-        }
-    }
-
+    int scr = getLowestScore (currHand, assembledHands);
     return assembledHands;
 }
 
-// returns the score after checking every possible combination in the permuted hands
-// also changes tempHand and combo passed in a arguments
-int Player::getLowestScoreHand(vector<Cards> &tempHand, vector<int> &combo, vector<vector<Cards>> permutedHands,
-                                vector<vector<int>> combinations) {
-    int leastScore = 99999;
-    for (auto const& eachHand : permutedHands) {
-        int currScore;
-        // Now, check all the combination indices to go out
-        for (auto const& eachCombo : combinations) {
-            // get the score from this combination
-            currScore = checkCombo(eachHand, eachCombo);
-            // store the hand and combo of the least score calculated from combo
-            if (currScore < leastScore) {
-                leastScore = currScore;
-                tempHand = eachHand;
-                combo = eachCombo;
-            }
-        }
-    }
-    return leastScore;
-}
-
 void Player::removeCards(vector<Cards> &a_hand, vector<Cards> cards) {
-    for (auto each : cards) {
+    for (auto const &each : cards) {
         for (int i = 0; i < a_hand.size(); i++) {
             if (each == a_hand[i]) {
                 a_hand.erase(a_hand.begin() + i);
@@ -262,7 +166,7 @@ int Player::getLowestScore(vector<Cards> &a_hand, vector<vector<Cards>> &assembl
     }
     // generate child hands of each by removing the parent cards
     else {
-        for (auto each : booksAndRuns) {
+        for (auto const &each : booksAndRuns) {
             // copy the current hand
             vector <Cards> temp_hand = a_hand;
 
@@ -270,12 +174,12 @@ int Player::getLowestScore(vector<Cards> &a_hand, vector<vector<Cards>> &assembl
             removeCards(temp_hand, each);
 
             // calculate the score -> recursion
-            int score = getLowestScore(temp_hand, assembled_hands);
+            int scr = getLowestScore(temp_hand, assembled_hands);
 
             // set the minScore of this parent
             // also set the best combo of this parent
-            if (score < minScore) {
-                minScore = score;
+            if (scr < minScore) {
+                minScore = scr;
                 bestCombo = each;
             }
         }

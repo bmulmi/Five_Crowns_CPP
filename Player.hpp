@@ -31,9 +31,6 @@ public:
 
     int getCardIndex(vector<Cards> a_hand, Cards a_card);
 
-    int getLowestScoreHand (vector<Cards> &tempHand, vector<int> &combo, vector<vector<Cards>> permutedHands,
-            vector<vector<int>> combinations);
-
     int getLowestScore (vector <Cards> &a_hand, vector<vector<Cards>> &assembled_hands);
     vector<vector<Cards>> getBooksAndRuns(vector<Cards> a_hand);
     vector<vector<Cards>> getSameSuiteHands(vector<Cards> a_hand);
