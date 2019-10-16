@@ -163,14 +163,19 @@ void Human::getHint() {
 
         case 2: {
             vector<vector<Cards>> arrangedHand = assemblePossibleHand();
-            cout << "++++ You can arrange your hand as: ++++\n";
-            for (auto const& eachHand : arrangedHand) {
-                for (auto eachCard : eachHand) {
-                    cout << eachCard.toString() << " ";
-                }
-                cout << " | ";
+            if (arrangedHand.front().empty()) {
+                cout << "++++ There is no arrangement possible ++++\n" << endl;
             }
-            cout << "\n" << endl;
+            else {
+                cout << "++++ You can arrange your hand as: ++++\n";
+                for (auto const& eachHand : arrangedHand) {
+                    for (auto eachCard : eachHand) {
+                        cout << eachCard.toString() << " ";
+                    }
+                    cout << " | ";
+                }
+                cout << "\n" << endl;
+            }
             break;
         }
 

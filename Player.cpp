@@ -48,11 +48,16 @@ int Player::getHandScore() {
     vector<Cards> currHand = hand;
     vector<vector<Cards>> possibleCombos = assemblePossibleHand();
     int currScore = 0;
-    for (auto const& each : possibleCombos) {
-        if (isRun(each) || isBook(each))
-            continue;
-        else
-            currScore += calculateRealScore(each);
+    if (possibleCombos.empty()) {
+        currScore += calculateRealScore(currHand);
+    }
+    else {
+        // remove the combination cards from current hand
+        for (auto const& each : possibleCombos) {
+            removeCards(currHand, each);
+        }
+        // calculate score of the remaining cards
+        currScore += calculateRealScore(currHand);
     }
     return currScore;
 }
@@ -77,7 +82,6 @@ string Player::whichPileToChoose() {
         return "discard";
     }
 
-    Deck* deck = &Deck::getInstanceOfDeck(2);
     string wildCard = deck->getWildCardFace();
 
     // pick if wildCard
@@ -85,33 +89,59 @@ string Player::whichPileToChoose() {
         return "discard";
     }
 
-    // make a copy of hand
     vector<Cards> copyHand = hand;
+
+    // score of hand before picking discard card
+    vector<vector<Cards>> assembledHands;
+    int scr = getLowestScore(copyHand, assembledHands);
+    bool chooseDiscard = false;
+
+    // now pick the discard card
     copyHand.push_back(pickedCard);
-    // picked card is the last card in the hand
-    // now remove every card of the hand and see if the player canGoOut with the newly picked card
+
+    int cardToDiscardIndex;
+    // now remove every card of the previous hand AND
+    // check if the player will have more books or runs with lower score with the newly picked card
     for (int i = 0; i < hand.size(); i++){
         vector<Cards> temp = copyHand;
         temp.erase(temp.begin() + i);
-        if (canGoOut(temp)) {
-            return "discard";
+        vector<vector<Cards>> curr_assembledHands;
+        int curr_scr = getLowestScore(temp, curr_assembledHands);
+        if (curr_assembledHands.size() >= assembledHands.size() && curr_scr < scr) {
+            assembledHands = curr_assembledHands;
+            scr = curr_scr;
+            cardToDiscardIndex = i;
+            chooseDiscard = true;
         }
     }
 
-    return "draw";
+    if (chooseDiscard) {
+        return "discard";
+    }
+    else {
+        return "draw";
+    }
 }
 
 int Player::whichCardToDiscard() {
     vector<Cards> currHand = hand;
     int cardIndex = 0;
-    int currScore = 9999;
+    int currScore = 99999;
 
     // if the hand size is 3
     if (currHand.size() == 3)
         return -999;
 
+    deck = &Deck::getInstanceOfDeck(2);
+    string wildCard = deck->getWildCardFace();
+
     for (int i = 0; i < currHand.size(); i++){
         vector<Cards> temp = currHand;
+
+        if (currHand[i].isJoker() || currHand[i].getFace() == wildCard) {
+            continue;
+        }
+
         // remove a card from the hand
         temp.erase(temp.begin() + i);
 
@@ -149,9 +179,11 @@ int Player::getLowestScore(vector<Cards> &a_hand, vector<vector<Cards>> &assembl
     int minScore = 99999;
 
     vector<Cards> bestCombo;
-    vector<vector <Cards>> booksAndRuns = getBooksAndRuns(a_hand);
+    vector<Cards> t_hand = a_hand;
+    sortCards(t_hand);
+    vector<vector <Cards>> booksAndRuns = getBooksAndRuns(t_hand);
 
-    cout << "#Books and runs found: " << booksAndRuns.size() << endl;
+//    cout << "#Books and runs found: " << booksAndRuns.size() << endl;
 //
 //    for (auto each : booksAndRuns) {
 //        for (auto ev : each) {
@@ -335,7 +367,7 @@ vector<vector<Cards>> Player::getSameSuiteHands(vector<Cards> a_hand) {
     vector<Cards> wilds = extractWildCards(a_hand);
     vector<vector<Cards>> temp;
 
-    for (auto e_suite : suite) {
+    for (auto const &e_suite : suite) {
         vector<Cards> curr;
         for (auto e_card : a_hand) {
             if (e_card.getSuite() == e_suite) {
@@ -344,10 +376,10 @@ vector<vector<Cards>> Player::getSameSuiteHands(vector<Cards> a_hand) {
         }
         if (curr.size() > 1){
             // add jokers and wildcards to that group
-            for (auto each : jokers) {
+            for (auto const &each : jokers) {
                 curr.push_back(each);
             }
-            for (auto each : wilds) {
+            for (auto const &each : wilds) {
                 curr.push_back(each);
             }
             // finally add it to the returning vector

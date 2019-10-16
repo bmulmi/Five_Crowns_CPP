@@ -89,4 +89,10 @@ returns them.
 - error in removeCards() - returns first card with empty face value
 - the recursive function works
 
+10/16/2019
+- tweaked the whichPileToChoose function. Now the strategy chooses the discard card when
+    it assembles equal or more books or runs than before with less score of the hand
+- tweaked the whichCardToDiscard function.
+    Now it never suggests to discard wild cards or Jokers.
+
 

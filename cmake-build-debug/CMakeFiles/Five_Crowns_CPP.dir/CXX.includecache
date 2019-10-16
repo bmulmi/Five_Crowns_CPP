@@ -22,9 +22,15 @@ iostream
 time.h
 -
 
-/home/bibhash/git_repos/Five_Crowns_CPP/Player.cpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Human.cpp
+Human.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Human.hpp
+
+/home/bibhash/git_repos/Five_Crowns_CPP/Human.hpp
 Player.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Player.hpp
+iostream
+-
 
 /home/bibhash/git_repos/Five_Crowns_CPP/Player.hpp
 vector
