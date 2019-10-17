@@ -407,7 +407,3 @@ vector<vector<Cards>> Player::getSameSuiteHands(vector<Cards> a_hand) {
 
     return temp;
 }
-
-void Player::Hint() {
-
-}

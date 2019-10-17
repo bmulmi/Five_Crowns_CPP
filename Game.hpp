@@ -23,16 +23,17 @@ public:
     Game();
     Game(int roundNumber);
     ~Game();
+
+    int toss();
+
     void load(vector<string> info);
     void start();
     void saveGame(string info);
     void declareWinner();
-    int toss();
 
 private:
     int roundNumber;
     Player* player[2];
-
 };
 
 

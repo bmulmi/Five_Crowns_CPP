@@ -10,16 +10,21 @@
 #include <vector>
 
 class Assembled {
-public:
-    vector<Cards> parentHand;
-    vector<Cards> bestCombo;
-    Assembled* bestChild;
+public:;
+    Assembled() = default;
+
+    //Assembled& operator = (Assembled const&) = default;
 
     Assembled (vector<Cards> hand) {
         parentHand = hand;
         bestCombo = {};
         bestChild = NULL;
-    }
+    };
+    ~Assembled() = default;
+
+    vector<Cards> parentHand;
+    vector<Cards> bestCombo;
+    Assembled* bestChild;
 
     int size() {
         int size = 0;

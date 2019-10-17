@@ -23,31 +23,22 @@ class Player {
 public:
     Player();
     ~Player() = default;
+
     int getScore() { return score; }
     int getHandScore();
+
     void updateScore(int score) { this->score += score; }
     void setScore( int score ) { this->score = score; }
     void setHand (vector<Cards> hand) { this->hand = hand; }
+
     void removeFromHand(int discardIndex) { hand.erase(hand.begin() + discardIndex); }
 
     int getCardIndex(vector<Cards> a_hand, Cards a_card);
 
-    int getLowestScore (vector <Cards> &a_hand, Assembled *assembled_hands);
-    vector<vector<Cards>> getBooksAndRuns(vector<Cards> a_hand);
-    vector<vector<Cards>> getSameSuiteHands(vector<Cards> a_hand);
-    void getBooksOrRuns(vector<Cards> a_hand, vector<vector<Cards>> &a_collection, int check_type);
-
-    void combineAndCheck (vector<Cards> a_hand, vector<Cards> a_cards, vector<vector<Cards>> &collection, int check_type);
-    void combineTwoAndCheck (vector<Cards> a_hand, vector<Cards> a_cards1, vector<Cards> a_cards2, vector<vector<Cards>> &collection, int check_type);
-    void removeCards (vector<Cards> &a_hand, vector<Cards> cards);
     string getAssembledHandAsString();
 
-
-    vector<Cards> getHand() { return this->hand; }
     string getHandAsString();
     string getHandWithIndex();
-
-    void Hint();
 
     string whichPileToChoose();
     int whichCardToDiscard();
@@ -69,7 +60,6 @@ public:
     void setSaveGame(bool val) { saveGame = val; }
     void setGoneOut(bool val) { goneOut  = val;}
 
-
 protected:
     int score;
     string type;
@@ -79,6 +69,15 @@ protected:
     Deck* deck;
     vector<Cards> hand;
 
+    vector<vector<Cards>> getBooksAndRuns(vector<Cards> a_hand);
+    vector<vector<Cards>> getSameSuiteHands(vector<Cards> a_hand);
+
+    int getLowestScore (vector <Cards> &a_hand, Assembled *assembled_hands);
+
+    void getBooksOrRuns(vector<Cards> a_hand, vector<vector<Cards>> &a_collection, int check_type);
+    void combineAndCheck (vector<Cards> a_hand, vector<Cards> a_cards, vector<vector<Cards>> &collection, int check_type);
+    void combineTwoAndCheck (vector<Cards> a_hand, vector<Cards> a_cards1, vector<Cards> a_cards2, vector<vector<Cards>> &collection, int check_type);
+    void removeCards (vector<Cards> &a_hand, vector<Cards> cards);
 
 private:
 
