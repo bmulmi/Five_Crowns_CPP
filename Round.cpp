@@ -197,19 +197,18 @@ string Round::getSerializableInfo() {
 }
 
 void Round::endRound() {
-    cout << "***********************************************\n";
-    cout << player[currPlayer]->getType() << ":\n";
-    cout << "Hand: " << player[currPlayer]->getHandAsString();
+    cout << "*************************************************************************\n";
+    cout << "* " << player[currPlayer]->getType() << ":\n";
+    cout << "* Hand: " << player[currPlayer]->getAssembledHandAsString();
     cout << "Score Earned: 0\n";
     player[currPlayer]->updateScore(0);
 
-    cout << player[nextPlayer]->getType() << ":\n";
-    cout << "Hand: " << player[nextPlayer]->getHandAsString();
+    cout << "* " << player[nextPlayer]->getType() << ":\n";
+    cout << "* Hand: " << player[nextPlayer]->getAssembledHandAsString();
     int earned = player[nextPlayer]->getHandScore();
     cout << "Score Earned: " << earned << endl;
     player[nextPlayer]->updateScore(earned);
-    cout << "***********************************************\n";
+    cout << "*************************************************************************\n";
 
     cout << "\n" << endl;
-//    setSaveGame(true);
 }

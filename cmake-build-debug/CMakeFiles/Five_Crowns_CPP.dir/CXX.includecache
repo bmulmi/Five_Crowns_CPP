@@ -6,9 +6,23 @@
 
 #IncludeRegexTransform: 
 
+/home/bibhash/git_repos/Five_Crowns_CPP/Assembled.hpp
+Cards.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Cards.hpp
+vector
+-
+
 /home/bibhash/git_repos/Five_Crowns_CPP/Cards.hpp
 string
 -
+
+/home/bibhash/git_repos/Five_Crowns_CPP/Computer.hpp
+iostream
+-
+Player.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Player.hpp
+Deck.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Deck.hpp
 
 /home/bibhash/git_repos/Five_Crowns_CPP/Deck.hpp
 Cards.hpp
@@ -22,9 +36,31 @@ iostream
 time.h
 -
 
-/home/bibhash/git_repos/Five_Crowns_CPP/Human.cpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Game.cpp
+Game.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Game.hpp
+
+/home/bibhash/git_repos/Five_Crowns_CPP/Game.hpp
+Player.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Player.hpp
 Human.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Human.hpp
+Computer.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Computer.hpp
+Round.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Round.hpp
+Utilities.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Utilities.hpp
+iostream
+-
+cstdlib
+-
+ctime
+-
+algorithm
+-
+fstream
+-
 
 /home/bibhash/git_repos/Five_Crowns_CPP/Human.hpp
 Player.hpp
@@ -47,8 +83,24 @@ Validate.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Validate.hpp
 Utilities.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Utilities.hpp
+Assembled.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Assembled.hpp
 string.h
 -
+
+/home/bibhash/git_repos/Five_Crowns_CPP/Round.cpp
+iomanip
+-
+Round.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Round.hpp
+
+/home/bibhash/git_repos/Five_Crowns_CPP/Round.hpp
+Player.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Player.hpp
+Deck.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Deck.hpp
+Utilities.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Utilities.hpp
 
 /home/bibhash/git_repos/Five_Crowns_CPP/Utilities.hpp
 string

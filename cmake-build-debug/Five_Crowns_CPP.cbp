@@ -84,6 +84,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/Assembled.cpp">
+			<Option target="Five_Crowns_CPP"/>
+		</Unit>
+		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/Assembled.hpp">
+			<Option target="Five_Crowns_CPP"/>
+		</Unit>
 		<Unit filename="/home/bibhash/git_repos/Five_Crowns_CPP/Cards.cpp">
 			<Option target="Five_Crowns_CPP"/>
 		</Unit>

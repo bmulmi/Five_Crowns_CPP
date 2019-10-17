@@ -26,6 +26,7 @@ public:
     void load(vector<string> info);
     void start();
     void saveGame(string info);
+    void declareWinner();
     int toss();
 
 private:

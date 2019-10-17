@@ -15,9 +15,9 @@ void Computer::play() {
         cout    << "1. Save the game.\n" \
                 << "2. Make a move.\n" \
                 << "3. Quit the game." << endl;
-        cin >> choice;
+//        cin >> choice;
+        choice = 2;
     } while (choice  > 4 || choice < 0);
-    choice = 2;
 
     if (choice == 1) {
         setSaveGame(true);

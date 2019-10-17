@@ -126,6 +126,33 @@ Five_Crowns_CPP/fast:
 	$(MAKE) -f CMakeFiles/Five_Crowns_CPP.dir/build.make CMakeFiles/Five_Crowns_CPP.dir/build
 .PHONY : Five_Crowns_CPP/fast
 
+Assembled.o: Assembled.cpp.o
+
+.PHONY : Assembled.o
+
+# target to build an object file
+Assembled.cpp.o:
+	$(MAKE) -f CMakeFiles/Five_Crowns_CPP.dir/build.make CMakeFiles/Five_Crowns_CPP.dir/Assembled.cpp.o
+.PHONY : Assembled.cpp.o
+
+Assembled.i: Assembled.cpp.i
+
+.PHONY : Assembled.i
+
+# target to preprocess a source file
+Assembled.cpp.i:
+	$(MAKE) -f CMakeFiles/Five_Crowns_CPP.dir/build.make CMakeFiles/Five_Crowns_CPP.dir/Assembled.cpp.i
+.PHONY : Assembled.cpp.i
+
+Assembled.s: Assembled.cpp.s
+
+.PHONY : Assembled.s
+
+# target to generate assembly for a file
+Assembled.cpp.s:
+	$(MAKE) -f CMakeFiles/Five_Crowns_CPP.dir/build.make CMakeFiles/Five_Crowns_CPP.dir/Assembled.cpp.s
+.PHONY : Assembled.cpp.s
+
 Cards.o: Cards.cpp.o
 
 .PHONY : Cards.o
@@ -432,6 +459,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Five_Crowns_CPP"
 	@echo "... edit_cache"
+	@echo "... Assembled.o"
+	@echo "... Assembled.i"
+	@echo "... Assembled.s"
 	@echo "... Cards.o"
 	@echo "... Cards.i"
 	@echo "... Cards.s"

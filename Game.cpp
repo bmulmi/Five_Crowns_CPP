@@ -20,20 +20,20 @@ Game::~Game() {
 void Game::start() {
     int nextPlayer = toss();
     if (nextPlayer == 0) {
-        player[0] = new Human();
-        player[0]->setType("Human");
-//        player[0] = new Computer();
-//        player[0]->setType("Computer 2");
+//        player[0] = new Human();
+//        player[0]->setType("Human");
+        player[0] = new Computer();
+        player[0]->setType("Computer 2");
         player[1] = new Computer();
         player[1]->setType("Computer");
     }
     else {
         player[0] = new Computer();
         player[0]->setType("Computer");
-        player[1] = new Human();
-        player[1]->setType("Human");
-//        player[1] = new Computer();
-//        player[1]->setType("Computer 2");
+//        player[1] = new Human();
+//        player[1]->setType("Human");
+        player[1] = new Computer();
+        player[1]->setType("Computer 2");
     }
     cout << "Now, Lets get started!" << endl;
 
@@ -55,8 +55,8 @@ void Game::start() {
 
         roundNumber++;
     }
-//    declare winner()
 
+    declareWinner();
 }
 
 int Game::toss() {
@@ -133,6 +133,7 @@ void Game::load(vector<string> info) {
 
         roundNumber++;
     }
+    declareWinner();
 }
 
 // saves the string of round info into a ofstream object
@@ -148,4 +149,21 @@ void Game::saveGame(string info) {
     save.open("/home/bibhash/git_repos/Five_Crowns_CPP/savedGames/"+filename);
     save << info;
     save.close();
+}
+
+void Game::declareWinner() {
+    int scr1 = player[0]->getScore();
+    int scr2 = player[1]->getScore();
+    string winner = scr1 < scr2 ? player[0]->getType() : player[1]->getType();
+    string loser = scr2 < scr1 ? player[0]->getType() : player[1]->getType();
+    int winnerScr = scr1 < scr2 ? scr1 : scr2;
+    int loserScr = scr2 < scr1 ? scr1 : scr2;
+
+    cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" << endl;
+    cout << winner << " is the Winner!" << endl;
+    cout << winner << " total score: " << winnerScr << endl;
+
+    cout << loser << " lost the game... " << endl;
+    cout << loser << " total score: " << loserScr << endl;
+    cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" << endl;
 }

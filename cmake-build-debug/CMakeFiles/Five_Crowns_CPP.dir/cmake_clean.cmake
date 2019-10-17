@@ -10,6 +10,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Five_Crowns_CPP.dir/Round.cpp.o"
   "CMakeFiles/Five_Crowns_CPP.dir/Utilities.cpp.o"
   "CMakeFiles/Five_Crowns_CPP.dir/Validate.cpp.o"
+  "CMakeFiles/Five_Crowns_CPP.dir/Assembled.cpp.o"
   "Five_Crowns_CPP.pdb"
   "Five_Crowns_CPP"
 )

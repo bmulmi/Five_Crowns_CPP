@@ -45,26 +45,18 @@ int Player::getCardIndex(vector<Cards> a_hand, Cards a_card) {
 
 // returns the score from the current hand where joker is 50 points and wilds are 20 points
 int Player::getHandScore() {
-    vector<Cards> currHand = hand;
     vector<vector<Cards>> possibleCombos = assemblePossibleHand();
-    int currScore = 0;
-    if (possibleCombos.empty()) {
-        currScore += calculateRealScore(currHand);
-    }
-    else {
-        // remove the combination cards from current hand
-        for (auto const& each : possibleCombos) {
-            removeCards(currHand, each);
-        }
-        // calculate score of the remaining cards
-        currScore += calculateRealScore(currHand);
-    }
+
+    // the unaccounted cards are at the back of the assembled hand.
+    vector<Cards> scoreHand = possibleCombos.back();
+
+    int currScore = calculateRealScore(scoreHand);
     return currScore;
 }
 
 // checks to see if the player can go out or not
 bool Player::canGoOut(vector<Cards> a_hand) {
-    vector<vector<Cards>> assembledHands;
+    Assembled *assembledHands = new Assembled(hand);
     int temp = getLowestScore(a_hand, assembledHands);
     return temp == 0;
 }
@@ -92,25 +84,29 @@ string Player::whichPileToChoose() {
     vector<Cards> copyHand = hand;
 
     // score of hand before picking discard card
-    vector<vector<Cards>> assembledHands;
-    int scr = getLowestScore(copyHand, assembledHands);
+    Assembled *assembledHand = new Assembled(copyHand);
+
+    int scr = getLowestScore(copyHand, assembledHand);
     bool chooseDiscard = false;
 
     // now pick the discard card
     copyHand.push_back(pickedCard);
 
-    int cardToDiscardIndex;
     // now remove every card of the previous hand AND
     // check if the player will have more books or runs with lower score with the newly picked card
     for (int i = 0; i < hand.size(); i++){
         vector<Cards> temp = copyHand;
         temp.erase(temp.begin() + i);
-        vector<vector<Cards>> curr_assembledHands;
-        int curr_scr = getLowestScore(temp, curr_assembledHands);
-        if (curr_assembledHands.size() >= assembledHands.size() && curr_scr < scr) {
-            assembledHands = curr_assembledHands;
+
+        Assembled *curr_assembledHand = new Assembled(temp);
+
+        int curr_scr = getLowestScore(temp, curr_assembledHand);
+        // TODO:
+//        if (!curr_assembledHand->bestCombo.empty() && curr_assembledHands.size() > assembledHands.size() && curr_scr < scr) {
+
+        if (!curr_assembledHand->bestCombo.empty() && curr_assembledHand->size() > assembledHand->size() && curr_scr < scr) {
+            assembledHand = curr_assembledHand;
             scr = curr_scr;
-            cardToDiscardIndex = i;
             chooseDiscard = true;
         }
     }
@@ -146,7 +142,7 @@ int Player::whichCardToDiscard() {
         temp.erase(temp.begin() + i);
 
         // now count the score;
-        vector<vector<Cards>> assembledHand;
+        Assembled *assembledHand = new Assembled(temp);
 
         int tempScr = getLowestScore(temp, assembledHand);
         if (tempScr < currScore) {
@@ -159,9 +155,31 @@ int Player::whichCardToDiscard() {
 
 vector<vector<Cards>> Player::assemblePossibleHand() {
     vector<Cards> currHand = hand;
-    vector<vector<Cards>> assembledHands;
-    int scr = getLowestScore (currHand, assembledHands);
-    return assembledHands;
+    Assembled *assembledHand = new Assembled(currHand);
+
+    int scr = getLowestScore (currHand, assembledHand);
+
+    vector<Cards> temp = assembledHand->bestCombo;
+    vector<vector<Cards>> ret;
+    while (!temp.empty()) {
+        ret.push_back(temp);
+        assembledHand = assembledHand->bestChild;
+        temp = assembledHand->bestCombo;
+    }
+
+    return ret;
+}
+
+string Player::getAssembledHandAsString() {
+    vector<vector<Cards>> arrangedHand = assemblePossibleHand();
+    string temp;
+    for (auto const& eachHand : arrangedHand) {
+        for (auto eachCard : eachHand) {
+            temp += eachCard.toString() + " ";
+        }
+        temp += " | ";
+    }
+    return temp;
 }
 
 void Player::removeCards(vector<Cards> &a_hand, vector<Cards> cards) {
@@ -175,7 +193,7 @@ void Player::removeCards(vector<Cards> &a_hand, vector<Cards> cards) {
     }
 }
 
-int Player::getLowestScore(vector<Cards> &a_hand, vector<vector<Cards>> &assembled_hands) {
+int Player::getLowestScore(vector<Cards> &a_hand, Assembled *assembled_hands) {
     int minScore = 99999;
 
     vector<Cards> bestCombo;
@@ -183,41 +201,41 @@ int Player::getLowestScore(vector<Cards> &a_hand, vector<vector<Cards>> &assembl
     sortCards(t_hand);
     vector<vector <Cards>> booksAndRuns = getBooksAndRuns(t_hand);
 
-//    cout << "#Books and runs found: " << booksAndRuns.size() << endl;
-//
-//    for (auto each : booksAndRuns) {
-//        for (auto ev : each) {
-//            cout << ev.toString() << " ";
-//        }
-//        cout << "\n";
-//    }
-//
     // base case
     if (booksAndRuns.empty()) {
+        Assembled *temp_assembled = new Assembled(t_hand);
+        assembled_hands->bestChild = temp_assembled;
+        assembled_hands->bestCombo = a_hand;
         return calculateRealScore(a_hand);
     }
     // generate child hands of each by removing the parent cards
     else {
-        for (auto const &each : booksAndRuns) {
+        for (auto const each : booksAndRuns) {
             // copy the current hand
             vector <Cards> temp_hand = a_hand;
 
             // remove the books or runs from the hand
             removeCards(temp_hand, each);
 
+            Assembled *temp_assembled = new Assembled(temp_hand);
+
             // calculate the score -> recursion
-            int scr = getLowestScore(temp_hand, assembled_hands);
+            int scr = getLowestScore(temp_hand, temp_assembled);
 
             // set the minScore of this parent
             // also set the best combo of this parent
             if (scr < minScore) {
                 minScore = scr;
+                assembled_hands->bestChild = temp_assembled;
+                assembled_hands->bestCombo = each;
                 bestCombo = each;
             }
         }
-        // push the best combination of this depth into the assembled hands vector
-        assembled_hands.push_back(bestCombo);
+
     }
+    // push the best combination of this depth into the assembled hands vector
+//    assembled_hands.push_back(bestCombo);
+
     return minScore;
 }
 
