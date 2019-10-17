@@ -13,13 +13,16 @@ using namespace std;
 
 class Computer : public Player {
 public:
-    Computer();
-    string getType() { return type; }
-    void setType(string type) { this->type = type; }
-    void play();
-    void goOut();
-    void pickCard();
+    Computer() = default;
+    ~Computer() = default;
 
+    const string getType() override { return type; }
+
+    void setType(string type) override { this->type = type; }
+
+    void play() override;
+    void goOut() override;
+    void pickCard() override;
 };
 
 

@@ -14,7 +14,6 @@ namespace Utils {
     std::string getValue(std::string &line);
     std::string trim(std::string &word);
     Cards toCards(string a_card);
-};
-
+}
 
 #endif //FIVE_CROWNS_CPP_UTILITIES_HPP

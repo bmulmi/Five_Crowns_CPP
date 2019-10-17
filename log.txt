@@ -94,5 +94,8 @@ returns them.
     it assembles equal or more books or runs than before with less score of the hand
 - tweaked the whichCardToDiscard function.
     Now it never suggests to discard wild cards or Jokers.
-
+- added Assembled class to help trace the assembled hands structure in the Depth First Search.
+- the game is now complete.
+- BUG: Assembled Hand shows wild cards as a separate combination!
+- cleaned the code
 

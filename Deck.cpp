@@ -68,15 +68,6 @@ deque<Cards> Deck::createJokers(int num) {
     return temp;
 }
 
-void Deck::printDeck() {
-    cout << "# Cards: " << this->drawPile.size() << endl;
-
-    for(auto a_card : this->drawPile) {
-        cout << a_card.toString() << " ";
-    }
-    cout << endl;
-}
-
 // mixes the discard pile into draw pile and shuffles the deck
 void Deck::shuffleDeck() {
     unsigned seed = time(NULL);
@@ -117,10 +108,24 @@ Cards Deck::drawDiscardCard() {
     return temp;
 }
 
-void Deck::showDrawPile() {
-    for (auto a_card : drawPile) {
-        cout << a_card.toString() << " ";
+string Deck::getDiscardPile() {
+    string temp;
+
+    for (auto each : this->discardPile) {
+        temp += each.toString() + " ";
     }
+
+    return temp;
+}
+
+string Deck::getDrawPile() {
+    string temp;
+
+    for (auto each : this->drawPile) {
+        temp += each.toString() + " ";
+    }
+
+    return temp;
 }
 
 void Deck::setDiscardPile(deque<Cards> cards) {
@@ -157,24 +162,4 @@ void Deck::setWildCard(int faceValue) {
     else {
         this->wildCardFace = to_string(tempFace);
     }
-}
-
-string Deck::getDiscardPile() {
-    string temp;
-
-    for (auto each : this->discardPile) {
-        temp += each.toString() + " ";
-    }
-
-    return temp;
-}
-
-string Deck::getDrawPile() {
-    string temp;
-
-    for (auto each : this->drawPile) {
-        temp += each.toString() + " ";
-    }
-
-    return temp;
 }

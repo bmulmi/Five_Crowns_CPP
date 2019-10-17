@@ -12,15 +12,13 @@
 class Assembled {
 public:;
     Assembled() = default;
-
-    //Assembled& operator = (Assembled const&) = default;
-
-    Assembled (vector<Cards> hand) {
+    explicit Assembled (vector<Cards> hand) {
         parentHand = hand;
         bestCombo = {};
         bestChild = NULL;
     };
     ~Assembled() = default;
+    Assembled& operator = (Assembled const&) = default;
 
     vector<Cards> parentHand;
     vector<Cards> bestCombo;

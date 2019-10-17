@@ -4,10 +4,6 @@
 
 #include "FiveCrowns.hpp"
 
-FiveCrowns::FiveCrowns() {
-
-}
-
 FiveCrowns::~FiveCrowns() {
     reset();
 }
@@ -31,14 +27,13 @@ void FiveCrowns::start() {
     cout << "Thank you for playing Five Crowns! Hope you enjoyed it!" << endl;
 }
 
-
-
 void FiveCrowns::restart() {
-
+    reset();
+    start();
 }
 
 void FiveCrowns::reset() {
-
+    delete game;
 }
 
 // initializes the round number

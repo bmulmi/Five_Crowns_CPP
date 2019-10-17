@@ -20,12 +20,11 @@
 
 class Game {
 public:
-    Game();
+    Game() = default;
     Game(int roundNumber);
-    ~Game();
+    ~Game() = default;
 
     int toss();
-
     void load(vector<string> info);
     void start();
     void saveGame(string info);

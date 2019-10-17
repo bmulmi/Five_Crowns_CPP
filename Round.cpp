@@ -5,10 +5,6 @@
 #include <iomanip>
 #include "Round.hpp"
 
-Round::Round() {
-
-}
-
 Round::Round(int roundNumber, Player* player[]) {
     this->roundNumber = roundNumber;
     this->player = player;
@@ -150,7 +146,7 @@ void Round::printRoundStatus() {
         cout << "\n";
     }
     cout << setw(10) << "Draw Pile: ";
-    deck->showDrawPile();
+    cout << deck->getDrawPile();
     cout << endl;
     cout << setw(10) << "Discard Pile: " << deck->showDiscardCard().toString() << endl;
     cout << "--------------------------------------------------------------------------------------------------" << endl;
@@ -162,7 +158,7 @@ bool Round::roundEnded() {
     return player[currPlayer]->hasGoneOut();
 }
 
-string Round::getSerializableInfo() {
+const string Round::getSerializableInfo() {
     string serializedText;
     string humanScore, humanHand, computerScore, computerHand;
 

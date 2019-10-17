@@ -12,12 +12,16 @@ using namespace std;
 
 class Human : public Player {
 public:
-    Human();
-    string getType() { return type; }
-    void setType(string type) { this->type = type; }
-    void play();
-    void goOut();
-    void pickCard();
+    Human() = default;
+    ~Human() = default;
+
+    const string getType() override { return type; }
+
+    void setType(string type) override { this->type = type; }
+
+    void play() override;
+    void goOut() override ;
+    void pickCard() override ;
 
 private:
     void getHint();

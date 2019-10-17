@@ -18,7 +18,6 @@ bool Validate::hasSameSuite(vector<Cards> a_hand) {
     return true;
 }
 
-
 // checks if the cards have the potential to be a run
 bool Validate::canBeRun(vector<Cards> a_cards, int &missingCardsCount) {
     for (int i = 0; i < a_cards.size() - 1; i++) {
@@ -107,7 +106,7 @@ bool Validate::isBook(vector<Cards> a_hand) {
     return true;
 }
 
-int Validate::calculateRealScore(vector<Cards> a_hand) {
+int Validate::calculateScore(vector<Cards> a_hand) {
     int score = 0;
 
     Deck* deck = &Deck::getInstanceOfDeck(2);

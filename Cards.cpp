@@ -4,11 +4,6 @@
 
 #include "Cards.hpp"
 
-Cards::Cards() {
-    this->face = "";
-    this->suite = "";
-}
-
 Cards::Cards(string& face, string &suite) {
     this->face = face;
     this->suite = suite;
@@ -22,7 +17,7 @@ bool operator==(const Cards &left, const Cards &right) {
     return (left.face == right.face && left.suite == right.suite);
 }
 
-int Cards::getFaceValue() {
+const int Cards::getFaceValue() {
     string temp = this->face;
 
     if (this->isJoker()) return 50;

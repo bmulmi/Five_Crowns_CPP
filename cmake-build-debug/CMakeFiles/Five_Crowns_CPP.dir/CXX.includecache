@@ -109,6 +109,8 @@ iostream
 -
 algorithm
 -
+string.h
+-
 Cards.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Cards.hpp
 Deck.hpp
@@ -119,8 +121,6 @@ Utilities.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Utilities.hpp
 Assembled.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Assembled.hpp
-string.h
--
 
 /home/bibhash/git_repos/Five_Crowns_CPP/Round.cpp
 iomanip
@@ -136,11 +136,21 @@ Deck.hpp
 Utilities.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Utilities.hpp
 
+/home/bibhash/git_repos/Five_Crowns_CPP/Utilities.cpp
+Utilities.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Utilities.hpp
+
 /home/bibhash/git_repos/Five_Crowns_CPP/Utilities.hpp
 string
 -
 Cards.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Cards.hpp
+
+/home/bibhash/git_repos/Five_Crowns_CPP/Validate.cpp
+Validate.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Validate.hpp
+Deck.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Deck.hpp
 
 /home/bibhash/git_repos/Five_Crowns_CPP/Validate.hpp
 Cards.hpp

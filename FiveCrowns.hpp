@@ -19,7 +19,7 @@ using namespace std;
 
 class FiveCrowns {
 public:
-    FiveCrowns();
+    FiveCrowns() = default;
     ~FiveCrowns();
     void start();
     void reset();

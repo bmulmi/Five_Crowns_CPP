@@ -4,10 +4,6 @@
 
 #include "Computer.hpp"
 
-Computer::Computer() {
-
-}
-
 void Computer::play() {
     int choice;
     do {

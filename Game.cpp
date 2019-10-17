@@ -5,16 +5,8 @@
 #include "Game.hpp"
 using namespace std;
 
-Game::Game() {
-
-}
-
 Game::Game(int roundNumber) {
     this->roundNumber = roundNumber;
-}
-
-Game::~Game() {
-
 }
 
 void Game::start() {

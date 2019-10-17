@@ -12,7 +12,7 @@ Player::Player() {
     hand.clear();
 }
 
-string Player::getHandAsString() {
+const string Player::getHandAsString() {
     string temp = "";
 
     for (auto a_card : this->hand) {
@@ -22,7 +22,7 @@ string Player::getHandAsString() {
     return temp;
 }
 
-string Player::getHandWithIndex() {
+const string Player::getHandWithIndex() {
     string temp = "";
 
     int i = 0;
@@ -34,7 +34,19 @@ string Player::getHandWithIndex() {
     return temp;
 }
 
-int Player::getCardIndex(vector<Cards> a_hand, Cards a_card) {
+const string Player::getAssembledHandAsString() {
+    vector<vector<Cards>> arrangedHand = assemblePossibleHand();
+    string temp;
+    for (auto const& eachHand : arrangedHand) {
+        for (auto eachCard : eachHand) {
+            temp += eachCard.toString() + " ";
+        }
+        temp += " | ";
+    }
+    return temp;
+}
+
+const int Player::getCardIndex(vector<Cards> a_hand, Cards a_card) {
     for (int i = 0; i < a_hand.size(); i++) {
         if (a_hand[i] == a_card) {
             return i;
@@ -44,14 +56,25 @@ int Player::getCardIndex(vector<Cards> a_hand, Cards a_card) {
 }
 
 // returns the score from the current hand where joker is 50 points and wilds are 20 points
-int Player::getHandScore() {
+const int Player::getHandScore() {
     vector<vector<Cards>> possibleCombos = assemblePossibleHand();
 
     // the unaccounted cards are at the back of the assembled hand.
     vector<Cards> scoreHand = possibleCombos.back();
 
-    int currScore = calculateRealScore(scoreHand);
+    int currScore = calculateScore(scoreHand);
     return currScore;
+}
+
+void Player::removeCards(vector<Cards> &a_hand, vector<Cards> cards) {
+    for (auto const &each : cards) {
+        for (int i = 0; i < a_hand.size(); i++) {
+            if (each == a_hand[i]) {
+                a_hand.erase(a_hand.begin() + i);
+                break;
+            }
+        }
+    }
 }
 
 // checks to see if the player can go out or not
@@ -60,8 +83,6 @@ bool Player::canGoOut(vector<Cards> a_hand) {
     int temp = getLowestScore(a_hand, assembledHands);
     return temp == 0;
 }
-
-
 
 string Player::whichPileToChoose() {
     deck = &Deck::getInstanceOfDeck(2);
@@ -101,8 +122,6 @@ string Player::whichPileToChoose() {
         Assembled *curr_assembledHand = new Assembled(temp);
 
         int curr_scr = getLowestScore(temp, curr_assembledHand);
-        // TODO:
-//        if (!curr_assembledHand->bestCombo.empty() && curr_assembledHands.size() > assembledHands.size() && curr_scr < scr) {
 
         if (!curr_assembledHand->bestCombo.empty() && curr_assembledHand->size() > assembledHand->size() && curr_scr < scr) {
             assembledHand = curr_assembledHand;
@@ -170,28 +189,6 @@ vector<vector<Cards>> Player::assemblePossibleHand() {
     return ret;
 }
 
-string Player::getAssembledHandAsString() {
-    vector<vector<Cards>> arrangedHand = assemblePossibleHand();
-    string temp;
-    for (auto const& eachHand : arrangedHand) {
-        for (auto eachCard : eachHand) {
-            temp += eachCard.toString() + " ";
-        }
-        temp += " | ";
-    }
-    return temp;
-}
-
-void Player::removeCards(vector<Cards> &a_hand, vector<Cards> cards) {
-    for (auto const &each : cards) {
-        for (int i = 0; i < a_hand.size(); i++) {
-            if (each == a_hand[i]) {
-                a_hand.erase(a_hand.begin() + i);
-                break;
-            }
-        }
-    }
-}
 
 int Player::getLowestScore(vector<Cards> &a_hand, Assembled *assembled_hands) {
     int minScore = 99999;
@@ -206,7 +203,7 @@ int Player::getLowestScore(vector<Cards> &a_hand, Assembled *assembled_hands) {
         Assembled *temp_assembled = new Assembled(t_hand);
         assembled_hands->bestChild = temp_assembled;
         assembled_hands->bestCombo = a_hand;
-        return calculateRealScore(a_hand);
+        return calculateScore(a_hand);
     }
     // generate child hands of each by removing the parent cards
     else {

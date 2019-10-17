@@ -10,15 +10,16 @@ using namespace std;
 
 class Cards {
 public:
-    Cards();
+    Cards() = default;
     Cards(string& face, string& suit);
     ~Cards() = default;
     friend bool operator==(const Cards &left, const Cards &right);
 
-    string getSuite() { return suite; }
-    string getFace() { return face; }
-    int getFaceValue();
-    string toString() { return face + suite; }
+    const int getFaceValue();
+    const string getSuite() { return suite; }
+    const string getFace() { return face; }
+    const string toString() { return face + suite; }
+
     bool isJoker();
 
 private:

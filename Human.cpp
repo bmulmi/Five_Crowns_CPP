@@ -4,10 +4,6 @@
 
 #include "Human.hpp"
 
-Human::Human() {
-
-}
-
 void Human::play() {
     int choice;
     do {
