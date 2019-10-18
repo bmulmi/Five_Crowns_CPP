@@ -70,7 +70,7 @@ deque<Cards> Deck::createJokers(int num) {
 
 // mixes the discard pile into draw pile and shuffles the deck
 void Deck::shuffleDeck() {
-    unsigned seed = time(NULL);
+    unsigned seed = time(nullptr);
 
     // clear both the piles
     drawPile.clear();

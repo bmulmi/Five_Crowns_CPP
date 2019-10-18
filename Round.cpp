@@ -39,7 +39,10 @@ void Round::start() {
 
     while (!roundEnded()) {
         printRoundStatus();
+        string prev = player[nextPlayer]->getAssembledHandAsString();
         player[nextPlayer]->play();
+        cout << "\nPrevious Hand: " << prev << endl;
+        cout << "Current Hand: " << player[nextPlayer]->getAssembledHandAsString() << endl;
 
         if (player[nextPlayer]->hasQuitGame()) {
             cout << "Quitting the game..." << endl;
