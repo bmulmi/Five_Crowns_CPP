@@ -12,23 +12,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e184658f-d105-4c43-9474-99fbef67297d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/savedGames/Case1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/savedGames/Case2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/savedGames/Case3.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cards.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Cards.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Computer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Computer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Deck.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Deck.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Deck.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Deck.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FiveCrowns.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FiveCrowns.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Human.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Human.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Human.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Human.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Player.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Player.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Round.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Round.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Five_Crowns_CPP.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Five_Crowns_CPP.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Five_Crowns_CPP" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Five_Crowns_CPP" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -48,8 +36,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Computer.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="990">
-                  <caret line="66" column="65" selection-start-line="66" selection-start-column="65" selection-end-line="66" selection-end-column="65" />
+                <state relative-caret-position="-388">
+                  <caret line="14" column="21" lean-forward="true" selection-start-line="14" selection-end-line="15" />
                 </state>
               </provider>
             </entry>
@@ -75,11 +63,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Round.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="977">
-                  <caret line="67" column="76" selection-start-line="67" selection-start-column="76" selection-end-line="67" selection-end-column="76" />
+                <state relative-caret-position="392">
+                  <caret line="229" column="39" selection-start-line="229" selection-start-column="39" selection-end-line="229" selection-end-column="39" />
                   <folding>
                     <element signature="e#41#59#0" expanded="true" />
                   </folding>
@@ -87,11 +75,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/Human.cpp">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Game.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="182">
-                  <caret line="156" column="128" selection-start-line="156" selection-start-column="128" selection-end-line="156" selection-end-column="128" />
+                <state relative-caret-position="62">
+                  <caret line="143" column="46" selection-start-line="143" selection-start-column="46" selection-end-line="143" selection-end-column="46" />
                 </state>
               </provider>
             </entry>
@@ -115,8 +103,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Deck.hpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="135">
-                  <caret line="49" column="37" selection-start-line="49" selection-start-column="37" selection-end-line="49" selection-end-column="37" />
+                <state relative-caret-position="346">
+                  <caret line="54" column="2" lean-forward="true" selection-start-line="54" selection-start-column="2" selection-end-line="54" selection-end-column="2" />
                   <folding>
                     <element signature="e#41#61#0" expanded="true" />
                   </folding>
@@ -234,15 +222,15 @@
         <option value="$PROJECT_DIR$/savedGames/Case2.txt" />
         <option value="$PROJECT_DIR$/savedGames/Case3.txt" />
         <option value="$PROJECT_DIR$/Player.cpp" />
-        <option value="$PROJECT_DIR$/Deck.hpp" />
         <option value="$PROJECT_DIR$/Deck.cpp" />
         <option value="$PROJECT_DIR$/Cards.cpp" />
+        <option value="$PROJECT_DIR$/Human.hpp" />
+        <option value="$PROJECT_DIR$/Computer.cpp" />
         <option value="$PROJECT_DIR$/FiveCrowns.cpp" />
         <option value="$PROJECT_DIR$/Game.cpp" />
         <option value="$PROJECT_DIR$/Round.cpp" />
-        <option value="$PROJECT_DIR$/Human.hpp" />
-        <option value="$PROJECT_DIR$/Computer.cpp" />
         <option value="$PROJECT_DIR$/Human.cpp" />
+        <option value="$PROJECT_DIR$/Deck.hpp" />
       </list>
     </option>
   </component>
@@ -341,12 +329,12 @@
       <workItem from="1571485301589" duration="33000" />
       <workItem from="1571516650749" duration="4939000" />
       <workItem from="1571598762575" duration="123000" />
-      <workItem from="1571598950775" duration="6915000" />
+      <workItem from="1571598950775" duration="10914000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="246521000" />
+    <option name="totallyTimeSpent" value="250520000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -359,17 +347,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="699" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.14090909" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14090909" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="CMake" order="0" weight="0.3268206" />
       <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="Messages" order="2" weight="0.339254" />
+      <window_info anchor="bottom" id="Messages" order="2" weight="0.1793961" />
       <window_info anchor="bottom" id="Find" order="3" weight="0.3285968" />
       <window_info anchor="bottom" id="TODO" order="4" weight="0.328" />
-      <window_info active="true" anchor="bottom" id="Run" order="5" sideWeight="0.4994664" visible="true" weight="0.26820603" />
+      <window_info anchor="bottom" x="0" y="64" width="1366" height="662" id="Run" maximized="true" order="5" sideWeight="0.4994664" type="WINDOWED" visible="true" weight="0.94671404" />
       <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
@@ -388,10 +375,10 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="CMake" order="0" weight="0.3268206" />
       <window_info anchor="bottom" id="Message" order="1" />
-      <window_info active="true" anchor="bottom" id="Messages" order="2" visible="true" weight="0.339254" />
+      <window_info active="true" anchor="bottom" id="Messages" order="2" visible="true" weight="0.1793961" />
       <window_info anchor="bottom" id="Find" order="3" weight="0.3285968" />
       <window_info anchor="bottom" id="TODO" order="4" weight="0.328" />
-      <window_info anchor="bottom" id="Run" order="5" sideWeight="0.4994664" weight="0.23801066" />
+      <window_info anchor="bottom" x="0" y="64" width="1366" height="662" id="Run" maximized="true" order="5" sideWeight="0.4994664" type="WINDOWED" visible="true" weight="0.94671404" />
       <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
@@ -406,27 +393,6 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///usr/include/c++/8/bits/stl_iterator.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="783" selection-start-line="783" selection-end-line="783" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/include/c++/8/bits/allocator.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="33">
-          <caret line="133" selection-start-line="133" selection-end-line="133" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/savedGames/first.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/savedGames/save1.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -657,13 +623,6 @@
     <entry file="file://$PROJECT_DIR$/savedGames/trial1.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/FiveCrowns.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="51" column="40" lean-forward="true" selection-start-line="51" selection-start-column="40" selection-end-line="51" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Cards.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
@@ -675,13 +634,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Game.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1217">
-          <caret line="146" selection-start-line="146" selection-end-line="146" />
         </state>
       </provider>
     </entry>
@@ -715,37 +667,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Computer.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="990">
-          <caret line="66" column="65" selection-start-line="66" selection-start-column="65" selection-end-line="66" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Player.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="720">
           <caret line="48" column="18" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Round.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="977">
-          <caret line="67" column="76" selection-start-line="67" selection-start-column="76" selection-end-line="67" selection-end-column="76" />
-          <folding>
-            <element signature="e#41#59#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Deck.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2235">
-          <caret line="149" selection-start-line="149" selection-end-line="149" />
-          <folding>
-            <element signature="e#41#60#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -759,20 +684,70 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Deck.hpp">
+    <entry file="file://$PROJECT_DIR$/Game.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="49" column="37" selection-start-line="49" selection-start-column="37" selection-end-line="49" selection-end-column="37" />
+        <state relative-caret-position="62">
+          <caret line="143" column="46" selection-start-line="143" selection-start-column="46" selection-end-line="143" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/savedGames/trial2.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/savedGames/trial3.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/savedGames/trial5.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Deck.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2235">
+          <caret line="149" selection-start-line="149" selection-end-line="149" />
           <folding>
-            <element signature="e#41#61#0" expanded="true" />
+            <element signature="e#41#60#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Human.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="156" column="128" selection-start-line="156" selection-start-column="128" selection-end-line="156" selection-end-column="128" />
+        <state relative-caret-position="1725">
+          <caret line="115" column="1" selection-start-line="115" selection-start-column="1" selection-end-line="115" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FiveCrowns.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1050">
+          <caret line="70" column="17" selection-start-line="70" selection-start-column="17" selection-end-line="70" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Computer.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-388">
+          <caret line="14" column="21" lean-forward="true" selection-start-line="14" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Round.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="229" column="39" selection-start-line="229" selection-start-column="39" selection-end-line="229" selection-end-column="39" />
+          <folding>
+            <element signature="e#41#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Deck.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="54" column="2" lean-forward="true" selection-start-line="54" selection-start-column="2" selection-end-line="54" selection-end-column="2" />
+          <folding>
+            <element signature="e#41#61#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

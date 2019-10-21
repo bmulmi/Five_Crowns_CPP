@@ -54,18 +54,18 @@ void Game::start() {
 int Game::toss() {
     char side;
     do {
-        cout << "Time for a toss. Heads or Tails (h/t)? ";
+        cout << ">Time for a toss. Heads or Tails (h/t)? ";
         cin >> side;
     } while (side != 'h' && side != 't');
 
     srand(time(0));
     int winner = rand() % 2;
     if ((winner == 0 && side == 'h') || (winner == 1 && side == 't')) {
-        cout << "Congratulations! You won the toss." << endl;
+        cout << ">Congratulations! You won the toss." << endl;
         return 0;
     }
     else {
-        cout << "Sorry, you lost the toss." << endl;
+        cout << ">Sorry, you lost the toss." << endl;
         return 1;
     }
 }
@@ -76,7 +76,7 @@ void Game::load(vector<string> info) {
     info.pop_back();
 
     // set the next player
-    cout << "Next player: " << nextPlayer << endl;
+    cout << ">Next player: " << nextPlayer << endl;
 
     if (nextPlayer == "human") {
         player[0] = new Human();
@@ -133,7 +133,7 @@ void Game::saveGame(string info) {
     ofstream save;
     string filename;
 
-    cout << "Please enter the name of the file you want to save: ";
+    cout << ">Please enter the name of the file you want to save: ";
     cin.ignore();
     cin >> filename;
     filename += ".txt";
@@ -141,7 +141,7 @@ void Game::saveGame(string info) {
     save.open("/home/bibhash/git_repos/Five_Crowns_CPP/savedGames/"+filename);
 
     if (!save.is_open()) {
-        cout << "Could not use the filename." << endl;
+        cout << ">Could not use the filename." << endl;
         saveGame(info);
     }
 

@@ -32,10 +32,13 @@ void Round::play() {
 }
 
 void Round::start() {
+    // set the player who went out first from last round as the next player
     nextPlayer = player[1]->hasGoneOut() ? 1 : 0;
     currPlayer = nextPlayer;
 
-    player[currPlayer]->setGoneOut(false);
+    // set the goOut for both players to false
+    player[1]->setGoneOut(false);
+    player[0]->setGoneOut(false);
 
     while (!roundEnded()) {
         printRoundStatus();
@@ -45,8 +48,10 @@ void Round::start() {
 
         player[nextPlayer]->play();
 
-        cout << "\nPrevious Hand: " << prev << "Score: " << scr << endl;
-        cout << "Current Hand: " << player[nextPlayer]->getAssembledHandAsString() << player[nextPlayer]-> getHandScore() << "\n" << endl;
+        cout << "Previous Hand: " << prev
+            << "Score: " << scr << endl;
+        cout << "Current Hand: " << player[nextPlayer]->getAssembledHandAsString()
+            << "Score: " << player[nextPlayer]-> getHandScore() << "\n" << endl;
 
         if (player[nextPlayer]->hasQuitGame()) {
             cout << "===== Quitting the game =====" << endl;
@@ -65,7 +70,7 @@ void Round::start() {
         }
     }
 
-    cout << "\n===== Round " << roundNumber << " is Ending. Last Turn! =====" << endl;
+    cout << "\n===== Round " << roundNumber << " is Ending. Last Turn! =====\n" << endl;
     endRound();
 
 }
@@ -203,6 +208,10 @@ void Round::endRound() {
     // next player plays a turn
     printRoundStatus();
     player[nextPlayer]->play();
+
+    // set the goOut of this player to false because it should not matter at this point
+    player[nextPlayer]->setGoneOut(false);
+
     if (player[nextPlayer]->hasSaveGame()) {
         cout << "You cannot save the game now. " << endl;
         player[nextPlayer]->setSaveGame(false);

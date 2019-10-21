@@ -36,7 +36,7 @@ void Human::play() {
         int input;
 
         do {
-            cout << "Do you want to: \n";
+            cout << ">Do you want to: \n";
             cout << "1. Assemble possible hands.\n";
             cout << "2. Go Out.\n";
             cout << "3. Continue playing.\n";
@@ -58,8 +58,8 @@ void Human::play() {
 void Human::pickCard() {
     int choice;
     do {
-        cout    << "From which pile do you want to pick the card? \n" \
-                << "Enter 1 for draw pile, 2 for discard pile, -1 to get Help. "<< endl;
+        cout    << ">From which pile do you want to pick the card? \n" \
+                << "1. Draw pile\n2. Discard pile\n( Enter -1 to get hint )"<< endl;
         cin >> choice;
 
         if (choice == -1) {
@@ -85,9 +85,9 @@ void Human::pickCard() {
 
     do {
         cin.ignore();
-        cout    << "Which card do you want to discard? \n" \
+        cout    << ">Which card do you want to discard? \n" \
                 << getHandAsString() << "\n" \
-                << "Enter the card to discard OR Enter -1 to get hint. " << endl;
+                << ">Enter the card to discard OR Enter -1 to get hint. " << endl;
         cin >> input;
 
         discardingCard = Utils::toCards(input);
@@ -115,14 +115,14 @@ void Human::goOut() {
     cout << "^*^*^*^*^\nHuman has gone out\n^*^*^*^*^" << endl;
 }
 
-
 void Human::getHint() {
     int choice;
     do {
+        cout << "Hints:\n";
         cout << "1. Whether to draw from draw pile or discard pile.\n";
         cout << "2. How to assemble books and runs with the current hand.\n";
-        cout << "3. Whether to go out or not.\n" << endl;
-        cout << "Please enter the Hint # you would like: ";
+        cout << "3. Whether to go out or not." << endl;
+        cout << ">Please enter the Hint # you would like: ";
         cin >> choice;
     } while (choice < 0 || choice > 3);
 

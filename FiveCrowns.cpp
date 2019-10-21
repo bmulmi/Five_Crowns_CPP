@@ -12,7 +12,7 @@ void FiveCrowns::start() {
     cout << "Welcome to Five Crowns!" << endl;
     char load;
     do {
-        cout << "Do you want to load game? (y/n) ";
+        cout << ">Do you want to load game? (y/n) ";
         cin >> load;
     } while(load != 'y' && load != 'n');
 
@@ -27,7 +27,7 @@ void FiveCrowns::start() {
     char re_start;
     do {
         cin.ignore();
-        cout << "Do you want to restart the game? (y/n) ";
+        cout << ">Do you want to restart the game? (y/n) ";
         cin >> re_start;
     } while (re_start != 'y' && re_start != 'n');
 
@@ -61,13 +61,14 @@ void FiveCrowns::loadGame() {
 
     string filename;
     cin.ignore();
-    cout << "What is the name of the saved file? ";
+    cout << ">What is the name of the saved file? ";
     cin >> filename;
     filename.append(".txt");
     file += filename;
     save.open(file);
 
     if (!save.is_open()) {
+        cout << "File Not Found!" << endl;
         loadGame();
     }
 
