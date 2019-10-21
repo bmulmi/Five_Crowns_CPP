@@ -12,20 +12,20 @@ Game::Game(int roundNumber) {
 void Game::start() {
     int nextPlayer = toss();
     if (nextPlayer == 0) {
-//        player[0] = new Human();
-//        player[0]->setType("Human");
-        player[0] = new Computer();
-        player[0]->setType("Computer 2");
+        player[0] = new Human();
+        player[0]->setType("Human");
+//        player[0] = new Computer();
+//        player[0]->setType("Computer 2");
         player[1] = new Computer();
         player[1]->setType("Computer");
     }
     else {
         player[0] = new Computer();
         player[0]->setType("Computer");
-//        player[1] = new Human();
-//        player[1]->setType("Human");
-        player[1] = new Computer();
-        player[1]->setType("Computer 2");
+        player[1] = new Human();
+        player[1]->setType("Human");
+//        player[1] = new Computer();
+//        player[1]->setType("Computer 2");
     }
     cout << "Now, Lets get started!" << endl;
 
@@ -139,6 +139,12 @@ void Game::saveGame(string info) {
     filename += ".txt";
 
     save.open("/home/bibhash/git_repos/Five_Crowns_CPP/savedGames/"+filename);
+
+    if (!save.is_open()) {
+        cout << "Could not use the filename." << endl;
+        saveGame(info);
+    }
+
     save << info;
     save.close();
 }

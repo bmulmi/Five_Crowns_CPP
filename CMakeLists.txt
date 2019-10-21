@@ -20,4 +20,10 @@ add_executable(
         Game.cpp
         FiveCrowns.hpp
         FiveCrowns.cpp
-        Round.cpp Round.hpp Utilities.cpp Utilities.hpp Validate.cpp Validate.hpp Assembled.hpp)
+        Round.cpp
+        Round.hpp
+        Utilities.cpp
+        Utilities.hpp
+        Validate.cpp
+        Validate.hpp
+        Assembled.hpp)

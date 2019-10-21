@@ -25,6 +25,9 @@ public:
 
 private:
     void getHint();
+    void printChosenPile(string const &a_pile);
+    void printAssembledHand(vector<vector<Cards>> const &a_arranged);
+    void printCanGoOut();
 };
 
 

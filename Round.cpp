@@ -39,13 +39,17 @@ void Round::start() {
 
     while (!roundEnded()) {
         printRoundStatus();
+
         string prev = player[nextPlayer]->getAssembledHandAsString();
+        int scr = player[nextPlayer]-> getHandScore();
+
         player[nextPlayer]->play();
-        cout << "\nPrevious Hand: " << prev << endl;
-        cout << "Current Hand: " << player[nextPlayer]->getAssembledHandAsString() << endl;
+
+        cout << "\nPrevious Hand: " << prev << "Score: " << scr << endl;
+        cout << "Current Hand: " << player[nextPlayer]->getAssembledHandAsString() << player[nextPlayer]-> getHandScore() << "\n" << endl;
 
         if (player[nextPlayer]->hasQuitGame()) {
-            cout << "Quitting the game..." << endl;
+            cout << "===== Quitting the game =====" << endl;
             exit (1);
         }
 
@@ -61,8 +65,9 @@ void Round::start() {
         }
     }
 
-    cout << "ROUND " << roundNumber <<" ENDED!" << endl;
+    cout << "\n===== Round " << roundNumber << " is Ending. Last Turn! =====" << endl;
     endRound();
+
 }
 
 void Round::load(vector<string> info) {
@@ -139,7 +144,7 @@ void Round::distributeCards() {
 }
 
 void Round::printRoundStatus() {
-    cout << "--------------------------------------------------------------------------------------------------" << endl;
+    cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
     cout << left << setw(10) << "Round Number: " << roundNumber << endl;
     cout << "\n";
     for (int i = 0; i < totalNumPlayers; i++) {
@@ -152,8 +157,7 @@ void Round::printRoundStatus() {
     cout << deck->getDrawPile();
     cout << endl;
     cout << setw(10) << "Discard Pile: " << deck->showDiscardCard().toString() << endl;
-    cout << "--------------------------------------------------------------------------------------------------" << endl;
-
+    cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
 }
 
 //checks to see if the previous player can go out or not.
@@ -196,6 +200,20 @@ const string Round::getSerializableInfo() {
 }
 
 void Round::endRound() {
+    // next player plays a turn
+    printRoundStatus();
+    player[nextPlayer]->play();
+    if (player[nextPlayer]->hasSaveGame()) {
+        cout << "You cannot save the game now. " << endl;
+        player[nextPlayer]->setSaveGame(false);
+        endRound();
+    }
+    if (player[nextPlayer]->hasQuitGame()) {
+        cout << "==== Quitting the game ====" << endl;
+        exit (1);
+    }
+
+    // now end the round
     cout << "*************************************************************************\n";
     cout << "* " << player[currPlayer]->getType() << ":\n";
     cout << "* Hand: " << player[currPlayer]->getAssembledHandAsString();

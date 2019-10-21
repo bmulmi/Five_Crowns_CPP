@@ -22,7 +22,8 @@ const int Cards::getFaceValue() {
 
     if (this->isJoker()) return 50;
 
-    if (temp == "J") return 11;
+    if (temp=="X") return 10;
+    else if (temp == "J") return 11;
     else if (temp == "Q") return 12;
     else if (temp == "K") return 13;
     else return stoi(temp);

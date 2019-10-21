@@ -11,8 +11,8 @@ void Computer::play() {
         cout    << "1. Save the game.\n" \
                 << "2. Make a move.\n" \
                 << "3. Quit the game." << endl;
-//        cin >> choice;
-        choice = 2;
+        cin >> choice;
+//        choice = 2;
     } while (choice  > 4 || choice < 0);
 
     if (choice == 1) {
@@ -34,7 +34,7 @@ void Computer::play() {
 }
 
 void Computer::pickCard() {
-    cout << getType() << endl;
+    cout << getType() << " is playing."<< endl;
     deck = &Deck::getInstanceOfDeck(2);
 
     // choose a pile
@@ -42,20 +42,20 @@ void Computer::pickCard() {
 
     // pick from the pile
     Cards cardPicked;
+    cout << "\n=-=-=-=\n" << getType() << " chose ";
     if (chosenPile == "discard") {
-        cout << "@@@@ Computer chose " << chosenPile << " pile because it helped in making a run or a book. @@@@\n";
+        cout << chosenPile << " pile because it helped in making a run or a book.\n=-=-=-=\n";
         cardPicked = deck->drawDiscardCard();
     }
     else {
-        cout << "@@@@ Computer chose " << chosenPile
-        << " pile to pick the card because discard pile card does not help in making a complete run or a complete book. @@@@\n";
+        cout << chosenPile << " pile to pick the card because discard pile card did not help in making more numbers of complete runs or complete books.\n=-=-=-=\n";
         cardPicked = deck->drawCard();
     }
     this->hand.push_back(cardPicked);
 
     // choose card to discard
     int discardIndex = whichCardToDiscard();
-    cout << "@@@@ Computer discarded " << hand[discardIndex].toString() << " card because it made the score lower. @@@@\n" << endl;
+    cout << "\n=-=-=-=\n" << getType() << " discarded " << hand[discardIndex].toString() << " card because it made the score lower.\n=-=-=-=\n" << endl;
 
     // discard the card
     deck->discard(hand[discardIndex]);
@@ -64,5 +64,5 @@ void Computer::pickCard() {
 
 void Computer::goOut() {
     this->goneOut = true;
-    cout << "@@@@ " << this->getType() << " has gone out. @@@@" << endl;
+    cout << "^*^*^*^*^\n" << this->getType() << " has gone out.\n^*^*^*^*^" << endl;
 }

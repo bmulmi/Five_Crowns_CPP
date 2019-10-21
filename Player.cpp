@@ -57,6 +57,10 @@ const int Player::getCardIndex(vector<Cards> a_hand, Cards a_card) {
 
 // returns the score from the current hand where joker is 50 points and wilds are 20 points
 const int Player::getHandScore() {
+    if (canGoOut(hand)) {
+        return 0;
+    }
+
     vector<vector<Cards>> possibleCombos = assemblePossibleHand();
 
     // the unaccounted cards are at the back of the assembled hand.
@@ -186,6 +190,25 @@ vector<vector<Cards>> Player::assemblePossibleHand() {
         temp = assembledHand->bestCombo;
     }
 
+    bool isSpecial = true;
+    vector<Cards> lastCombo = ret.back();
+    deck = &Deck::getInstanceOfDeck(2);
+    // check whether the last combo contains all jokers or wild cards
+    for (auto each : lastCombo) {
+        if (!each.isJoker() && each.getFace() != deck->getWildCardFace()) {
+            isSpecial = false;
+        }
+    }
+
+    if (isSpecial) {
+        // the last combo contains special cards only
+        // remove the combo
+        ret.pop_back();
+        for (auto const &each : lastCombo) {
+            ret.back().push_back(each);
+        }
+    }
+
     return ret;
 }
 
@@ -230,8 +253,6 @@ int Player::getLowestScore(vector<Cards> &a_hand, Assembled *assembled_hands) {
         }
 
     }
-    // push the best combination of this depth into the assembled hands vector
-//    assembled_hands.push_back(bestCombo);
 
     return minScore;
 }

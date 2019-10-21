@@ -41,28 +41,16 @@ void Human::play() {
             cout << "2. Go Out.\n";
             cout << "3. Continue playing.\n";
             cin >> input;
-        } while(input < 1 || input > 3);
 
-        if (input == 1) {
-            vector<vector<Cards>> arrangedHand = assemblePossibleHand();
-            cout << "++++ You can arrange your hand as: ++++\n";
-            for (auto const& eachHand : arrangedHand) {
-                for (auto eachCard : eachHand) {
-                    cout << eachCard.toString() << " ";
-                }
-                cout << " | ";
+            if (input == 1) {
+                vector<vector<Cards>> arrangedHand = assemblePossibleHand();
+                printAssembledHand(arrangedHand);
             }
-            cout << "\n" << endl;
-        }
+
+        } while(input == 1 || input < 0 || input > 3);
 
         if (input == 2) {
-            if (canGoOut(hand)) {
-                cout << "++++ You may go out. ++++\n" << endl;
-                goOut();
-            }
-            else {
-                cout << "++++ You cannot go out. There are still unaccounted cards in your hand! ++++\n" << endl;
-            }
+            printCanGoOut();
         }
     }
 }
@@ -71,14 +59,13 @@ void Human::pickCard() {
     int choice;
     do {
         cout    << "From which pile do you want to pick the card? \n" \
-                << "Enter 1 for draw pile, 2 for discard pile, 3 to get Help. "<< endl;
+                << "Enter 1 for draw pile, 2 for discard pile, -1 to get Help. "<< endl;
         cin >> choice;
 
-        if (choice == 3) {
+        if (choice == -1) {
             string pile = whichPileToChoose();
-            cout << "++++ HINT: You should pick from the " << pile << " pile. ++++" << endl;
+            printChosenPile(pile);
         }
-
     } while (choice != 1 && choice != 2);
 
     deck = &Deck::getInstanceOfDeck(2);
@@ -99,7 +86,7 @@ void Human::pickCard() {
     do {
         cin.ignore();
         cout    << "Which card do you want to discard? \n" \
-                << getHandWithIndex() << "\n" \
+                << getHandAsString() << "\n" \
                 << "Enter the card to discard OR Enter -1 to get hint. " << endl;
         cin >> input;
 
@@ -108,16 +95,16 @@ void Human::pickCard() {
         if (input == "-1") {
             int whichCard = whichCardToDiscard();
             if (whichCard == -999) {
-                cout << "++++ You need at least four cards in your hand to discard a card ++++" << endl;
+                cout << "++++\nYou need at least four cards in your hand to discard a card \n++++" << endl;
             }
             else {
-                cout << "++++ HINT: You should discard " << hand[whichCard].toString() << " because it will help you get a lower score. ++++" << endl;
+                cout << "++++\nHINT: You should discard " << hand[whichCard].toString() << " because it will help you get a lower score. \n++++" << endl;
             }
         }
 
         cardIndex = getCardIndex(hand, discardingCard);
 
-    } while (cardIndex < 0 || cardIndex > hand.size());
+    } while (cardIndex < 0);
 
     deck->discard(hand[cardIndex]);
     removeFromHand(cardIndex);
@@ -125,66 +112,70 @@ void Human::pickCard() {
 
 void Human::goOut() {
     this->goneOut = true;
-    cout << "**** Human has gone out. ****" << endl;
+    cout << "^*^*^*^*^\nHuman has gone out\n^*^*^*^*^" << endl;
 }
+
 
 void Human::getHint() {
     int choice;
-    cout << "1. Whether to draw from draw pile or discard pile.\n";
-    cout << "2. How to assemble books and runs with the current hand.\n";
-    cout << "3. Whether to go out or not.\n" << endl;
-    cout << "Please enter the Hint # you would like: ";
     do {
+        cout << "1. Whether to draw from draw pile or discard pile.\n";
+        cout << "2. How to assemble books and runs with the current hand.\n";
+        cout << "3. Whether to go out or not.\n" << endl;
+        cout << "Please enter the Hint # you would like: ";
         cin >> choice;
     } while (choice < 0 || choice > 3);
 
     switch (choice) {
         case 1: {
             string pile = whichPileToChoose();
-            cout << "++++ You should pick from the " << pile << " pile. ++++" << endl;
+            printChosenPile(pile);
             break;
-        }
-
-        case 5: {
-            int whichCard = whichCardToDiscard();
-            if (whichCard == -999) {
-                cout << "++++ You need at least four cards in your hand to discard a card ++++" << endl;
-                break;
-            }
-            else {
-                cout << "++++ You should discard " << hand[whichCard].toString() << " because it will help you get a lower score. ++++" << endl;
-                break;
-            }
         }
 
         case 2: {
             vector<vector<Cards>> arrangedHand = assemblePossibleHand();
-            if (arrangedHand.front().empty()) {
-                cout << "++++ There is no arrangement possible ++++\n" << endl;
-            }
-            else {
-                cout << "++++ You can arrange your hand as: ++++\n";
-                for (auto const& eachHand : arrangedHand) {
-                    for (auto eachCard : eachHand) {
-                        cout << eachCard.toString() << " ";
-                    }
-                    cout << " | ";
-                }
-                cout << "\n" << endl;
-            }
+            printAssembledHand(arrangedHand);
             break;
         }
 
         case 3:
-            if (canGoOut(hand)) {
-                cout << "++++ You may go out. ++++" << endl;
-            }
-            else {
-                cout << "++++ You cannot go out. ++++" << endl;
-            }
+            printCanGoOut();
             break;
 
         default:
             break;
+    }
+}
+
+void Human::printChosenPile(string const &a_pile) {
+    cout << "++++\nHINT: You should pick from the " << a_pile << " pile because";
+    if (a_pile == "discard") {
+        cout << " discard pile card helps you to make more runs or books and decrease your hand score. \n++++" << endl;
+    }
+    else {
+        cout << " discard pile card does not help you to make any more runs or books. Draw pile might have a better card. \n++++" << endl;
+    }
+}
+
+void Human::printAssembledHand(vector<vector<Cards>> const &a_arranged) {
+    cout << "++++\nYou can arrange your hand as\n++++\n";
+    for (auto const& eachHand : a_arranged) {
+        for (auto eachCard : eachHand) {
+            cout << eachCard.toString() << " ";
+        }
+        cout << " | ";
+    }
+    cout << " Hand Score: " << getHandScore();
+    cout << "\n" << endl;
+}
+
+void Human::printCanGoOut() {
+    if (canGoOut(hand)) {
+        cout << "++++\nYou may go out.\n++++\n" << endl;
+        goOut();
+    }
+    else {
+        cout << "++++\nYou cannot go out. There are still unaccounted cards in your hand! \n++++\n" << endl;
     }
 }

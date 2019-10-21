@@ -47,7 +47,7 @@ deque<Cards> Deck::arrangeDeck(int numDecks) {
     for (int i = 0; i < numDecks; i++) {
         deque<Cards> secondaryDeck = createDeck();
         // push each card into the initial deck
-        for (auto a_card : secondaryDeck) {
+        for (auto const &a_card : secondaryDeck) {
             initialDeck.push_back(a_card);
         }
     }
@@ -70,7 +70,8 @@ deque<Cards> Deck::createJokers(int num) {
 
 // mixes the discard pile into draw pile and shuffles the deck
 void Deck::shuffleDeck() {
-    unsigned seed = time(nullptr);
+    // initialize the seed
+    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
 
     // clear both the piles
     drawPile.clear();
@@ -111,7 +112,7 @@ Cards Deck::drawDiscardCard() {
 string Deck::getDiscardPile() {
     string temp;
 
-    for (auto each : this->discardPile) {
+    for (auto each : discardPile) {
         temp += each.toString() + " ";
     }
 
@@ -121,7 +122,7 @@ string Deck::getDiscardPile() {
 string Deck::getDrawPile() {
     string temp;
 
-    for (auto each : this->drawPile) {
+    for (auto each : drawPile) {
         temp += each.toString() + " ";
     }
 
@@ -129,20 +130,24 @@ string Deck::getDrawPile() {
 }
 
 void Deck::setDiscardPile(deque<Cards> cards) {
-    this->discardPile.clear();
-    this->discardPile = cards;
+    discardPile.clear();
+    discardPile = cards;
 }
 
 void Deck::setDrawPile(deque<Cards> cards) {
-    this->drawPile.clear();
-    this->drawPile = cards;
+    drawPile.clear();
+    drawPile = cards;
 }
 
 void Deck::setWildCard(int faceValue) {
     int tempFace = faceValue;
 
-    if (tempFace > 10) {
+    if (tempFace > 9) {
         switch (tempFace) {
+            case 10:
+                this->wildCardFace = "X";
+                break;
+
             case 11:
                 this->wildCardFace = "J";
                 break;

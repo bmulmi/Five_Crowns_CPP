@@ -6,7 +6,7 @@
 #include <vector>
 #include <queue>
 #include <iostream>
-#include <time.h>
+#include <chrono>
 
 #ifndef FIVE_CROWNS_CPP_DECK_HPP
 #define FIVE_CROWNS_CPP_DECK_HPP
@@ -47,7 +47,7 @@ private:
     int const numberOfJokers = 3;
     string const suite [5] = {"S", "C", "D", "H", "T"};
     string const face [11] = {"3", "4", "5", "6", "7", "8",
-                              "9", "10", "J", "Q", "K"};
+                              "9", "X", "J", "Q", "K"};
 
     deque<Cards> createJokers(int num);
     deque<Cards> createDeck();
