@@ -1,6 +1,14 @@
-//
+/*
+ ************************************************************
+ * Name: Bibhash Mulmi                                      *
+ * Project: P1 Five Crowns CPP                              *
+ * Class: OPL Fall 19                                       *
+ * Date: 10/23/2019                                         *
+ ************************************************************
+*/
+
 // Created by bibhash on 9/11/19.
-//
+
 
 #ifndef FIVE_CROWNS_CPP_FIVECROWNS_HPP
 #define FIVE_CROWNS_CPP_FIVECROWNS_HPP

@@ -1,9 +1,29 @@
-//
+/*
+ ************************************************************
+ * Name: Bibhash Mulmi                                      *
+ * Project: P1 Five Crowns CPP                              *
+ * Class: OPL Fall 19                                       *
+ * Date: 10/23/2019                                         *
+ ************************************************************
+*/
+
 // Created by bibhash on 9/11/19.
-//
+
 
 #include "Human.hpp"
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void Human::play() {
     int choice;
     do {
@@ -34,10 +54,9 @@ void Human::play() {
         pickCard();
 
         int input;
-
         do {
             cout << ">Do you want to: \n";
-            cout << "1. Assemble possible hands.\n";
+            cout << "1. See possible assembled hand.\n";
             cout << "2. Go Out.\n";
             cout << "3. Continue playing.\n";
             cin >> input;
@@ -55,8 +74,22 @@ void Human::play() {
     }
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void Human::pickCard() {
+    // ----- pick a card -----
     int choice;
+
     do {
         cout    << ">From which pile do you want to pick the card? \n" \
                 << "1. Draw pile\n2. Discard pile\n( Enter -1 to get hint )"<< endl;
@@ -79,6 +112,7 @@ void Human::pickCard() {
 
     this->hand.push_back(cardPicked);
 
+    // ----- discard a card -----
     string input;
     Cards discardingCard;
     int cardIndex;
@@ -110,11 +144,35 @@ void Human::pickCard() {
     removeFromHand(cardIndex);
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void Human::goOut() {
     this->goneOut = true;
     cout << "^*^*^*^*^\nHuman has gone out\n^*^*^*^*^" << endl;
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void Human::getHint() {
     int choice;
     do {
@@ -148,6 +206,18 @@ void Human::getHint() {
     }
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void Human::printChosenPile(string const &a_pile) {
     cout << "++++\nHINT: You should pick from the " << a_pile << " pile because";
     if (a_pile == "discard") {
@@ -158,6 +228,18 @@ void Human::printChosenPile(string const &a_pile) {
     }
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void Human::printAssembledHand(vector<vector<Cards>> const &a_arranged) {
     cout << "++++\nYou can arrange your hand as\n++++\n";
     for (auto const& eachHand : a_arranged) {
@@ -170,6 +252,18 @@ void Human::printAssembledHand(vector<vector<Cards>> const &a_arranged) {
     cout << "\n" << endl;
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void Human::printCanGoOut() {
     if (canGoOut(hand)) {
         cout << "++++\nYou may go out.\n++++\n" << endl;

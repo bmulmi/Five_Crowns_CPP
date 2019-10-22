@@ -6,6 +6,7 @@
 - createDeck() function and createJoker function added.
 - worked on client side code. Initialized players here. But need to move this to game class.
 - the toss function also needs to be in game class.
+Total: 2.5 hours
 
 9/12/2019
 - created shuffleDeck() function using shuffle function from <bits/stdc++.h> library.
@@ -14,6 +15,7 @@
 - added start, load, and play function in round class.
 - added getCards(int num) in Deck class to distribute cards for player hands.
 - added printRoundStatus() prints the status of the round.
+Total: 2 hours
 
 9/14/2019
 - in load() of game string comparision for next player not working.
@@ -21,6 +23,7 @@
 - added play() function to the player class. coded for human. Displays menu and calls necessary functions.
 - added goOut() and pickCard() functions to the player class.
 - found out the reason for not loading the game. The values have a space in the beginning. so used str.erase() for that.
+Total: 3 hours
 
 9/18/2019
 - found a bug in load() function. the hands and deck were not loading correctly.
@@ -33,16 +36,20 @@ returns them.
 - added sortCards() function that sorts the Cards in ascending order
 - added swapCards() function that swaps two cards.
 - refactored previousPlayer to currPlayer to keep track of current player. MUST CHECK THIS!
+Total: 4.5 hours
 
 9/19/2019
 - put the currPlayer assignment within the else statement right before nextPlayer is changed.
+Total: 0.5 hours
 
 9/21/2019
 - added save game function in round and game
 - saveGame does not show score.
+Total: 0.5 hours
 
 9/22/2019
 - save game works correctly now.
+Total: 1 hour
 
 9/26/2019
 - added extractWildCardsSameSuite and extractWildCardsDiffSuite functions
@@ -51,6 +58,7 @@ returns them.
 - permutations of the card added
 - added a function that returns combination indices of the vector of cards for checking
 - ERROR: cannot access memory at location! discard pile first card's face
+Total: 4 hours
 
 9/29/2019
 - made deck a protected member of the player class to solve the copy issue of deck instance
@@ -68,6 +76,7 @@ returns them.
 - calculate score now calculates wildCards and Jokers as 0 point
 - added endRound that prints out end of round hands and scores earned
 - TODO: check the whichPileToChoose edge case (JS 7H 3H) with discardCard 8H. must choose 8H discard JS.
+Total: 7 hours
 
 9/30/2019
 - fixed save game next player issue. Now the player if he had not made a move plays next.
@@ -76,6 +85,7 @@ returns them.
 - bug in whichCardToDiscard - was getCombinationIndices of currHand.size() where it should have been temp.size()
 - added more combinations in getLowestScoreHand because the canGoOut indices do not give combinations for one or two card combos
 - need to look into getlowestscorehand function once again
+Total: 5 hours
 
 10/13/2019
 - changed the discarding function for human while dropping a card
@@ -83,11 +93,15 @@ returns them.
     added getCardIndex() in Player
 - added getBooksAndRuns() function to the player class that returns a vector of all the possible books and runs from the hand
 - deleted code from isRun and isBook
+Total: 2.5 hours
+
+10/14/2019
 - added combineAndCheck, combineTwoAndCheck functions
 - added getSameSuiteHands that returns a vector of vector of hands with same suites
 - added getBooksOrRuns() as a helper function for getBooksAndRuns()
 - error in removeCards() - returns first card with empty face value
 - the recursive function works
+Total: 4 hours
 
 10/16/2019
 - tweaked the whichPileToChoose function. Now the strategy chooses the discard card when
@@ -98,4 +112,14 @@ returns them.
 - the game is now complete.
 - BUG: Assembled Hand shows wild cards as a separate combination!
 - cleaned the code
+Total: 2 hours
 
+10/20/2019
+- cleaned the code
+- Fixed Card number 10. Changed it to X.
+Total: 1 hour
+
+10/21/2019
+- when a player goes out, a turn is played and then the round is ended.
+- fixed endRound issues.
+Total: 1.5 hours

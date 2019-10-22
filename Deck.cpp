@@ -1,6 +1,14 @@
-//
+/*
+ ************************************************************
+ * Name: Bibhash Mulmi                                      *
+ * Project: P1 Five Crowns CPP                              *
+ * Class: OPL Fall 19                                       *
+ * Date: 10/23/2019                                         *
+ ************************************************************
+*/
+
 // Created by bibhash on 9/10/19.
-//
+
 
 #include "Deck.hpp"
 #include <bits/stdc++.h>
@@ -10,12 +18,36 @@ Deck* Deck::deck = NULL;
 deque<Cards> Deck::drawPile;
 deque<Cards> Deck::discardPile;
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 Deck::Deck(int numDecks) {
-    // create an initial deck
+    // create an initial deck of size numDecks
     deque<Cards> initialDeck = arrangeDeck(numDecks);
     drawPile = initialDeck;
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 Deck& Deck::getInstanceOfDeck(int num) {
     if (deck == nullptr){
         deck = new Deck(num);
@@ -23,6 +55,19 @@ Deck& Deck::getInstanceOfDeck(int num) {
     return *deck;
 }
 
+
+/**********************************************************************
+ * Function Name: 
+ * Purpose: 
+ * Parameters:
+ *              
+ * Return Value: 
+ * Local Variables:
+ *              
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 // creates one deck of cards with Jokers
 deque<Cards> Deck::createDeck() {
     deque<Cards> temp;
@@ -40,6 +85,18 @@ deque<Cards> Deck::createDeck() {
     return temp;
 }
 
+/**********************************************************************
+ * Function Name: 
+ * Purpose: 
+ * Parameters:
+ *              
+ * Return Value: 
+ * Local Variables:
+ *              
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 // arranges the number of decks into one deck
 deque<Cards> Deck::arrangeDeck(int numDecks) {
     deque<Cards> initialDeck;
@@ -55,6 +112,18 @@ deque<Cards> Deck::arrangeDeck(int numDecks) {
     return initialDeck;
 }
 
+/**********************************************************************
+ * Function Name: 
+ * Purpose: 
+ * Parameters:
+ *              
+ * Return Value: 
+ * Local Variables:
+ *              
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 // creates a deque of Jokers
 deque<Cards> Deck::createJokers(int num) {
     deque<Cards> temp;
@@ -68,6 +137,18 @@ deque<Cards> Deck::createJokers(int num) {
     return temp;
 }
 
+/**********************************************************************
+ * Function Name: 
+ * Purpose: 
+ * Parameters:
+ *              
+ * Return Value: 
+ * Local Variables:
+ *              
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 // mixes the discard pile into draw pile and shuffles the deck
 void Deck::shuffleDeck() {
     // initialize the seed
@@ -84,6 +165,18 @@ void Deck::shuffleDeck() {
     shuffle(drawPile.begin(), drawPile.end(), default_random_engine(seed));
 }
 
+/**********************************************************************
+ * Function Name: 
+ * Purpose: 
+ * Parameters:
+ *              
+ * Return Value: 
+ * Local Variables:
+ *              
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 // returns top card of the draw pile and pops it from the pile
 Cards Deck::drawCard() {
     Cards temp = drawPile.front();
@@ -91,17 +184,52 @@ Cards Deck::drawCard() {
     return temp;
 }
 
+/**********************************************************************
+ * Function Name: 
+ * Purpose: 
+ * Parameters:
+ *              
+ * Return Value: 
+ * Local Variables:
+ *              
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 // pushes card into top of discard pile
 void Deck::discard(Cards a_card) {
     this->discardPile.push_front(a_card);
 }
 
+/**********************************************************************
+ * Function Name: 
+ * Purpose: 
+ * Parameters:
+ *              
+ * Return Value: 
+ * Local Variables:
+ *              
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 // returns top card of the discard pile
 Cards Deck::showDiscardCard() {
-//    cout << "Discard Card returning: " << this->discardPile.front().toString();
     return discardPile.front();
 }
 
+/**********************************************************************
+ * Function Name: 
+ * Purpose: 
+ * Parameters:
+ *              
+ * Return Value: 
+ * Local Variables:
+ *              
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 // returns top card of the discard pile and pops it from the pile
 Cards Deck::drawDiscardCard() {
     Cards temp = discardPile.front();
@@ -109,6 +237,18 @@ Cards Deck::drawDiscardCard() {
     return temp;
 }
 
+/**********************************************************************
+ * Function Name: 
+ * Purpose: 
+ * Parameters:
+ *              
+ * Return Value: 
+ * Local Variables:
+ *              
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 string Deck::getDiscardPile() {
     string temp;
 
@@ -119,6 +259,18 @@ string Deck::getDiscardPile() {
     return temp;
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 string Deck::getDrawPile() {
     string temp;
 
@@ -129,16 +281,52 @@ string Deck::getDrawPile() {
     return temp;
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void Deck::setDiscardPile(deque<Cards> cards) {
     discardPile.clear();
     discardPile = cards;
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void Deck::setDrawPile(deque<Cards> cards) {
     drawPile.clear();
     drawPile = cards;
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void Deck::setWildCard(int faceValue) {
     int tempFace = faceValue;
 

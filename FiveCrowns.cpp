@@ -1,13 +1,29 @@
-//
+/*
+ ************************************************************
+ * Name: Bibhash Mulmi                                      *
+ * Project: P1 Five Crowns CPP                              *
+ * Class: OPL Fall 19                                       *
+ * Date: 10/23/2019                                         *
+ ************************************************************
+*/
+
 // Created by bibhash on 9/11/19.
-//
 
 #include "FiveCrowns.hpp"
 
-FiveCrowns::~FiveCrowns() {
-    reset();
-}
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void FiveCrowns::start() {
     cout << "Welcome to Five Crowns!" << endl;
     char load;
@@ -38,26 +54,22 @@ void FiveCrowns::start() {
     cout << "===== Thank you for playing Five Crowns! Hope you enjoyed it! =====" << endl;
 }
 
-void FiveCrowns::restart() {
-    reset();
-    start();
-}
-
-void FiveCrowns::reset() {
-    delete game;
-}
-
-// initializes the round number
-// next player: 0 for human, 1 for computer
-void FiveCrowns::init(int roundNumber) {
-    game = new Game(roundNumber);
-}
-
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void FiveCrowns::loadGame() {
     string file = "/home/bibhash/git_repos/Five_Crowns_CPP/savedGames/";
 
     ifstream save;
-
 
     string filename;
     cin.ignore();
@@ -74,7 +86,7 @@ void FiveCrowns::loadGame() {
 
     string line;
 
-    // get the round number
+    // get the round number and store it
     getline(save, line);
     int roundNumber = stoi(Utils::getValue(line));
 
@@ -87,9 +99,61 @@ void FiveCrowns::loadGame() {
         }
     }
 
-    // initialize the game with the round number
     init(roundNumber);
 
-    // load the game
     game->load(roundStats);
+}
+
+FiveCrowns::~FiveCrowns() {
+    reset();
+}
+
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
+void FiveCrowns::restart() {
+    reset();
+    start();
+}
+
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
+void FiveCrowns::reset() {
+    delete game;
+}
+
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
+// initializes the round number
+void FiveCrowns::init(int roundNumber) {
+    game = new Game(roundNumber);
 }

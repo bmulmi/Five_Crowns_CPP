@@ -1,31 +1,50 @@
-//
+/*
+ ************************************************************
+ * Name: Bibhash Mulmi                                      *
+ * Project: P1 Five Crowns CPP                              *
+ * Class: OPL Fall 19                                       *
+ * Date: 10/23/2019                                         *
+ ************************************************************
+*/
+
 // Created by bibhash on 9/11/19.
-//
+
 
 #include "Game.hpp"
-using namespace std;
 
 Game::Game(int roundNumber) {
     this->roundNumber = roundNumber;
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void Game::start() {
     int nextPlayer = toss();
     if (nextPlayer == 0) {
-        player[0] = new Human();
-        player[0]->setType("Human");
-//        player[0] = new Computer();
-//        player[0]->setType("Computer 2");
+//        player[0] = new Human();
+//        player[0]->setType("Human");
+        player[0] = new Computer();
+        player[0]->setType("Computer 2");
         player[1] = new Computer();
         player[1]->setType("Computer");
     }
     else {
         player[0] = new Computer();
         player[0]->setType("Computer");
-        player[1] = new Human();
-        player[1]->setType("Human");
-//        player[1] = new Computer();
-//        player[1]->setType("Computer 2");
+//        player[1] = new Human();
+//        player[1]->setType("Human");
+        player[1] = new Computer();
+        player[1]->setType("Computer 2");
     }
     cout << "Now, Lets get started!" << endl;
 
@@ -33,7 +52,6 @@ void Game::start() {
     for (int i = 0; i < 2; i++) {
         player[i]->setScore(0);
     }
-
 
     while (roundNumber < 12) {
         Round r(roundNumber, player);
@@ -51,6 +69,18 @@ void Game::start() {
     declareWinner();
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 int Game::toss() {
     char side;
     do {
@@ -70,6 +100,18 @@ int Game::toss() {
     }
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 // sets next player and loads the round
 void Game::load(vector<string> info) {
     string nextPlayer = Utils::toLowerCase(info[info.size()-1]);
@@ -128,6 +170,18 @@ void Game::load(vector<string> info) {
     declareWinner();
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 // saves the string of round info into a ofstream object
 void Game::saveGame(string info) {
     ofstream save;
@@ -149,6 +203,18 @@ void Game::saveGame(string info) {
     save.close();
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void Game::declareWinner() {
     int scr1 = player[0]->getScore();
     int scr2 = player[1]->getScore();

@@ -1,6 +1,14 @@
-//
+/*
+ ************************************************************
+ * Name: Bibhash Mulmi                                      *
+ * Project: P1 Five Crowns CPP                              *
+ * Class: OPL Fall 19                                       *
+ * Date: 10/23/2019                                         *
+ ************************************************************
+*/
+
 // Created by bibhash on 9/12/19.
-//
+
 
 #include <iomanip>
 #include "Round.hpp"
@@ -12,31 +20,51 @@ Round::Round(int roundNumber, Player* player[]) {
     this->saveAndQuit = false;
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 // this starts a new fresh round
 void Round::play() {
     deck = &(Deck::getInstanceOfDeck(2));
 
-    // set the wild card
     deck->setWildCard(roundNumber + 2);
 
-    // shuffle cards
     deck->shuffleDeck();
 
-    // set players hands
     distributeCards();
 
-    // set the discard pile
     deck->discard(deck->drawCard());
 
     start();
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void Round::start() {
     // set the player who went out first from last round as the next player
     nextPlayer = player[1]->hasGoneOut() ? 1 : 0;
     currPlayer = nextPlayer;
 
-    // set the goOut for both players to false
+    // now set the goOut for both players to false
     player[1]->setGoneOut(false);
     player[0]->setGoneOut(false);
 
@@ -60,7 +88,6 @@ void Round::start() {
 
         if (player[nextPlayer]->hasSaveGame()) {
             setSaveGame(true);
-            // change the save game flag of the player
             player[nextPlayer]->setSaveGame(false);
             return;
         }
@@ -75,6 +102,18 @@ void Round::start() {
 
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void Round::load(vector<string> info) {
     deck = &(Deck::getInstanceOfDeck(2));
     deck->setWildCard(roundNumber + 2);
@@ -107,6 +146,18 @@ void Round::load(vector<string> info) {
     deck->setDiscardPile(discardPile);
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 // loads Hands of players from serialized string
 vector<Cards> Round::loadHands(string cards) {
     istringstream ss(cards);
@@ -122,6 +173,18 @@ vector<Cards> Round::loadHands(string cards) {
     return temp;
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 // loads Deck of cards from serialized string
 deque<Cards> Round::loadDeck(string cards) {
     istringstream ss(cards);
@@ -137,6 +200,18 @@ deque<Cards> Round::loadDeck(string cards) {
     return temp;
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 // sets hands of the players
 void Round::distributeCards() {
     for (int i = 0; i < totalNumPlayers; i++) {
@@ -148,6 +223,18 @@ void Round::distributeCards() {
     }
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void Round::printRoundStatus() {
     cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
     cout << left << setw(10) << "Round Number: " << roundNumber << endl;
@@ -165,11 +252,35 @@ void Round::printRoundStatus() {
     cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 //checks to see if the previous player can go out or not.
 bool Round::roundEnded() {
     return player[currPlayer]->hasGoneOut();
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 const string Round::getSerializableInfo() {
     string serializedText;
     string humanScore, humanHand, computerScore, computerHand;
@@ -204,6 +315,18 @@ const string Round::getSerializableInfo() {
     return serializedText;
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void Round::endRound() {
     // next player plays a turn
     printRoundStatus();

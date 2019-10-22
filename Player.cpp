@@ -1,6 +1,14 @@
-//
+/*
+ ************************************************************
+ * Name: Bibhash Mulmi                                      *
+ * Project: P1 Five Crowns CPP                              *
+ * Class: OPL Fall 19                                       *
+ * Date: 10/23/2019                                         *
+ ************************************************************
+*/
+
 // Created by bibhash on 9/11/19.
-//
+
 
 #include "Player.hpp"
 
@@ -12,6 +20,18 @@ Player::Player() {
     hand.clear();
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 const string Player::getHandAsString() {
     string temp = "";
 
@@ -22,18 +42,18 @@ const string Player::getHandAsString() {
     return temp;
 }
 
-const string Player::getHandWithIndex() {
-    string temp = "";
-
-    int i = 0;
-    for (auto a_card : this->hand) {
-        temp += a_card.toString() + " --> " + to_string(i) + "  ";
-        i++;
-    }
-
-    return temp;
-}
-
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 const string Player::getAssembledHandAsString() {
     vector<vector<Cards>> arrangedHand = assemblePossibleHand();
     string temp;
@@ -46,6 +66,18 @@ const string Player::getAssembledHandAsString() {
     return temp;
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 const int Player::getCardIndex(vector<Cards> a_hand, Cards a_card) {
     for (int i = 0; i < a_hand.size(); i++) {
         if (a_hand[i] == a_card) {
@@ -55,6 +87,18 @@ const int Player::getCardIndex(vector<Cards> a_hand, Cards a_card) {
     return -1;
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 // returns the score from the current hand where joker is 50 points and wilds are 20 points
 const int Player::getHandScore() {
     if (canGoOut(hand)) {
@@ -70,6 +114,18 @@ const int Player::getHandScore() {
     return currScore;
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void Player::removeCards(vector<Cards> &a_hand, vector<Cards> cards) {
     for (auto const &each : cards) {
         for (int i = 0; i < a_hand.size(); i++) {
@@ -81,6 +137,18 @@ void Player::removeCards(vector<Cards> &a_hand, vector<Cards> cards) {
     }
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 // checks to see if the player can go out or not
 bool Player::canGoOut(vector<Cards> a_hand) {
     Assembled *assembledHands = new Assembled(hand);
@@ -88,29 +156,39 @@ bool Player::canGoOut(vector<Cards> a_hand) {
     return temp == 0;
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 string Player::whichPileToChoose() {
     deck = &Deck::getInstanceOfDeck(2);
     string chosenPile;
+
     // take the discard pile card
     Cards pickedCard = deck->showDiscardCard();
 
-    // pick if joker
-    if (pickedCard.isJoker()) {
-        return "discard";
-    }
+//    if (pickedCard.isJoker()) {
+//        return "discard";
+//    }
 
     string wildCard = deck->getWildCardFace();
 
-    // pick if wildCard
-    if (pickedCard.getFace() == wildCard) {
-        return "discard";
-    }
+//    if (pickedCard.getFace() == wildCard) {
+//        return "discard";
+//    }
 
     vector<Cards> copyHand = hand;
 
-    // score of hand before picking discard card
     Assembled *assembledHand = new Assembled(copyHand);
-
+    // store the score of hand before picking discard card
     int scr = getLowestScore(copyHand, assembledHand);
     bool chooseDiscard = false;
 
@@ -142,12 +220,23 @@ string Player::whichPileToChoose() {
     }
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 int Player::whichCardToDiscard() {
     vector<Cards> currHand = hand;
     int cardIndex = 0;
     int currScore = 99999;
 
-    // if the hand size is 3
     if (currHand.size() == 3)
         return -999;
 
@@ -164,9 +253,8 @@ int Player::whichCardToDiscard() {
         // remove a card from the hand
         temp.erase(temp.begin() + i);
 
-        // now count the score;
         Assembled *assembledHand = new Assembled(temp);
-
+        // now count the score;
         int tempScr = getLowestScore(temp, assembledHand);
         if (tempScr < currScore) {
             currScore = tempScr;
@@ -176,6 +264,18 @@ int Player::whichCardToDiscard() {
     return cardIndex;
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 vector<vector<Cards>> Player::assemblePossibleHand() {
     vector<Cards> currHand = hand;
     Assembled *assembledHand = new Assembled(currHand);
@@ -193,6 +293,7 @@ vector<vector<Cards>> Player::assemblePossibleHand() {
     bool isSpecial = true;
     vector<Cards> lastCombo = ret.back();
     deck = &Deck::getInstanceOfDeck(2);
+
     // check whether the last combo contains all jokers or wild cards
     for (auto each : lastCombo) {
         if (!each.isJoker() && each.getFace() != deck->getWildCardFace()) {
@@ -202,7 +303,7 @@ vector<vector<Cards>> Player::assemblePossibleHand() {
 
     if (isSpecial) {
         // the last combo contains special cards only
-        // remove the combo
+        // remove the combo and combine it with the second last combo
         ret.pop_back();
         for (auto const &each : lastCombo) {
             ret.back().push_back(each);
@@ -212,7 +313,18 @@ vector<vector<Cards>> Player::assemblePossibleHand() {
     return ret;
 }
 
-
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 int Player::getLowestScore(vector<Cards> &a_hand, Assembled *assembled_hands) {
     int minScore = 99999;
 
@@ -228,13 +340,12 @@ int Player::getLowestScore(vector<Cards> &a_hand, Assembled *assembled_hands) {
         assembled_hands->bestCombo = a_hand;
         return calculateScore(a_hand);
     }
-    // generate child hands of each by removing the parent cards
+    // generate child hands of each by removing the books and runs from the parent's cards
     else {
         for (auto const each : booksAndRuns) {
             // copy the current hand
             vector <Cards> temp_hand = a_hand;
 
-            // remove the books or runs from the hand
             removeCards(temp_hand, each);
 
             Assembled *temp_assembled = new Assembled(temp_hand);
@@ -242,9 +353,9 @@ int Player::getLowestScore(vector<Cards> &a_hand, Assembled *assembled_hands) {
             // calculate the score -> recursion
             int scr = getLowestScore(temp_hand, temp_assembled);
 
-            // set the minScore of this parent
-            // also set the best combo of this parent
             if (scr < minScore) {
+                // set the minScore of this parent
+                // also set the best combo of this parent
                 minScore = scr;
                 assembled_hands->bestChild = temp_assembled;
                 assembled_hands->bestCombo = each;
@@ -257,6 +368,18 @@ int Player::getLowestScore(vector<Cards> &a_hand, Assembled *assembled_hands) {
     return minScore;
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 vector<vector<Cards>> Player::getBooksAndRuns(vector<Cards> a_hand) {
     vector<vector<Cards>> temp;
 
@@ -273,6 +396,18 @@ vector<vector<Cards>> Player::getBooksAndRuns(vector<Cards> a_hand) {
     return temp;
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void Player::getBooksOrRuns(vector<Cards> a_hand, vector<vector<Cards>> &a_collection, int check_type) {
     vector<Cards> temp_hand = a_hand;
     vector<Cards> temp_jokers = extractJokerCards(temp_hand);
@@ -287,7 +422,7 @@ void Player::getBooksOrRuns(vector<Cards> a_hand, vector<vector<Cards>> &a_colle
         return;
     }
 
-    // check without jokers and wilds
+    // STEP 1: check without jokers and wilds
     for (int i = 0; i < temp_hand.size(); i++) {
         for (int j = 1; j < temp_hand.size() + 1 - i; j++) {
             vector<Cards> curr (temp_hand.begin()+i, temp_hand.begin()+i+j);
@@ -331,6 +466,18 @@ void Player::getBooksOrRuns(vector<Cards> a_hand, vector<vector<Cards>> &a_colle
 
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void Player::combineAndCheck(vector <Cards> a_hand, vector <Cards> a_cards, vector <vector<Cards>> &collection, int check_type) {
     for (int i = 0; i < a_hand.size(); i++) {
         for (int j = 0; j < a_hand.size() + 1 - i; j++) {
@@ -338,7 +485,7 @@ void Player::combineAndCheck(vector <Cards> a_hand, vector <Cards> a_cards, vect
             vector<Cards> curr (a_hand.begin()+i, a_hand.begin()+i+j);
 
             vector<Cards> cardsToCombine = a_cards;
-            // check this group of cards with jokers
+            // check this group of cards with special cards
             while (!cardsToCombine.empty()) {
                 Cards currJoker = cardsToCombine.back();
                 cardsToCombine.pop_back();
@@ -358,6 +505,18 @@ void Player::combineAndCheck(vector <Cards> a_hand, vector <Cards> a_cards, vect
     }
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 void Player::combineTwoAndCheck(vector<Cards> a_hand, vector<Cards> a_cards1, vector<Cards> a_cards2,
                                 vector<vector<Cards>> &collection, int check_type) {
     for (int i = 0; i < a_hand.size(); i++) {
@@ -366,7 +525,7 @@ void Player::combineTwoAndCheck(vector<Cards> a_hand, vector<Cards> a_cards1, ve
             vector<Cards> curr (a_hand.begin()+i, a_hand.begin()+i+j);
             vector<Cards> temp_cards1 = a_cards1;
 
-            // check this group of cards with wilds
+            // check this group of cards with wild cards for runs or books
             while (!temp_cards1.empty()) {
                 Cards currWilds = temp_cards1.back();
                 temp_cards1.pop_back();
@@ -376,7 +535,8 @@ void Player::combineTwoAndCheck(vector<Cards> a_hand, vector<Cards> a_cards1, ve
                 vector<Cards> copy_curr = curr;
 
                 vector<Cards> temp_cards2 = a_cards2;
-                // push each joker to the copied hand and check
+
+                // push each joker to the copied hand and check runs or books
                 while (!temp_cards2.empty()) {
                     Cards currJoker = temp_cards2.back();
                     temp_cards2.pop_back();
@@ -397,6 +557,18 @@ void Player::combineTwoAndCheck(vector<Cards> a_hand, vector<Cards> a_cards1, ve
     }
 }
 
+/**********************************************************************
+ * Function Name:
+ * Purpose:
+ * Parameters:
+ *
+ * Return Value:
+ * Local Variables:
+ *
+ * Algorithm:
+ *               1)
+ * Assistance Received: None
+ **********************************************************************/
 vector<vector<Cards>> Player::getSameSuiteHands(vector<Cards> a_hand) {
     string const suite [5] = {"S", "C", "D", "H", "T"};
     vector<Cards> jokers = extractJokerCards(a_hand);

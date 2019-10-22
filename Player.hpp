@@ -1,6 +1,14 @@
-//
+/*
+ ************************************************************
+ * Name: Bibhash Mulmi                                      *
+ * Project: P1 Five Crowns CPP                              *
+ * Class: OPL Fall 19                                       *
+ * Date: 10/23/2019                                         *
+ ************************************************************
+*/
+
 // Created by bibhash on 9/11/19.
-//
+
 
 #ifndef FIVE_CROWNS_CPP_PLAYER_HPP
 #define FIVE_CROWNS_CPP_PLAYER_HPP
@@ -30,7 +38,6 @@ public:
     const int getCardIndex(vector<Cards> a_hand, Cards a_card);
     const string getAssembledHandAsString();
     const string getHandAsString();
-    const string getHandWithIndex();
 
     void setScore( int a_score ) { this->score = a_score; }
     void setHand (vector<Cards> a_hand) { this->hand = a_hand; }
