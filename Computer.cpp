@@ -40,7 +40,7 @@ void Computer::play() {
                 << "2. Make a move.\n" \
                 << "3. Quit the game." << endl;
         cin >> choice;
-    } while (choice  > 4 || choice < 0);
+    } while (choice  > 3 || choice < 0);
 
 
     if (choice == 1) {
@@ -85,7 +85,7 @@ void Computer::play() {
  * Assistance Received: None
  **********************************************************************/
 void Computer::pickCard() {
-    cout << getType() << " is playing."<< endl;
+//    cout << getType() << " is playing."<< endl;
     deck = &Deck::getInstanceOfDeck(2);
 
     // varialble that stores the chosen a pile

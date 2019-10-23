@@ -30,7 +30,7 @@ Cards::Cards(string& face, string &suite) {
 *              2) Else return false.
 * Assistance Received: None
 **********************************************************************/
-bool Cards::isJoker() {
+bool Cards::isJoker() const{
     return (this->face == "J" && (this->suite == "1" || this->suite == "2" || this->suite == "3"));
 }
 
@@ -55,7 +55,7 @@ bool operator==(const Cards &left, const Cards &right) {
 *               6) Else return the integer value of temp.
 * Assistance Received: None
 **********************************************************************/
-const int Cards::getFaceValue() {
+int Cards::getFaceValue() const {
     string temp = this->face;
 
     if (this->isJoker()) return 50;

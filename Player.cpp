@@ -32,7 +32,7 @@ Player::Player() {
  *               1)
  * Assistance Received: None
  **********************************************************************/
-const string Player::getHandAsString() {
+string Player::getHandAsString() {
     string temp = "";
 
     for (auto a_card : this->hand) {
@@ -54,7 +54,7 @@ const string Player::getHandAsString() {
  *               1)
  * Assistance Received: None
  **********************************************************************/
-const string Player::getAssembledHandAsString() {
+string Player::getAssembledHandAsString() {
     vector<vector<Cards>> arrangedHand = assemblePossibleHand();
     string temp;
     for (auto const& eachHand : arrangedHand) {
@@ -78,7 +78,7 @@ const string Player::getAssembledHandAsString() {
  *               1)
  * Assistance Received: None
  **********************************************************************/
-const int Player::getCardIndex(vector<Cards> a_hand, Cards a_card) {
+int Player::getCardIndex(vector<Cards> a_hand, Cards a_card) const {
     for (int i = 0; i < a_hand.size(); i++) {
         if (a_hand[i] == a_card) {
             return i;
@@ -100,7 +100,7 @@ const int Player::getCardIndex(vector<Cards> a_hand, Cards a_card) {
  * Assistance Received: None
  **********************************************************************/
 // returns the score from the current hand where joker is 50 points and wilds are 20 points
-const int Player::getHandScore() {
+int Player::getHandScore() {
     if (canGoOut(hand)) {
         return 0;
     }
@@ -114,18 +114,6 @@ const int Player::getHandScore() {
     return currScore;
 }
 
-/**********************************************************************
- * Function Name:
- * Purpose:
- * Parameters:
- *
- * Return Value:
- * Local Variables:
- *
- * Algorithm:
- *               1)
- * Assistance Received: None
- **********************************************************************/
 void Player::removeCards(vector<Cards> &a_hand, vector<Cards> cards) {
     for (auto const &each : cards) {
         for (int i = 0; i < a_hand.size(); i++) {
@@ -175,15 +163,7 @@ string Player::whichPileToChoose() {
     // take the discard pile card
     Cards pickedCard = deck->showDiscardCard();
 
-//    if (pickedCard.isJoker()) {
-//        return "discard";
-//    }
-
     string wildCard = deck->getWildCardFace();
-
-//    if (pickedCard.getFace() == wildCard) {
-//        return "discard";
-//    }
 
     vector<Cards> copyHand = hand;
 

@@ -13,15 +13,17 @@
 #include "FiveCrowns.hpp"
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: main
+ * Purpose: To run the entire game
  * Parameters:
+ *          argc, an int value. It holds the number of arguments passed in
+ *          from the console.
  *
- * Return Value:
+ *          argv, an array of char values. It holds the arguments passed in
+ *          from the console.
+ * Return Value: None
  * Local Variables:
- *
- * Algorithm:
- *               1)
+ *          None
  * Assistance Received: None
  **********************************************************************/
 int main(int argc, const char** argv) {

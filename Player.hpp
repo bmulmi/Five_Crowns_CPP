@@ -33,27 +33,28 @@ public:
     Player();
     ~Player() = default;
 
-    const int getScore() { return score; }
-    const int getHandScore();
-    const int getCardIndex(vector<Cards> a_hand, Cards a_card);
-    const string getAssembledHandAsString();
-    const string getHandAsString();
-
-    void setScore( int a_score ) { this->score = a_score; }
-    void setHand (vector<Cards> a_hand) { this->hand = a_hand; }
-    void setQuitGame(bool val) { quitGame = val; }
-    void setSaveGame(bool val) { saveGame = val; }
-    void setGoneOut(bool val) { goneOut  = val;}
-    void updateScore(int a_score) { this->score += a_score; }
-    void removeFromHand(int discardIndex) { hand.erase(hand.begin() + discardIndex); }
-
+    // -----selectors-----
+    int getScore() const { return score; }
+    int getHandScore();
+    int getCardIndex(vector<Cards> a_hand, Cards a_card) const;
+    string getAssembledHandAsString();
+    string getHandAsString();
     bool hasQuitGame() { return quitGame; }
     bool hasSaveGame() { return saveGame; }
     bool hasGoneOut() { return goneOut; }
     bool canGoOut(vector<Cards> a_hand);
+    virtual string getType() const = 0;
 
-    virtual const string getType() = 0;
+    //-----mutators-----
+    inline void setScore( int a_score ) { this->score = a_score; }
+    inline void setHand (vector<Cards> a_hand) { this->hand = a_hand; }
+    inline void setQuitGame(bool val) { quitGame = val; }
+    inline void setSaveGame(bool val) { saveGame = val; }
+    inline void setGoneOut(bool val) { goneOut  = val;}
+    inline void updateScore(int a_score) { this->score += a_score; }
+    inline void removeFromHand(int discardIndex) { hand.erase(hand.begin() + discardIndex); }
     virtual void setType(string type) = 0;
+
     virtual void goOut() = 0;
     virtual void play() = 0;
     virtual void pickCard() = 0;

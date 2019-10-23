@@ -17,34 +17,36 @@ Game::Game(int roundNumber) {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: start
+ * Purpose: To start the game.
  * Parameters:
- *
- * Return Value:
+ *              None
+ * Return Value: None
  * Local Variables:
- *
+ *              nextPlayer, an int value. Stores the player's turn returned
+ *              from Toss function
  * Algorithm:
- *               1)
+ *               1) Do the Toss, assign first and second players accordingly.
+ *               2) Set scores to 0 for players
+ *               3) While round number is less than 12, keep initializing new
+ *               Round objects
+ *               4) Return from the function if player saves and quits the game.
+ *               5) Declare the winner.
  * Assistance Received: None
  **********************************************************************/
 void Game::start() {
     int nextPlayer = toss();
     if (nextPlayer == 0) {
-//        player[0] = new Human();
-//        player[0]->setType("Human");
-        player[0] = new Computer();
-        player[0]->setType("Computer 2");
+        player[0] = new Human();
+        player[0]->setType("Human");
         player[1] = new Computer();
         player[1]->setType("Computer");
     }
     else {
         player[0] = new Computer();
         player[0]->setType("Computer");
-//        player[1] = new Human();
-//        player[1]->setType("Human");
-        player[1] = new Computer();
-        player[1]->setType("Computer 2");
+        player[1] = new Human();
+        player[1]->setType("Human");
     }
     cout << "Now, Lets get started!" << endl;
 
@@ -70,15 +72,21 @@ void Game::start() {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: toss
+ * Purpose: To toss a coin
  * Parameters:
- *
- * Return Value:
+ *              None
+ * Return Value: Int value of 0 if Human wins, 1 if computer wins
  * Local Variables:
+ *              side, a char value. It holds the user input for heads or
+ *              tails
  *
+ *              winner, an int value. It holds the winning random integer
+ *              value.
  * Algorithm:
- *               1)
+ *               1) Ask user for heads or tails
+ *               2) Generate a random number of 0 or 1
+ *               3) Return the value.
  * Assistance Received: None
  **********************************************************************/
 int Game::toss() {
@@ -101,15 +109,25 @@ int Game::toss() {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: load
+ * Purpose: To load the game
  * Parameters:
- *
- * Return Value:
+ *              info, a vector of string. It holds the round information to
+ *              be loaded.
+ * Return Value: None
  * Local Variables:
- *
+ *              nextPlayer, a string value. It holds the next player info
+ *              from the info vector
  * Algorithm:
- *               1)
+ *               1) Get the next player
+ *               2) Assign the first player as next player
+ *               3) While round number is less than 12 initialize new round
+ *               objects. Increase the round Number.
+ *               4) If the round is just loaded, then call load function of round
+ *               and start the round.
+ *               5) If the user wants to save and quit, set the save flag and
+ *               return from the function.
+ *               6) Declare the winner.
  * Assistance Received: None
  **********************************************************************/
 // sets next player and loads the round
@@ -125,16 +143,12 @@ void Game::load(vector<string> info) {
         player[0]->setType("Human");
         player[1] = new Computer();
         player[1]->setType("Computer");
-//        player[0] = new Computer();
-//        player[0]->setType("Computer 2");
     }
     else if (nextPlayer == "computer"){
         player[0] = new Computer();
         player[0]->setType("Computer");
         player[1] = new Human();
         player[1]->setType("Human");
-//        player[1] = new Computer();
-//        player[1]->setType("Computer 2");
     }
     else {
         cerr << "Invalid Next Player in the serialization file! So, human goes first." << endl;
@@ -171,15 +185,22 @@ void Game::load(vector<string> info) {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: saveGame
+ * Purpose: To save the game.
  * Parameters:
- *
- * Return Value:
+ *          info, a string value. It holds the string representation of
+ *          the round state to be saved.
+ * Return Value: None
  * Local Variables:
+ *          save, an ofstream object to write the file.
  *
+ *          filename, a string value. It holds the filename we want to
+ *          use to save.
  * Algorithm:
- *               1)
+ *               1) Ask the user for a filename.
+ *               2) if the filename cannot be used, re call the function
+ *               3) write the info into the file.
+ *               4) close the file.
  * Assistance Received: None
  **********************************************************************/
 // saves the string of round info into a ofstream object
@@ -204,15 +225,23 @@ void Game::saveGame(string info) {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: declareWinner
+ * Purpose: to declare the winner and print the status
  * Parameters:
- *
- * Return Value:
+ *              None
+ * Return Value: None
  * Local Variables:
- *
+ *              scr1, an int value. Holds the first player's score.
+ *              scr2, an int value. Holds the second player's score.
+ *              winner, a string value. Holds the type of winning player.
+ *              loser, a string value. Holds the type of losing player.
+ *              winnerScr, an int value. Holds the winner score.
+ *              loserScr, an int value. Holds the loser score.
  * Algorithm:
- *               1)
+ *               1) Get the scores of players and store them.
+ *               2) The player with lower score is the winner.
+ *               3) Get the winner's score.
+ *               4) Print out the end of game info with winner and loser info.
  * Assistance Received: None
  **********************************************************************/
 void Game::declareWinner() {

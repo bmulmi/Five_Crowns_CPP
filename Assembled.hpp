@@ -43,9 +43,9 @@ public:
     *               1) increase the size by 1 until the bestChild is NULL
     * Assistance Received: None
     **********************************************************************/
-    int size() {
+    int size() const {
         int size = 0;
-        Assembled *temp = this;
+        const Assembled *temp = this;
         while (temp->bestChild != NULL) {
             size++;
             temp = temp->bestChild;

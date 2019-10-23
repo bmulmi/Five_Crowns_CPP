@@ -62,6 +62,10 @@ Computer.hpp
 Utilities.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Utilities.hpp
 
+/home/bibhash/git_repos/Five_Crowns_CPP/Game.cpp
+Game.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Game.hpp
+
 /home/bibhash/git_repos/Five_Crowns_CPP/Game.hpp
 Player.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Player.hpp
@@ -84,11 +88,19 @@ algorithm
 fstream
 -
 
+/home/bibhash/git_repos/Five_Crowns_CPP/Human.cpp
+Human.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Human.hpp
+
 /home/bibhash/git_repos/Five_Crowns_CPP/Human.hpp
 Player.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Player.hpp
 iostream
 -
+
+/home/bibhash/git_repos/Five_Crowns_CPP/Player.cpp
+Player.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Player.hpp
 
 /home/bibhash/git_repos/Five_Crowns_CPP/Player.hpp
 vector
@@ -109,6 +121,12 @@ Utilities.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Utilities.hpp
 Assembled.hpp
 /home/bibhash/git_repos/Five_Crowns_CPP/Assembled.hpp
+
+/home/bibhash/git_repos/Five_Crowns_CPP/Round.cpp
+iomanip
+-
+Round.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/Round.hpp
 
 /home/bibhash/git_repos/Five_Crowns_CPP/Round.hpp
 Player.hpp
@@ -131,4 +149,8 @@ vector
 -
 climits
 -
+
+/home/bibhash/git_repos/Five_Crowns_CPP/main.cpp
+FiveCrowns.hpp
+/home/bibhash/git_repos/Five_Crowns_CPP/FiveCrowns.hpp
 

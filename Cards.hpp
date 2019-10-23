@@ -23,12 +23,12 @@ public:
     ~Cards() = default;
     friend bool operator==(const Cards &left, const Cards &right);
 
-    const int getFaceValue();
-    const string getSuite() { return suite; }
-    const string getFace() { return face; }
-    const string toString() { return face + suite; }
+    int getFaceValue() const;
+    string getSuite() const { return suite; }
+    string getFace() const { return face; }
+    string toString() const { return face + suite; }
 
-    bool isJoker();
+    bool isJoker() const;
 
 private:
     string face;

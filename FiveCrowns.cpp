@@ -13,15 +13,22 @@
 
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: start
+ * Purpose: To start either a new game or load game
  * Parameters:
- *
- * Return Value:
+ *              None
+ * Return Value: None
  * Local Variables:
+ *              load, a char value. It holds the user input of 'y' or 'n'
+ *              when asked whether they want to load a game.
  *
+ *              re_start, a char value. It holds the user input of 'y' or 'n'
+ *              when asked whether they want to restart the game.
  * Algorithm:
- *               1)
+ *               1) Ask the user if they want to load game.
+ *               2) Call load game function or start new game function accordingly.
+ *               3) Ask the user if they want to restart the game.
+ *               4) Call restart game function accordingly.
  * Assistance Received: None
  **********************************************************************/
 void FiveCrowns::start() {
@@ -55,15 +62,31 @@ void FiveCrowns::start() {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: loadGame
+ * Purpose: To load the game from serialized file
  * Parameters:
- *
- * Return Value:
+ *              None
+ * Return Value: None
  * Local Variables:
+ *              file, a string value. It holds the directory of the file
+ *              to be loaded.
  *
+ *              filename, a string value. It holds the filename of the user.
+ *
+ *              save, an ifstream object. It opens the file to be loaded.
+ *
+ *              roundNumber, an int value. It holds the round number loaded
+ *              from file.
+ *
+ *              roundStats, a vector of string. It hold each line as string from
+ *              the loaded file.
  * Algorithm:
- *               1)
+ *               1) Get the file name from user. Re-call the function if file
+ *               cannot be opened.
+ *               2) Get the first line of file and store it into roundNumber.
+ *               3) Get each line from the file and save it into the vector.
+ *               4) Initialize the Game object.
+ *               5) Call load function of Game.
  * Assistance Received: None
  **********************************************************************/
 void FiveCrowns::loadGame() {
@@ -109,15 +132,13 @@ FiveCrowns::~FiveCrowns() {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: restart
+ * Purpose: To restart the Game from beginning
  * Parameters:
- *
- * Return Value:
+ *          None
+ * Return Value: None
  * Local Variables:
- *
- * Algorithm:
- *               1)
+ *          None
  * Assistance Received: None
  **********************************************************************/
 void FiveCrowns::restart() {
@@ -126,15 +147,13 @@ void FiveCrowns::restart() {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: reset
+ * Purpose: To delete the pointer to the game object
  * Parameters:
- *
- * Return Value:
+ *              None
+ * Return Value: None
  * Local Variables:
- *
- * Algorithm:
- *               1)
+ *              None
  * Assistance Received: None
  **********************************************************************/
 void FiveCrowns::reset() {
@@ -142,15 +161,13 @@ void FiveCrowns::reset() {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: init
+ * Purpose: To assign Game object pointer to the game member variable
  * Parameters:
- *
- * Return Value:
+ *          roundNumber, an int value. It holds the round number of the game.
+ * Return Value: None
  * Local Variables:
- *
- * Algorithm:
- *               1)
+ *          None
  * Assistance Received: None
  **********************************************************************/
 // initializes the round number

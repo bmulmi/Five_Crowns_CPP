@@ -24,9 +24,9 @@ public:
     Computer() = default;
     ~Computer() = default;
 
-    const string getType() override { return type; }
+    string getType() const override { return type; }
 
-    void setType(string type) override { this->type = type; }
+    inline void setType(string type) override { this->type = type; }
 
     void play() override;
     void goOut() override;
