@@ -12,6 +12,18 @@
 
 #include "Cards.hpp"
 
+
+/**********************************************************************
+ * Function Name: Cards
+ * Purpose: To construct the cards object
+ * Parameters:
+ *              face, a string value passed by reference that holds the
+ *              face of card.
+ *
+ *              suite, a string value passed by reference that holds the
+ *              suite of card
+ * Assistance Received: None
+ **********************************************************************/
 Cards::Cards(string& face, string &suite) {
     this->face = face;
     this->suite = suite;

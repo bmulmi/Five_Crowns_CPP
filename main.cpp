@@ -14,7 +14,7 @@
 
 /**********************************************************************
  * Function Name: main
- * Purpose: To run the entire game
+ * Purpose: To run the entire game. This is the main entry point of the game.
  * Parameters:
  *          argc, an int value. It holds the number of arguments passed in
  *          from the console.

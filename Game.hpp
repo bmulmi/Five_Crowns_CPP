@@ -32,7 +32,7 @@ public:
     Game() = default;
     Game(int roundNumber);
     ~Game() = default;
-
+    
     int toss();
     void load(vector<string> info);
     void start();

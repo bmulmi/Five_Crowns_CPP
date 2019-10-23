@@ -25,21 +25,23 @@ class Deck {
 public:
     Deck& operator = (Deck const&) = delete;
     ~Deck() = default;
-    static Deck& getInstanceOfDeck(int num);
 
+    //-----selectors-----
+    static Deck& getInstanceOfDeck(int num);
     string getWildCardFace () { return this->wildCardFace; }
     string getDiscardPile();
     string getDrawPile();
     Cards showDiscardCard();
 
+    //-----mutators-----
     void setDrawPile(deque<Cards> cards);
     void setDiscardPile(deque<Cards> cards);
     void setWildCard(int faceValue);
-
     Cards drawDiscardCard();
     Cards drawCard();
     void discard(Cards a_card);
 
+    //-----utility functions-----
     void shuffleDeck();
 
 private:
@@ -57,6 +59,7 @@ private:
     string const face [11] = {"3", "4", "5", "6", "7", "8",
                               "9", "X", "J", "Q", "K"};
 
+    //-----utility functions-----
     deque<Cards> createJokers(int num);
     deque<Cards> createDeck();
     deque<Cards> arrangeDeck(int numDecks);

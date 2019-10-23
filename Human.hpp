@@ -23,15 +23,19 @@ public:
     Human() = default;
     ~Human() = default;
 
+    //----selectors-----
     string getType() const override { return type; }
 
+    //-----mutators-----
     void setType(string type) override { this->type = type; }
 
+    //-----inherited virtual functions-----
     void play() override;
     void goOut() override ;
     void pickCard() override ;
 
 private:
+    //-----utility functions-----
     void getHint();
     void printChosenPile(string const &a_pile);
     void printAssembledHand(vector<vector<Cards>> const &a_arranged);

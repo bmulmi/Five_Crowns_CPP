@@ -25,6 +25,15 @@ public:
     ~Round() = default;
 
     const string getSerializableInfo();
+
+    /**********************************************************************
+     * Function Name: isSaveAndQuit
+     * Purpose: To return the saveAndQuit flag
+     * Parameters: None
+     * Return Value: Boolean value. True if player saved and quit, false otherwise.
+     * Local Variables: None
+     * Assistance Received: None
+     **********************************************************************/
     bool isSaveAndQuit() {return saveAndQuit; }
 
     void play();
@@ -40,6 +49,14 @@ private:
     int roundNumber;
     int totalNumPlayers;
 
+    /**********************************************************************
+     * Function Name: setSaveGame
+     * Purpose: To set the saveAndQuit flag
+     * Parameters: val, a boolean value.
+     * Return Value: None
+     * Local Variables: None
+     * Assistance Received: None
+     **********************************************************************/
     void setSaveGame(bool val) { saveAndQuit = val;}
 
     vector<Cards> loadHands(string cards);

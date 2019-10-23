@@ -12,6 +12,15 @@
 
 #include "Player.hpp"
 
+
+/**********************************************************************
+ * Function Name: Player
+ * Purpose: To construct the player class object.
+ * Parameters:
+ *              None
+ * Return Value: None
+ * Assistance Received: None
+ **********************************************************************/
 Player::Player() {
     score = 0;
     goneOut = false;

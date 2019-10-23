@@ -27,8 +27,13 @@ public:
     ~Assembled() = default;
     Assembled& operator = (Assembled const&) = default;
 
+    // represents the parent hand from which best combo is removed
     vector<Cards> parentHand;
+
+    // represents the best book or run from the parentHand
     vector<Cards> bestCombo;
+    
+    // represents the child after removing bestCombo from parentHand
     Assembled* bestChild;
 
     /**********************************************************************

@@ -12,6 +12,16 @@
 
 #include "Game.hpp"
 
+
+/**********************************************************************
+ * Function Name: Game
+ * Purpose: To construct the Game class object.
+ * Parameters:
+ *              roundNumber, an int value that holds the round number of
+ *              game currently being played.
+ * Return Value: None
+ * Assistance Received: None
+ **********************************************************************/
 Game::Game(int roundNumber) {
     this->roundNumber = roundNumber;
 }

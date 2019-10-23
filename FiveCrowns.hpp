@@ -34,9 +34,9 @@ public:
     void restart();
 
 private:
+    Game* game;
     void init(int roundNumber);
     void loadGame();
-    Game* game;
 };
 
 

@@ -24,10 +24,13 @@ public:
     Computer() = default;
     ~Computer() = default;
 
+    //-----selectors-----
     string getType() const override { return type; }
 
+    //-----mutators-----
     inline void setType(string type) override { this->type = type; }
 
+    //-----virtual functions-----
     void play() override;
     void goOut() override;
     void pickCard() override;
