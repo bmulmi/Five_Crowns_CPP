@@ -30,7 +30,7 @@ public:
     //-----mutators-----
     inline void setType(string type) override { this->type = type; }
 
-    //-----virtual functions-----
+    //-----inherited virtual functions-----
     void play() override;
     void goOut() override;
     void pickCard() override;
