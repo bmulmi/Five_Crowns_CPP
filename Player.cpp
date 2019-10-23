@@ -21,15 +21,15 @@ Player::Player() {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: getHandAsString
+ * Purpose:  To get the string representation of hand
  * Parameters:
- *
- * Return Value:
+ *              None
+ * Return Value: a string value. It holds the string representation of 
+                hand
  * Local Variables:
- *
- * Algorithm:
- *               1)
+ *              temp, a string value. It holds the string representation of 
+ *              hand
  * Assistance Received: None
  **********************************************************************/
 string Player::getHandAsString() {
@@ -43,15 +43,14 @@ string Player::getHandAsString() {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: getAssembledHandAsString
+ * Purpose: To get the assembled hand as string
  * Parameters:
- *
- * Return Value:
+ *              None
+ * Return Value: a string representation of arranged hand
  * Local Variables:
- *
- * Algorithm:
- *               1)
+ *              arrangedHand, a vector of vector of Cards object. It holds
+ *              the assembled runs and books and remaining cards in a string.
  * Assistance Received: None
  **********************************************************************/
 string Player::getAssembledHandAsString() {
@@ -67,15 +66,18 @@ string Player::getAssembledHandAsString() {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: getCardIndex
+ * Purpose: To get the index of card in hand
  * Parameters:
- *
- * Return Value:
+ *              a_hand, a vector of Cards object. It represents the hand.
+ *              a_card, a Cards object. It represents the card to find the
+ *              index of.
+ * Return Value: an int value representing the index of card.
  * Local Variables:
- *
+ *              None
  * Algorithm:
- *               1)
+ *               1) For each card in hand, compare it with the card passed,
+ *                  if it matches, return the index, else return -1.
  * Assistance Received: None
  **********************************************************************/
 int Player::getCardIndex(vector<Cards> a_hand, Cards a_card) const {
@@ -88,18 +90,26 @@ int Player::getCardIndex(vector<Cards> a_hand, Cards a_card) const {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: getHandScore
+ * Purpose: To get the score of the current hand
  * Parameters:
- *
- * Return Value:
+ *              None
+ * Return Value: an int value that holds the score of the hand
  * Local Variables:
- *
+ *              possibleCombos, a vector of vector of Cards object. It holds
+ *              the combinations of runs and books of the hand.
+ *              
+ *              scoreHand, a vector of Cards object. It holds the last vector
+ *              of possibleCombos. This combination is the remaining unaccounted
+ *              cards of the hand.
+ *              
+ *              currScore, an int value. It holds the score of the scoreHand.
  * Algorithm:
- *               1)
+ *               1) If the hand can go out, return 0.
+ *               2) Get the assembled hand, get the last combination from it.
+ *               3) Calculate the score of the last combination and return it.
  * Assistance Received: None
  **********************************************************************/
-// returns the score from the current hand where joker is 50 points and wilds are 20 points
 int Player::getHandScore() {
     if (canGoOut(hand)) {
         return 0;
@@ -114,6 +124,22 @@ int Player::getHandScore() {
     return currScore;
 }
 
+/**********************************************************************
+ * Function Name: removeCards
+ * Purpose: To remove the card from hand
+ * Parameters:
+ *              a_hand, a vector of Cards object passed by reference. The
+ *              hand is changed since we are removing a card from it.
+ *              cards, a vector of Cards object that needs to be removed 
+ *              from a_hand.
+ * Return Value: None
+ * Local Variables:
+ *              None
+ * Algorithm:
+ *               1) For each card in cards, compare each card in hand, and
+ *                  when matched, remove the card from hand.
+ * Assistance Received: None
+ **********************************************************************/
 void Player::removeCards(vector<Cards> &a_hand, vector<Cards> cards) {
     for (auto const &each : cards) {
         for (int i = 0; i < a_hand.size(); i++) {
@@ -126,15 +152,18 @@ void Player::removeCards(vector<Cards> &a_hand, vector<Cards> cards) {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: canGoOut
+ * Purpose: To check if the player can go out
  * Parameters:
- *
- * Return Value:
+ *              a_hand, a vector of Cards object. It holds the hand of 
+ *              the player
+ * Return Value: a boolean value. True if player can go out, false otherwise.
  * Local Variables:
- *
+ *              *assembledHands, a pointer to Assembled object/struct. 
+ *              temp, an int value, it holds the score of the player's hand.
  * Algorithm:
- *               1)
+ *               1) Get the lowest score of hand. Return true if it is 0, else
+ *                  false.
  * Assistance Received: None
  **********************************************************************/
 // checks to see if the player can go out or not
@@ -145,20 +174,36 @@ bool Player::canGoOut(vector<Cards> a_hand) {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
- * Parameters:
- *
- * Return Value:
+ * Function Name: whichPileToChoose
+ * Purpose: To get the pile to pick card from by using computer's strategy.
+ * Parameters: 
+ *              None
+ * Return Value: a string value representing the pile name.
  * Local Variables:
+ *              pickedCard, a Cards object. It holds the top discard pile
+ *              card.
  *
+ *              wildCard, a string value. It holds the face of wild card.
+ *
+ *              copyHand, a vector of Cards object. It holds a copy of the
+ *              player's hand.
+ *
+ *              assembledHand, a pointer to Assembled struct for the copy
+ *              hand. 
  * Algorithm:
- *               1)
+ *               1) Make a copy of the current hand and add the discard pile
+ *                  card to it. Initialize assembledHand and score of original hand.
+ *               2) Remove each card from the copied hand and keep track of score of
+ *                  each temp hand.
+ *               3) If the the assembled hand of the temp hand has more combinations
+ *                  and the score of the hand is less than the current score of hand,
+ *                  set the assembledHand and score to that of temp hand. Put a flag
+ *                  to choose from discard pile. Return discard pile.
+ *               4) Else, return draw pile.  
  * Assistance Received: None
  **********************************************************************/
 string Player::whichPileToChoose() {
     deck = &Deck::getInstanceOfDeck(2);
-    string chosenPile;
 
     // take the discard pile card
     Cards pickedCard = deck->showDiscardCard();
@@ -201,15 +246,31 @@ string Player::whichPileToChoose() {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
- * Parameters:
- *
- * Return Value:
+ * Function Name: whichCardToDiscard
+ * Purpose: To get the index of card to discard from the current hand using
+ *          computer's strategy.
+ * Parameters: 
+ *              None
+ * Return Value: an int value that holds the index of the discarding card of hand  
  * Local Variables:
+ *              currHand, a vector of Cards object that holds the copy of player's
+ *              current hand.
  *
+ *              cardIndex, an int value. It holds the index of the card to discard.
+ *
+ *              currScore, an int value. It holds the lowest possible score of the 
+ *              hand.
+ *
+ *              wildCard, a string value. It holds the face of wild card.
+ *
+ *              temp, a vector of Cards object. It holds the copy of currHand. Cards
+ *              are erased from this copy to get the lowest score of hand.
  * Algorithm:
- *               1)
+ *               1) Initialize cardIndex, currScore, wildCard values. 
+ *               2) Copy the current hand and remove each card and check the score.
+ *               3) If the score is lower than currScore, update the cardIndex to 
+ *                  current index and currScore to current score.
+ *               4) Return the card index.
  * Assistance Received: None
  **********************************************************************/
 int Player::whichCardToDiscard() {
@@ -245,15 +306,40 @@ int Player::whichCardToDiscard() {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: assemblePossibleHand
+ * Purpose: To assemble possible runs and books from the current hand
  * Parameters:
- *
- * Return Value:
+ *              None
+ * Return Value: None
  * Local Variables:
+ *              currHand, a vector of Cards object. It holds a copy of the
+ *              player's hand.
  *
+ *              assembledHand, a pointer to Assembled struct. It holds the
+ *              assembled combinations of books and runs.
+ *
+ *              scr, an int value. It holds the score of current hand.
+ *
+ *              temp, a vector of Cards object. It holds the best combo
+ *              of the assembled hand struct
+ *
+ *              ret, a vector of vector of Cards object. It holds the 
+ *              runs and books.
+ *
+ *              isSpecial, a boolean flag that keeps track of the last 
+ *              combination of assembled hand whether it is a run or a book.
+ *
+ *              lastCombo, a vector of Cards object that holds the last 
+ *              combination of assembled hand.
  * Algorithm:
- *               1)
+ *               1) Initialize assembled hand, current hand, score, returning vector
+ *               2) Pass the assembled hand into getLowestScore function. This function
+ *                  adds the combinations into the struct.
+ *               3) Store each combination from the struct into ret vector.
+ *               3) Check whether the last combination in the vector is all 
+ *                  wild cards or jokers. If true, push every card into the second last
+ *                  combination of ret vector.
+ *               4) Return the ret vector.
  * Assistance Received: None
  **********************************************************************/
 vector<vector<Cards>> Player::assemblePossibleHand() {
@@ -294,7 +380,7 @@ vector<vector<Cards>> Player::assemblePossibleHand() {
 }
 
 /**********************************************************************
- * Function Name:
+ * Function Name: getLowestScore
  * Purpose:
  * Parameters:
  *
