@@ -21,15 +21,19 @@ Round::Round(int roundNumber, Player* player[]) {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: play
+ * Purpose: To shuffle deck, distribute cards and start the fresh round
  * Parameters:
- *
- * Return Value:
+ *          None
+ * Return Value: None
  * Local Variables:
- *
+ *          None
  * Algorithm:
- *               1)
+ *          1) Set wild card
+ *          2) Shuffle the deck
+ *          3) Distribute Cards
+ *          4) Discard a Card
+ *          5) Start the round
  * Assistance Received: None
  **********************************************************************/
 // this starts a new fresh round
@@ -48,15 +52,28 @@ void Round::play() {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: start
+ * Purpose: To assign next player and play the round
  * Parameters:
- *
- * Return Value:
+ *          None
+ * Return Value: None
  * Local Variables:
+ *          prev, a string value. It holds the current player's Assembled
+ *          hand as string before making a move.
  *
+ *          scr, an int value. It holds the current player's hand score
+ *          before making a move.
  * Algorithm:
- *               1)
+ *               1) Set the next player by checking who went out in the
+ *                  last round
+ *               2) Set both player's goOut flags to false.
+ *               3) While the round does not end, let the players play.
+ *                  Change players after each player makes a move.
+ *               4) Check if player saved or quit the game. Set the
+ *                  saveGame or quitGame flags and return from this
+ *                  function.
+ *               5) After the round ends, call endRound function to
+ *                  display end scores.
  * Assistance Received: None
  **********************************************************************/
 void Round::start() {
@@ -103,15 +120,26 @@ void Round::start() {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: load
+ * Purpose: To load the round
  * Parameters:
- *
- * Return Value:
+ *          info, a vector of String. It holds the round information.
+ * Return Value: None
  * Local Variables:
+ *          rawInfo, a vector of String. It holds the copy of info.
  *
- * Algorithm:
- *               1)
+ *          computerHand, a vector of Cards. It holds the cards for
+ *          computer
+ *
+ *          humanHand, a vector of Cards that holds the cards for human.
+ *
+ *          drawPile, a deque of Cards that holds the draw pile loaded
+ *          from info.
+ *
+ *          discardPile, a deque of Cards that holds the discard pile
+ *          loaded from info
+ *
+ *          firstPlayer, a string value. It holds the next player's type.
  * Assistance Received: None
  **********************************************************************/
 void Round::load(vector<string> info) {
@@ -147,18 +175,30 @@ void Round::load(vector<string> info) {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: loadHands
+ * Purpose: To load a vector of Cards from a string of Cards
  * Parameters:
- *
- * Return Value:
+ *          cards, a string value that holds the cards to be loaded.
+ * Return Value: A hand with Cards objects.
  * Local Variables:
+ *          ss, an istringstream object for reading individual cards
+ *          from the string separated by space.
  *
+ *          card, a string value that stores the card read from string.
+ *
+ *          temp, a vector or Cards object that holds the Card objects
+ *          created after reading them from string.
+ *
+ *          face, a string value. It holds the face of Card.
+ *
+ *          suite, a string value. It holds the suite of Card.
  * Algorithm:
- *               1)
+ *               1) Read each card from string separated by space.
+ *               2) Store the face and suite using substr function.
+ *               3) Add the created Cards object into the temp vector.
+ *               4) Return the temp vector.
  * Assistance Received: None
  **********************************************************************/
-// loads Hands of players from serialized string
 vector<Cards> Round::loadHands(string cards) {
     istringstream ss(cards);
     string card;
@@ -174,18 +214,30 @@ vector<Cards> Round::loadHands(string cards) {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: loadDeck
+ * Purpose: To load a deque of Cards from a string of Cards
  * Parameters:
- *
- * Return Value:
+ *          cards, a string value that holds the cards to be loaded.
+ * Return Value: A pile with Cards objects.
  * Local Variables:
+ *          ss, an istringstream object for reading individual cards
+ *          from the string separated by space.
  *
+ *          card, a string value that stores the card read from string.
+ *
+ *          temp, a vector or Cards object that holds the Card objects
+ *          created after reading them from string.
+ *
+ *          face, a string value. It holds the face of Card.
+ *
+ *          suite, a string value. It holds the suite of Card.
  * Algorithm:
- *               1)
+ *               1) Read each card from string separated by space.
+ *               2) Store the face and suite using substr function.
+ *               3) Add the created Cards object into the temp deque.
+ *               4) Return the temp vector.
  * Assistance Received: None
  **********************************************************************/
-// loads Deck of cards from serialized string
 deque<Cards> Round::loadDeck(string cards) {
     istringstream ss(cards);
     string card;
@@ -201,15 +253,18 @@ deque<Cards> Round::loadDeck(string cards) {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: distributeCards
+ * Purpose: To assign cards to hands of both players
  * Parameters:
- *
- * Return Value:
+ *          None
+ * Return Value: None
  * Local Variables:
- *
+ *          hand, a vector of Cards object that stores the cards for player's
+ *          hand.
  * Algorithm:
- *               1)
+ *               1) For every player, create a vector of cards, add cards from
+ *                  draw pile to it, and set the player's hand as that vector of
+ *                  cards.
  * Assistance Received: None
  **********************************************************************/
 // sets hands of the players
@@ -224,15 +279,13 @@ void Round::distributeCards() {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: printRoundStatus
+ * Purpose: To print the round status
  * Parameters:
- *
- * Return Value:
+ *          None
+ * Return Value: None
  * Local Variables:
- *
- * Algorithm:
- *               1)
+ *          None
  * Assistance Received: None
  **********************************************************************/
 void Round::printRoundStatus() {
@@ -253,15 +306,13 @@ void Round::printRoundStatus() {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: roundEnded
+ * Purpose: To check if the player has gone out or not
  * Parameters:
- *
- * Return Value:
+ *          None
+ * Return Value: Boolean
  * Local Variables:
- *
- * Algorithm:
- *               1)
+ *          None
  * Assistance Received: None
  **********************************************************************/
 //checks to see if the previous player can go out or not.
@@ -270,15 +321,22 @@ bool Round::roundEnded() {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: getSerializableInfo
+ * Purpose: To generate a single string of serialized info of the current
+ *          status of round
  * Parameters:
- *
- * Return Value:
+ *          None
+ * Return Value: A string value that will be written to a txt file.
  * Local Variables:
+ *          humanScore, a string value that holds the human player's score.
  *
- * Algorithm:
- *               1)
+ *          humanHand, a string value that holds the human player's hand cards.
+ *
+ *          computerScore, a string value that holds the computer player's score.
+ *
+ *          computerHand, a string value that holds the computer player's hand cards.
+ *
+ *          serializedText, a string value that holds the round status.
  * Assistance Received: None
  **********************************************************************/
 const string Round::getSerializableInfo() {
@@ -316,15 +374,18 @@ const string Round::getSerializableInfo() {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: endRound
+ * Purpose: To let next player play their last turn and print end of round
+ *          status
  * Parameters:
- *
- * Return Value:
+ *          None
+ * Return Value: None
  * Local Variables:
- *
+ *          earned, an int value that holds the losing player's score.
  * Algorithm:
- *               1)
+ *          1) Let next player play their turn.
+ *          2) Check if they have saved or quit the game.
+ *          3) Print end of round information.
  * Assistance Received: None
  **********************************************************************/
 void Round::endRound() {

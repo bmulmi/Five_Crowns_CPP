@@ -381,14 +381,35 @@ vector<vector<Cards>> Player::assemblePossibleHand() {
 
 /**********************************************************************
  * Function Name: getLowestScore
- * Purpose:
+ * Purpose: To get the lowest score possible from the hand and store all
+ *          runs and books in a struct
  * Parameters:
+ *          a_hand, a vector of Cards object. Holds the hand cards.
  *
- * Return Value:
+ *          *assembled_hands, a pointer to Assembled struct. Holds the
+ *          best runs or books of hand
+ * Return Value: int value that is the score of the hand.
  * Local Variables:
+ *          minScore, an int value that holds the minimum score of the hand
  *
+ *          bestCombo, a vector of Cards object that holds the best run or book
+ *          of each parent hand resulting in lowest score
+ *
+ *          t_hand, a vector of Cards object that is the copy of current hand.
+ *
+ *          booksAndRuns, a vector of vector of Cards. It holds all the possible
+ *          runs and books of t_hand
  * Algorithm:
- *               1)
+ *               1) Initialize minScore, bestCombo, t_hand, booksAndRuns.
+ *               2) Have the base case for recursion. When there are no more
+ *                  books and runs, set the best combo of assembled_hands to
+ *                  a_hand and return the score of a_hand.
+ *               3) Else, for each combination in the booksAndRuns, remove the
+ *                  combination from t_hand and recall the function.
+ *               4) If the score returned from recursion is less than minScore,
+ *                  set minScore to that score, set assembled hand's best combo
+ *                  to the combination we removed.
+ *               5) After the loop, return the minScore.
  * Assistance Received: None
  **********************************************************************/
 int Player::getLowestScore(vector<Cards> &a_hand, Assembled *assembled_hands) {
@@ -435,15 +456,25 @@ int Player::getLowestScore(vector<Cards> &a_hand, Assembled *assembled_hands) {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: getBooksAndRuns
+ * Purpose: To get all possible books and runs from hand
  * Parameters:
- *
- * Return Value:
+ *              a_hand, a vector of Cards object. It represents the hand.
+ * Return Value: A vector of vector of Cards that represents runs and books.
  * Local Variables:
+ *              temp, a vector of vector of Cards object that holds the books
+ *              and runs.
  *
+ *              temp_hand, a vector of Cards object that copies the hand passed.
+ *
+ *              temp_sameSuiteHands, a vector of vector of Cards. It holds the
+ *              same suite cards in vectors.
  * Algorithm:
- *               1)
+ *               1) Get all the books.
+ *               2) Get same suite cards then get all the runs.
+ *               3) Store the vectors returned from the two function calls in
+ *                  a single vector.
+ *               4) Return the vector.
  * Assistance Received: None
  **********************************************************************/
 vector<vector<Cards>> Player::getBooksAndRuns(vector<Cards> a_hand) {
@@ -463,15 +494,41 @@ vector<vector<Cards>> Player::getBooksAndRuns(vector<Cards> a_hand) {
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: getBooksOrRuns
+ * Purpose: To get all books or runs from the passed hand and store them
+ *          into the collection vector of vector of Cards passed by reference
  * Parameters:
+ *          a_hand, a vector of Cards. It holds the hand cards.
  *
- * Return Value:
+ *          a_collection, a vector of vector of Cards passed by reference. It
+ *          holds the books and runs from the hand.
+ *
+ *          type, an int value. It holds 0 for storing books, 1 for storing runs.
+ * Return Value: None
  * Local Variables:
+ *          temp_hand, vector of Cards object. It holds the copy of hand
  *
+ *          temp_jokers, vector of Cards object. It holds all the jokers from hand.
+ *
+ *          temp_wilds, vector of Cards object. It holds all the wild cards from
+ *          hand.
+ *
+ *          totalJnW, an int value. It holds the total number of jokers and wilds
+ *
+ *          jokerAndWildExists, a boolean value for whether jokers or wilds exist.
  * Algorithm:
- *               1)
+ *               1) Initialize a copy of hand.
+ *               2) Extract jokers and wild cards from hand and store them.
+ *               3) If all cards are jokers and wild cards, add them to collection
+ *                  vector and return from the function.
+ *               4) Check for books and runs without jokers and wilds. If found, add
+ *                  them to the collection vector.
+ *               5) If there are no jokers or wilds at this point, return.
+ *               6) Combine jokers to copied hand and check for runs or books.
+ *               7) Combine wilds to copied hand and check for runs or books.
+ *               8) Re-initialize copy of hand, extract jokers and wild cards.
+ *               9) Combine both jokers and wild cards and check for runs or
+ *                  books.
  * Assistance Received: None
  **********************************************************************/
 void Player::getBooksOrRuns(vector<Cards> a_hand, vector<vector<Cards>> &a_collection, int check_type) {
@@ -533,15 +590,35 @@ void Player::getBooksOrRuns(vector<Cards> a_hand, vector<vector<Cards>> &a_colle
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: combineAndCheck
+ * Purpose: To add each joker or wild card into the hand and check for
+ *          runs and books
  * Parameters:
+ *          a_hand, a vector of Cards object. It holds the cards of hand.
  *
- * Return Value:
+ *          a_cards, a vector of Cards object. It holds the jokers or wild
+ *          cards.
+ *
+ *          collection, a vector of vector of Cards. It is passed by reference,
+ *          it holds the books and runs found by this function.
+ *
+ *          check_type, an int value. It holds 0 for checking books and 1 for
+ *          checking runs.
+ * Return Value: None
  * Local Variables:
+ *          curr, a vector of Cards object. It holds the copy of hand.
  *
+ *          cardsToCombine, a vector of Cards object. It holds the copy of
+ *          jokers or wild card vectors passed
+ *
+ *          currJoker, a Cards object. It holds the card to be combined from
+ *          cardsToCombine.
  * Algorithm:
- *               1)
+ *               1) For each card in hand, combine it with every other card after
+ *                  it and with each of the special cards passed.
+ *               2) Check for books and runs in this combination.
+ *               3) If found, add the combination to collection.
+ *
  * Assistance Received: None
  **********************************************************************/
 void Player::combineAndCheck(vector <Cards> a_hand, vector <Cards> a_cards, vector <vector<Cards>> &collection, int check_type) {
@@ -572,15 +649,46 @@ void Player::combineAndCheck(vector <Cards> a_hand, vector <Cards> a_cards, vect
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: combineTwoAndCheck
+ * Purpose: To combine two special cards, Jokers and Wild Cards, to the
+ *          hand and check for books and runs to add them to the collection
+ *          vector
  * Parameters:
+ *          a_hand, a vector of Cards object. It holds the cards of hand.
  *
- * Return Value:
+ *          a_cards1, a vector of Cards object. It holds the wild cards.
+ *
+ *          a_cards2, a vector of Cards object. It holds the joker cards.
+ *
+ *          collection, a vector of vector of Cards. It is passed by reference,
+ *          it holds the books and runs found by this function.
+ *
+ *          check_type, an int value. It holds 0 for checking books and 1 for
+ *          checking runs.
+ * Return Value: None
  * Local Variables:
+ *          curr, a vector of Cards object. It holds the copy of hand.
+ *
+ *          temp_cards1, a vector of Cards object. It holds copy of a_cards1.
+ *
+ *          currWilds, a Cards object. It holds the card from temp_cards1.
+ *
+ *          copy_curr, a vector of Cards object. It holds the copy of curr
+ *          hand after the currWilds is added to it
+ *
+ *          temp_cards2, a vector of Cards object. It holds the copy of a_cards2.
+ *
+ *          currJoker, a Cards object. It holds the card from temp_cards2.
  *
  * Algorithm:
- *               1)
+ *               1) For each card in hand, combine it with each card after it
+ *               2) Inside the nested loop, combine each wild card to the copied
+ *                  hand.
+ *               3) Inside the nested loop, combine each joker card to the copied
+ *                  hand.
+ *               4) Check for books or runs in the combination.
+ *               5) If found, add the combination to the collection vector.
+ *
  * Assistance Received: None
  **********************************************************************/
 void Player::combineTwoAndCheck(vector<Cards> a_hand, vector<Cards> a_cards1, vector<Cards> a_cards2,
@@ -624,15 +732,30 @@ void Player::combineTwoAndCheck(vector<Cards> a_hand, vector<Cards> a_cards1, ve
 }
 
 /**********************************************************************
- * Function Name:
- * Purpose:
+ * Function Name: getSameSuiteHands
+ * Purpose: To get a vector of vector of Cards with same suites
  * Parameters:
- *
- * Return Value:
+ *          a_hand, a vector of Cards object. It holds the cards from
+ *          the player's hand
+ * Return Value: a vector that contains vector of cards of same suites.
  * Local Variables:
+ *          suite, an array of string. It holds the suite of cards.
  *
+ *          jokers, a vector of Cards. It holds all the jokers of hand.
+ *
+ *          wilds, a vector of Cards. It holds all the wild cards of hand.
+ *
+ *          curr, a vector of Cards. It holds the same suite cards.
+ *
+ *          temp, a vector of vector of Cards. It holds the vectors of
+ *          same suite Cards
  * Algorithm:
- *               1)
+ *               1) For every suite defined, compare it to the hand cards.
+ *               2) If suites match, add them to a vector of Cards.
+ *               3) If at least one card of a suite is found in hand, then
+ *                  add the jokers and wild cards to the vector.
+ *               4) Add the found cards to temp vector.
+ *               5) Return the temp vector.
  * Assistance Received: None
  **********************************************************************/
 vector<vector<Cards>> Player::getSameSuiteHands(vector<Cards> a_hand) {
